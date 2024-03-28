@@ -1,0 +1,23 @@
+CC := g++
+CFLAGS := -std=c++11 -Wall -Wextra
+SFML_LIBS := -lsfml-graphics -lsfml-window -lsfml-system
+
+
+SRCDIR := source
+INCDIR := headers
+BUILDDIR := build
+
+SOURCES := $(wildcard $(SRCDIR)/*.cpp)
+OBJECTS := $(patsubst $(SRCDIR)/%.cpp,$(BUILDDIR)/%.o,$(SOURCES))
+MAIN := main.cpp
+
+TARGET := my_game
+
+$(TARGET): $(OBJECTS) $(MAIN)
+	$(CC) $(CFLAGS) -I$(INCDIR) -o $@ $(MAIN) $(OBJECTS) $(SFML_LIBS)
+
+$(BUILDDIR)/%.o: $(SRCDIR)/%.cpp
+	$(CC) $(CFLAGS) -I$(INCDIR) -c -o $@ $<
+
+clean:
+	rm -f $(BUILDDIR)/*.o $(TARGET)
