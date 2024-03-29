@@ -6,13 +6,14 @@
 #include "../headers/screens/Options.hpp"      // Page 3
 
 int current_screen = 0;
+Menu menu = initlizeMainMenu();
 
-void updateGame()
+void updateGame(sf::RenderWindow &window)
 {
     switch (current_screen)
     {
     case 0:
-        mainUpdate();
+        mainUpdate(menu, current_screen, window);
         break;
     case 1:
         playSettingsUpdate();
@@ -32,7 +33,7 @@ void drawGame(sf::RenderWindow &window)
     switch (current_screen)
     {
     case 0:
-        mainDraw(window);
+        mainDraw(menu, window);
         break;
     case 1:
         playSettingsDraw(window);
