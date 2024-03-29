@@ -2,6 +2,6 @@
 #define S_GAME_H
 #include <SFML/Graphics.hpp>
 
-void updateGame();
+void updateGame(sf::RenderWindow &window);
 void drawGame(sf::RenderWindow &window);
 #endif // S_GAME_H
