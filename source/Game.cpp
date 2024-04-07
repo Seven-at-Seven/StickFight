@@ -6,7 +6,8 @@
 #include "../headers/screens/Options.hpp"      // Page 3
 
 int current_screen = 0;
-Menu menu = initlizeMainMenu();
+Menu mainMenu = initlizeMainMenu();
+Menu opMenu = initlizeOptionsMenu();
 sf::Event event;
 
 void updateGame(sf::RenderWindow &window)
@@ -14,7 +15,7 @@ void updateGame(sf::RenderWindow &window)
     switch (current_screen)
     {
     case 0:
-        mainUpdate(menu, current_screen, window);
+        mainUpdate(mainMenu, current_screen, window);
         break;
     case 1:
         playSettingsUpdate(window);
@@ -23,7 +24,7 @@ void updateGame(sf::RenderWindow &window)
         gamePlayUpdate(window);
         break;
     case 3:
-        optionsUpdate(window);
+        optionsUpdate(window, opMenu);
         break;
     default:
         break;
@@ -34,7 +35,7 @@ void drawGame(sf::RenderWindow &window)
     switch (current_screen)
     {
     case 0:
-        mainDraw(menu, window);
+        mainDraw(mainMenu, window);
         break;
     case 1:
         playSettingsDraw(window);
@@ -43,7 +44,7 @@ void drawGame(sf::RenderWindow &window)
         gamePlayDraw(window);
         break;
     case 3:
-        optionsDraw(window);
+        optionsDraw(window, opMenu);
         break;
 
     default:
