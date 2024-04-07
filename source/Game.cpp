@@ -7,6 +7,7 @@
 
 int current_screen = 0;
 Menu menu = initlizeMainMenu();
+sf::Event event;
 
 void updateGame(sf::RenderWindow &window)
 {
@@ -16,13 +17,13 @@ void updateGame(sf::RenderWindow &window)
         mainUpdate(menu, current_screen, window);
         break;
     case 1:
-        playSettingsUpdate();
+        playSettingsUpdate(window);
         break;
     case 2:
-        gamePlayUpdate();
+        gamePlayUpdate(window);
         break;
     case 3:
-        optionsUpdate();
+        optionsUpdate(window);
         break;
     default:
         break;

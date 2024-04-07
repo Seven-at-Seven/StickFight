@@ -3,5 +3,5 @@
 #include <SFML/Graphics.hpp>
 
 void playSettingsDraw(sf::RenderWindow &window);
-void playSettingsUpdate();
+void playSettingsUpdate(sf::RenderWindow &window);
 #endif // PLYASETTINGS_H

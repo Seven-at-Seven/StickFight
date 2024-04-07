@@ -5,6 +5,11 @@
 
 void mainUpdate(Menu &menu, int &current_screen, sf::RenderWindow &window)
 {
+    while (window.pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed)
+            window.close();
+    }
     if (
         sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {

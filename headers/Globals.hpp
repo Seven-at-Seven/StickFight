@@ -6,5 +6,6 @@ const int SCREENWIDTH = 1240;
 const int SCREENHEIGHT = 480;
 
 extern int current_screen;
+extern sf::Event event;
 
 #endif // S_GLOBALS_H
