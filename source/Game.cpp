@@ -1,14 +1,17 @@
 #include <SFML/Graphics.hpp>
-#include <../headers/Game.hpp>
-#include "../headers/screens/MainMenu.hpp"     // Page 0
-#include "../headers/screens/PlaySettings.hpp" // Page 1
-#include "../headers/screens/GamePlay.hpp"     // Page 2
-#include "../headers/screens/Options.hpp"      // Page 3
+#include <Game.hpp>
+#include "screens/MainMenu.hpp"     // Page 0
+#include "screens/PlaySettings.hpp" // Page 1
+#include "screens/GamePlay.hpp"     // Page 2
+#include "screens/Options.hpp"      // Page 3
 
+// Global states
 int current_screen = 0;
+sf::Event event;
+// Menus
 Menu mainMenu = initlizeMainMenu();
 Menu opMenu = initlizeOptionsMenu();
-sf::Event event;
+Menu psMenu = initlizePlaySettingsMenu();
 
 void updateGame(sf::RenderWindow &window)
 {
@@ -18,7 +21,7 @@ void updateGame(sf::RenderWindow &window)
         mainUpdate(mainMenu, current_screen, window);
         break;
     case 1:
-        playSettingsUpdate(window);
+        playSettingsUpdate(window, psMenu);
         break;
     case 2:
         gamePlayUpdate(window);
@@ -38,7 +41,7 @@ void drawGame(sf::RenderWindow &window)
         mainDraw(mainMenu, window);
         break;
     case 1:
-        playSettingsDraw(window);
+        playSettingsDraw(window, psMenu);
         break;
     case 2:
         gamePlayDraw(window);

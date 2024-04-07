@@ -1,6 +1,5 @@
 #include "components/Menu.hpp"
 #include <iostream>
-#include <unistd.h>
 
 Menu initlizeMenu(int numebrOfItems, char **items)
 {

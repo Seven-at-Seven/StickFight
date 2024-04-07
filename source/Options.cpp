@@ -18,7 +18,7 @@ void optionsUpdate(sf::RenderWindow &window, Menu &opMenu)
     {
         switch (opMenu.selectedItem)
         {
-        case 2:
+        case 0:
             opMenu.selectedItem = 0;
             current_screen = 0;
             usleep(200000);
@@ -36,7 +36,7 @@ void optionsDraw(sf::RenderWindow &window, Menu &opMenu)
 }
 Menu initlizeOptionsMenu()
 {
-    char *options[OPTIONS_ITEMS_NUMBER] = {"Sound", "Colors", "Main Menu"};
+    char *options[OPTIONS_ITEMS_NUMBER] = {"Main Menu", "Sound", "Colors"};
     Menu menu = initlizeMenu(OPTIONS_ITEMS_NUMBER, options);
     return menu;
 }

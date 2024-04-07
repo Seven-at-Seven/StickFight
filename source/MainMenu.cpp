@@ -1,5 +1,6 @@
 #include "../headers/screens/MainMenu.hpp"
 #include "../headers/Globals.hpp"
+#include <iostream>
 
 #define MAIN_MENU_ITEMS_NUMBER 3
 
@@ -19,9 +20,11 @@ void mainUpdate(Menu &menu, int &current_screen, sf::RenderWindow &window)
         {
         case 0:
             current_screen = 1;
+            usleep(100000);
             break;
         case 1:
             current_screen = 3;
+            usleep(100000);
             break;
         case 2:
             window.close();
@@ -38,8 +41,8 @@ Menu initlizeMainMenu()
 
     return menu;
 }
-
 void mainDraw(Menu &menu, sf::RenderWindow &window)
 {
+
     drawMenu(menu, window);
 }

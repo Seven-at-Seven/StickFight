@@ -1,5 +1,5 @@
-#include "../headers/screens/GamePlay.hpp"
-#include "../headers/Globals.hpp"
+#include "screens/GamePlay.hpp"
+#include "Globals.hpp"
 
 void gamePlayUpdate(sf::RenderWindow &window)
 {
