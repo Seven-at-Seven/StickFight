@@ -44,20 +44,16 @@ void moveSelectionDown(Menu &menu)
         menu.selectedItem++;
     }
 };
-void updateMenu(Menu &menu)
+void updateMenu(Menu &menu, sf::Event &event)
 {
 
-    if (
-        sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+    if (event.key.code == sf::Keyboard::W)
     {
         moveSelectionUp(menu);
-        usleep(200000);
     }
-    if (
-        sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+    if (event.key.code == sf::Keyboard::S)
     {
         moveSelectionDown(menu);
-        usleep(200000);
     }
 }
 void drawMenu(Menu &menu, sf::RenderWindow &window)

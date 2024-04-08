@@ -19,7 +19,7 @@ struct Menu
 void moveSelectionUp(Menu &menu);
 void moveSelectionDown(Menu &menu);
 void drawMenu(Menu &menu, sf::RenderWindow &window);
-void updateMenu(Menu &menu);
+void updateMenu(Menu &menu, sf::Event &event);
 Menu initlizeMenu(int numebrOfItems, char **items);
 
 #endif

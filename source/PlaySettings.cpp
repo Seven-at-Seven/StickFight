@@ -8,27 +8,33 @@ void playSettingsUpdate(sf::RenderWindow &window, Menu &psMenu)
 
     while (window.pollEvent(event))
     {
-        if (event.type == sf::Event::Closed)
-            window.close();
-    }
-
-    updateMenu(psMenu);
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-    {
-        switch (psMenu.selectedItem)
+        switch (event.type)
         {
-        case 0:
-            psMenu.selectedItem = 0;
-            current_screen = 0;
-            usleep(200000);
+        case sf::Event::Closed:
+            window.close();
             break;
-        case 3:
-            psMenu.selectedItem = 0;
-            current_screen = 2;
-            usleep(200000);
-            break;
+        case sf::Event::KeyReleased:
+        {
+            if (event.key.code == sf::Keyboard::Space)
+            {
+                switch (psMenu.selectedItem)
+                {
+                case 0:
+                    psMenu.selectedItem = 0;
+                    current_screen = 0;
+                    break;
+                case 3:
+                    psMenu.selectedItem = 0;
+                    current_screen = 2;
+                    break;
 
+                default:
+                    break;
+                }
+            }
+            updateMenu(psMenu, event);
+            break;
+        }
         default:
             break;
         }

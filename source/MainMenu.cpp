@@ -8,26 +8,32 @@ void mainUpdate(Menu &menu, int &current_screen, sf::RenderWindow &window)
 {
     while (window.pollEvent(event))
     {
-        if (event.type == sf::Event::Closed)
-            window.close();
-    }
-
-    updateMenu(menu);
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-    {
-        switch (menu.selectedItem)
+        switch (event.type)
         {
-        case 0:
-            current_screen = 1;
-            usleep(100000);
-            break;
-        case 1:
-            current_screen = 3;
-            usleep(100000);
-            break;
-        case 2:
+        case sf::Event::Closed:
             window.close();
+            break;
+        case sf::Event::KeyReleased:
+        {
+            if (event.key.code == sf::Keyboard::Space)
+            {
+                switch (menu.selectedItem)
+                {
+                case 0:
+                    current_screen = 1;
+                    break;
+                case 1:
+                    current_screen = 3;
+                    break;
+                case 2:
+                    window.close();
+                default:
+                    break;
+                }
+            }
+            updateMenu(menu, event);
+            break;
+        }
         default:
             break;
         }

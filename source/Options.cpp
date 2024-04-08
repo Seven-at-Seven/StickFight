@@ -9,20 +9,28 @@ void optionsUpdate(sf::RenderWindow &window, Menu &opMenu)
 
     while (window.pollEvent(event))
     {
-        if (event.type == sf::Event::Closed)
-            window.close();
-    }
-    updateMenu(opMenu);
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-    {
-        switch (opMenu.selectedItem)
+        switch (event.type)
         {
-        case 0:
-            opMenu.selectedItem = 0;
-            current_screen = 0;
-            usleep(200000);
+        case sf::Event::Closed:
+            window.close();
             break;
+        case sf::Event::KeyReleased:
+        {
+            if (event.key.code == sf::Keyboard::Space)
+            {
+                switch (opMenu.selectedItem)
+                {
+                case 0:
+                    opMenu.selectedItem = 0;
+                    current_screen = 0;
+                    break;
+                default:
+                    break;
+                }
+            }
+            updateMenu(opMenu, event);
+            break;
+        }
         default:
             break;
         }
