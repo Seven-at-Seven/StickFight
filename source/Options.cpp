@@ -1,10 +1,50 @@
 #include "../headers/screens/Options.hpp"
 #include "../headers/Globals.hpp"
+#include <unistd.h>
 
-void optionsUpdate()
+#define OPTIONS_ITEMS_NUMBER 3
+
+void optionsUpdate(sf::RenderWindow &window, Menu &opMenu)
 {
+
+    while (window.pollEvent(event))
+    {
+        switch (event.type)
+        {
+        case sf::Event::Closed:
+            window.close();
+            break;
+        case sf::Event::KeyReleased:
+        {
+            if (event.key.code == sf::Keyboard::Space)
+            {
+                switch (opMenu.selectedItem)
+                {
+                case 0:
+                    opMenu.selectedItem = 0;
+                    current_screen = 0;
+                    break;
+                default:
+                    break;
+                }
+            }
+            updateMenu(opMenu, event);
+            break;
+        }
+        default:
+            break;
+        }
+    }
 }
 
-void optionsDraw(sf::RenderWindow &window)
+// draw
+void optionsDraw(sf::RenderWindow &window, Menu &opMenu)
 {
+    drawMenu(opMenu, window);
+}
+Menu initlizeOptionsMenu()
+{
+    char *options[OPTIONS_ITEMS_NUMBER] = {"Main Menu", "Sound", "Colors"};
+    Menu menu = initlizeMenu(OPTIONS_ITEMS_NUMBER, options);
+    return menu;
 }
