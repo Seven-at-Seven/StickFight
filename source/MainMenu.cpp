@@ -47,8 +47,8 @@ Menu initlizeMainMenu()
 
     return menu;
 }
+
 void mainDraw(Menu &menu, sf::RenderWindow &window)
 {
-
     drawMenu(menu, window);
 }

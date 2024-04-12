@@ -3,7 +3,6 @@
 
 void gamePlayUpdate(sf::RenderWindow &window)
 {
-
     while (window.pollEvent(event))
     {
         if (event.type == sf::Event::Closed)
@@ -11,6 +10,7 @@ void gamePlayUpdate(sf::RenderWindow &window)
     }
 }
 
-void gamePlayDraw(sf::RenderWindow &window)
+void gamePlayDraw(sf::RenderWindow &window, Character character)
 {
+    window.draw(character.getShape());
 }

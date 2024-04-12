@@ -13,6 +13,9 @@ Menu mainMenu = initlizeMainMenu();
 Menu opMenu = initlizeOptionsMenu();
 Menu psMenu = initlizePlaySettingsMenu();
 
+// create a main character instance
+Character mainCharacter(50.0f, 50.0f, sf::Color::Red, 100.0f, 100.0f);
+
 void updateGame(sf::RenderWindow &window)
 {
     switch (current_screen)
@@ -44,7 +47,7 @@ void drawGame(sf::RenderWindow &window)
         playSettingsDraw(window, psMenu);
         break;
     case 2:
-        gamePlayDraw(window);
+        gamePlayDraw(window, mainCharacter);
         break;
     case 3:
         optionsDraw(window, opMenu);
