@@ -38,6 +38,10 @@ void gamePlayUpdate(sf::RenderWindow &window, Character &character, Block &surfa
     // Character collision ====
     makeCollision(character, surface);
     // ====
+
+    // Character jump ====
+    character.jump();
+    // ====
 }
 
 void gamePlayDraw(sf::RenderWindow &window, Character &character, Block &surface)

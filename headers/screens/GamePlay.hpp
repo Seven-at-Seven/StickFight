@@ -5,6 +5,10 @@
 class Character
 {
   sf::RectangleShape c;
+  sf::Vector2f velocity;
+  float jumpSpeed = 10.0f;
+  float gravity = 0.5f;
+  float groundHeight = 500.0f; // Adjust this to match your ground level
 
 public:
   Character(float width, float height, sf::Color color, float posX, float posY)
@@ -22,6 +26,29 @@ public:
   void move(float offsetX)
   {
     c.move(offsetX, 0);
+  }
+
+  void jump()
+  {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    {
+      velocity.y = -jumpSpeed;
+    }
+    else
+    {
+      velocity.x = 0.0f;
+    }
+
+    if (c.getPosition().y < groundHeight || velocity.y < 0.0f)
+    {
+      velocity.y += gravity;
+    }
+    else
+    {
+      velocity.y = 0.0f;
+    }
+
+    c.move(velocity.x, velocity.y);
   }
 };
 
