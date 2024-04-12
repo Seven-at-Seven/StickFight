@@ -1,8 +1,15 @@
 #include "screens/GamePlay.hpp"
 #include "Globals.hpp"
-#include <iostream>
 
-void gamePlayUpdate(sf::RenderWindow &window, Character &character)
+void makeCollision(Character &character, Block &block)
+{
+    if (character.getShape().getGlobalBounds().intersects(block.getShape().getGlobalBounds()))
+    {
+        character.getShape().setPosition(character.getShape().getPosition().x, block.getShape().getPosition().y - character.getShape().getSize().y);
+    }
+}
+
+void gamePlayUpdate(sf::RenderWindow &window, Character &character, Block &surface)
 {
     while (window.pollEvent(event))
     {
@@ -13,7 +20,6 @@ void gamePlayUpdate(sf::RenderWindow &window, Character &character)
     // Character movement ====
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
-        std::cout << "Left key pressed" << std::endl;
         character.move(-5);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
@@ -28,10 +34,14 @@ void gamePlayUpdate(sf::RenderWindow &window, Character &character)
         character.getShape().move(0, 5);
     }
     // ====
+
+    // Character collision ====
+    makeCollision(character, surface);
+    // ====
 }
 
-void gamePlayDraw(sf::RenderWindow &window, Character &character)
+void gamePlayDraw(sf::RenderWindow &window, Character &character, Block &surface)
 {
-    
+    window.draw(surface.getShape());
     window.draw(character.getShape());
 }
