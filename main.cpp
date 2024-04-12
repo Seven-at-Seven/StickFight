@@ -12,8 +12,8 @@ int main()
     window.setFramerateLimit(30);
 
     // temporary ====
+    // Block surface(SCREENWIDTH, 50.0f, sf::Color::White, 0.0f, SCREENHEIGHT + 500.0f);
     Character character(50.0f, 50.0f, sf::Color::Green, 100.0f, 100.0f);
-    Block surface(SCREENWIDTH, 50.0f, sf::Color::White, 0.0f, SCREENHEIGHT);
     // ====
 
     while (window.isOpen())
@@ -22,13 +22,13 @@ int main()
         // updateGame(window);
 
         // temporary ====
-        gamePlayUpdate(window, character, surface);
+        gamePlayUpdate(window, character);
         // ====
         window.clear();
         // drawGame(window);
 
         // temporary ====
-        gamePlayDraw(window, character, surface);
+        gamePlayDraw(window, character);
         // ====
         window.display();
     }

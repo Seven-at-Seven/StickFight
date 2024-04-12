@@ -15,7 +15,7 @@ Menu psMenu = initlizePlaySettingsMenu();
 
 // create a main character instance
 Character mainCharacter(50.0f, 50.0f, sf::Color::Red, 100.0f, 100.0f);
-Block surface(SCREENWIDTH, 100.0f, sf::Color::White, 0.0f, SCREENHEIGHT - 100.0f);
+// Block surface(SCREENWIDTH, 100.0f, sf::Color::White, 0.0f, SCREENHEIGHT - 100.0f);
 
 void updateGame(sf::RenderWindow &window)
 {
@@ -28,7 +28,7 @@ void updateGame(sf::RenderWindow &window)
         playSettingsUpdate(window, psMenu);
         break;
     case 2:
-        gamePlayUpdate(window, mainCharacter, surface);
+        gamePlayUpdate(window, mainCharacter);
         break;
     case 3:
         optionsUpdate(window, opMenu);
@@ -48,7 +48,7 @@ void drawGame(sf::RenderWindow &window)
         playSettingsDraw(window, psMenu);
         break;
     case 2:
-        gamePlayDraw(window, mainCharacter, surface);
+        gamePlayDraw(window, mainCharacter);
         break;
     case 3:
         optionsDraw(window, opMenu);

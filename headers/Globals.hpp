@@ -3,8 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <unistd.h>
 
-const int SCREENWIDTH = 1240;
-const int SCREENHEIGHT = 480;
+const float SCREENWIDTH = 1240.f;
+const float SCREENHEIGHT = 480.f;
 
 extern int current_screen;
 extern sf::Event event;

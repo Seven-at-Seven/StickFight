@@ -1,15 +1,7 @@
 #include "screens/GamePlay.hpp"
 #include "Globals.hpp"
 
-void makeCollision(Character &character, Block &block)
-{
-    if (character.getShape().getGlobalBounds().intersects(block.getShape().getGlobalBounds()))
-    {
-        character.getShape().setPosition(character.getShape().getPosition().x, block.getShape().getPosition().y - character.getShape().getSize().y);
-    }
-}
-
-void gamePlayUpdate(sf::RenderWindow &window, Character &character, Block &surface)
+void gamePlayUpdate(sf::RenderWindow &window, Character &character)
 {
     while (window.pollEvent(event))
     {
@@ -29,23 +21,22 @@ void gamePlayUpdate(sf::RenderWindow &window, Character &character, Block &surfa
     // ====
 
     // Character gravity ====
-    if (character.getShape().getPosition().y < window.getSize().y - 100)
+    if (character.getShape().getPosition().y < window.getSize().y)
     {
         character.getShape().move(0, 5);
     }
     // ====
 
-    // Character collision ====
-    makeCollision(character, surface);
-    // ====
-
     // Character jump ====
     character.jump();
     // ====
+
+    // Character screen collision ====
+    character.checkScreenCollision(window);
+    // ====
 }
 
-void gamePlayDraw(sf::RenderWindow &window, Character &character, Block &surface)
+void gamePlayDraw(sf::RenderWindow &window, Character &character)
 {
-    window.draw(surface.getShape());
     window.draw(character.getShape());
 }
