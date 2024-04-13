@@ -10,9 +10,9 @@ Menu initlizeMenu(int numebrOfItems, char **items)
     menu.selectedItem = 0;
     menu.numberOfItems = numebrOfItems;
 
-    if (!menu.font.loadFromFile("./assets/Suruma.ttf"))
+    if (!menu.font.loadFromFile("./assets/Surum.ttf"))
     {
-        std::cout << "Error loading font: assets/Suruma.ttf" << std::endl;
+        std::cout << "Error loading font: assets/Surum.ttf" << std::endl;
     }
     for (size_t i = 0; i < numebrOfItems; i++)
     {
