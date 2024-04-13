@@ -15,7 +15,7 @@ void playSettingsUpdate(sf::RenderWindow &window, Menu &psMenu)
             break;
         case sf::Event::KeyReleased:
         {
-            if (event.key.code == sf::Keyboard::Space)
+            if (event.key.code == sf::Keyboard::Enter)
             {
                 switch (psMenu.selectedItem)
                 {

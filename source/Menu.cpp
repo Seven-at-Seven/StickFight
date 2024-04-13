@@ -47,11 +47,11 @@ void moveSelectionDown(Menu &menu)
 void updateMenu(Menu &menu, sf::Event &event)
 {
 
-    if (event.key.code == sf::Keyboard::W)
+    if (event.key.code == sf::Keyboard::Up)
     {
         moveSelectionUp(menu);
     }
-    if (event.key.code == sf::Keyboard::S)
+    if (event.key.code == sf::Keyboard::Down)
     {
         moveSelectionDown(menu);
     }

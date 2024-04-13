@@ -2,8 +2,8 @@
 
 ## Main Menu Control
 
-- You can move between different buttons using `W` and `S`.
-- You can select the button you want by clicking `Space` on the selected Button.
+- You can move between different buttons using `Up` and `Down` arrows.
+- You can select the button you want by clicking `Enter` on the selected Button.
 
 ## Development Steps
 1. Create a branch named after the feature that you work on (you can create branch using Github)

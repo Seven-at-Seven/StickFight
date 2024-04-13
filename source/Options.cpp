@@ -16,7 +16,7 @@ void optionsUpdate(sf::RenderWindow &window, Menu &opMenu)
             break;
         case sf::Event::KeyReleased:
         {
-            if (event.key.code == sf::Keyboard::Space)
+            if (event.key.code == sf::Keyboard::Enter)
             {
                 switch (opMenu.selectedItem)
                 {
