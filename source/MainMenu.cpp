@@ -4,6 +4,7 @@
 
 #define MAIN_MENU_ITEMS_NUMBER 3
 
+bool firstLoad = true;
 void mainUpdate(Menu &menu, int &current_screen, sf::RenderWindow &window)
 {
     while (window.pollEvent(event))
@@ -15,7 +16,12 @@ void mainUpdate(Menu &menu, int &current_screen, sf::RenderWindow &window)
             break;
         case sf::Event::KeyReleased:
         {
-            if (event.key.code == sf::Keyboard::Space)
+            if (firstLoad)
+            {
+                firstLoad = false;
+                continue;
+            }
+            else if (event.key.code == sf::Keyboard::Enter)
             {
                 switch (menu.selectedItem)
                 {
