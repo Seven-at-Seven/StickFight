@@ -16,7 +16,7 @@
 
 6. Do your magic (add your code to the project)
 
-7. Run `make` to test the game
+7. Run `make` to test 
 
 8. Run `git add .` to stage your changes (it's prefered to commit each change alone with diffrante commit message for better readability)  
 
