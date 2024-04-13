@@ -22,4 +22,4 @@
 
 9. Run `git commit -m "<Add-your-message-here>"`
 
-10. 10.Run `git push`
+10. 10.Run `git push` to render changes on Github.
