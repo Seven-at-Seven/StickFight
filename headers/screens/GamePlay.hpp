@@ -7,14 +7,14 @@ void gamePlayDraw(sf::RenderWindow &window);
 void gamePlayUpdate(sf::RenderWindow &window);
 struct blocks
 {
-    const float x_coordinate, y_coordinate,width,height;
+    const float x_coordinate = 0, y_coordinate = 0,width = 0,height = 0;
 };
-struct maps
+struct mapss
 {
-    const int num_of_blocks;
-    blocks block[num_of_blocks];
+    constexpr int num_of_blocks;
+    blocks block[9];
     sf::Texture background;
 };
-maps map[6];
+mapss map1[6];
 
 #endif // GAMEPLAY_H
