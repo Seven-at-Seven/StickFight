@@ -1,6 +1,7 @@
 #include "screens/GamePlay.hpp"
 #include "Globals.hpp"
 
+maps map[6];
 void gamePlayUpdate(sf::RenderWindow &window)
 {
 
@@ -12,4 +13,5 @@ void gamePlayUpdate(sf::RenderWindow &window)
 }
 void gamePlayDraw(sf::RenderWindow &window)
 {
+    
 }

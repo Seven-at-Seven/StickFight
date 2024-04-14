@@ -9,5 +9,6 @@ const int SCREENHEIGHT = 480;
 extern int current_screen;
 extern int number_of_players;
 extern sf::Event event;
+extern int curmap;
 
 #endif // S_GLOBALS_H

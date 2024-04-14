@@ -7,7 +7,7 @@
 #include "screens/subscreens/NumberOfPlayers.hpp" // Page 5
 
 // Global states
-
+int curmap = 0;
 int current_screen = 0;
 int number_of_players = 2;
 sf::Event event;
