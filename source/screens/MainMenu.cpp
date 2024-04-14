@@ -1,6 +1,5 @@
 #include "../headers/screens/MainMenu.hpp"
 #include "../headers/Globals.hpp"
-#include <iostream>
 
 #define MAIN_MENU_ITEMS_NUMBER 3
 
@@ -16,6 +15,8 @@ void mainUpdate(Menu &menu, int &current_screen, sf::RenderWindow &window)
             break;
         case sf::Event::KeyReleased:
         {
+
+            // If first load don't check for KeyRelease Enter
             if (firstLoad)
             {
                 firstLoad = false;
@@ -56,5 +57,5 @@ Menu initlizeMainMenu()
 void mainDraw(Menu &menu, sf::RenderWindow &window)
 {
 
-    drawMenu(menu, window);
+    drawMenu(menu, window, "Main Menu");
 }

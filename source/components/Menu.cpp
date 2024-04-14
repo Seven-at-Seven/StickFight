@@ -56,7 +56,7 @@ void updateMenu(Menu &menu, sf::Event &event)
         moveSelectionDown(menu);
     }
 }
-void drawMenu(Menu &menu, sf::RenderWindow &window)
+void drawMenu(Menu &menu, sf::RenderWindow &window, char *title)
 {
 
     for (int i = 0; i < menu.numberOfItems; i++)
@@ -67,4 +67,11 @@ void drawMenu(Menu &menu, sf::RenderWindow &window)
             menu.text[i].setColor(sf::Color::White);
         window.draw(menu.text[i]);
     }
+
+    sf::Text menuTitle;
+    menuTitle.setString(title);
+    menuTitle.setFont(menu.font);
+    menuTitle.setPosition(sf::Vector2f(20, 20));
+    menuTitle.setFillColor(sf::Color::Blue);
+    window.draw(menuTitle);
 };

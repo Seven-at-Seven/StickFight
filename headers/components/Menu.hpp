@@ -18,7 +18,7 @@ struct Menu
 
 void moveSelectionUp(Menu &menu);
 void moveSelectionDown(Menu &menu);
-void drawMenu(Menu &menu, sf::RenderWindow &window);
+void drawMenu(Menu &menu, sf::RenderWindow &window, char *title);
 void updateMenu(Menu &menu, sf::Event &event);
 Menu initlizeMenu(int numebrOfItems, char **items);
 
