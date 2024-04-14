@@ -68,6 +68,7 @@ void drawGame(sf::RenderWindow &window)
         break;
     case 4:
         soundDraw(window);
+        break;
     case 5:
         numberOfPlayersDraw(window);
         break;

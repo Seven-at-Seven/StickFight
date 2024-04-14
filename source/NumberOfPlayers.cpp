@@ -1,4 +1,5 @@
 #include "screens/subscreens/NumberOfPlayers.hpp"
+#include <string>
 
 #define NUMBER_OF_PLAYERS_ITEMS_NUMBER 2
 
@@ -50,7 +51,7 @@ void numberOfPlayersDraw(sf::RenderWindow &window)
     // Number of Players Counter
     sf::Text numText;
     numText.setFont(numOfPMenu.font);
-    numText.setString(std::to_string(number_of_players));
+    // numText.setString(std::itos(number_of_players));
     numText.setPosition(SCREENWIDTH / 2 - 200, SCREENHEIGHT / (numOfPMenu.numberOfItems + 1));
     numText.setColor(sf::Color::Magenta);
     window.draw(numText);
