@@ -19,7 +19,7 @@ Menu initlizeMenu(int numebrOfItems, char **items)
         menu.text[i].setFont(menu.font);
         menu.text[i].setColor(sf::Color::White);
         menu.text[i].setString(items[i]);
-        menu.text[i].setPosition(sf::Vector2f(menu.width / 2 - 30, menu.height / (numebrOfItems + 1) * (i + 1)));
+        menu.text[i].setPosition(sf::Vector2f(menu.width / 2 - 40, menu.height / (numebrOfItems + 1) * (i + 1)));
     }
 
     return menu;
