@@ -34,4 +34,5 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.cpp
 
 
 clean:
-	$(RM) $(BUILDDIR)*.o $(TARGET)
+	$(RM) $(BUILDDIR)/*.o $(TARGET)
+	
