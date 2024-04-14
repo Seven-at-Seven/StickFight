@@ -40,7 +40,8 @@ void optionsUpdate(sf::RenderWindow &window, Menu &opMenu)
 // draw
 void optionsDraw(sf::RenderWindow &window, Menu &opMenu)
 {
-    drawMenu(opMenu, window);
+
+    drawMenu(opMenu, window, "Options Menu");
 }
 Menu initlizeOptionsMenu()
 {
