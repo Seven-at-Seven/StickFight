@@ -7,6 +7,7 @@
 
 // Global states
 int current_screen = 0;
+int number_of_players = 0;
 sf::Event event;
 // Menus
 Menu mainMenu = initlizeMainMenu();

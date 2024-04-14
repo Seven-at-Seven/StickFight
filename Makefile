@@ -27,11 +27,11 @@ endif
 
 
 $(TARGET): $(OBJECTS) $(MAIN)
-	$(CC) $(CFLAGS) -I$(INCDIR) -o $@ $(MAIN) $(OBJECTS) $(SFML_LIBS)
+	$(CC) $(CFLAGS) -I$(INCDIR) -o $@ $(MAIN) $(OBJECTS) $(SFML_LIBS) -g 
 
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.cpp
-	$(CC) $(CFLAGS) -I$(INCDIR) -c -o $@ $<
+	$(CC) $(CFLAGS) -I$(INCDIR) -c -o $@ $< -g
 
 
 clean:
