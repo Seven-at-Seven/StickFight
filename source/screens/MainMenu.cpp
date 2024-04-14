@@ -1,9 +1,9 @@
 #include "../headers/screens/MainMenu.hpp"
 #include "../headers/Globals.hpp"
-#include <iostream>
 
 #define MAIN_MENU_ITEMS_NUMBER 3
 
+bool firstLoad = true;
 void mainUpdate(Menu &menu, int &current_screen, sf::RenderWindow &window)
 {
     while (window.pollEvent(event))
@@ -15,7 +15,14 @@ void mainUpdate(Menu &menu, int &current_screen, sf::RenderWindow &window)
             break;
         case sf::Event::KeyReleased:
         {
-            if (event.key.code == sf::Keyboard::Space)
+
+            // If first load don't check for KeyRelease Enter
+            if (firstLoad)
+            {
+                firstLoad = false;
+                continue;
+            }
+            else if (event.key.code == sf::Keyboard::Enter)
             {
                 switch (menu.selectedItem)
                 {
@@ -50,5 +57,5 @@ Menu initlizeMainMenu()
 void mainDraw(Menu &menu, sf::RenderWindow &window)
 {
 
-    drawMenu(menu, window);
+    drawMenu(menu, window, "Main Menu");
 }

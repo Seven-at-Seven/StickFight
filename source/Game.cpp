@@ -1,19 +1,25 @@
 #include <SFML/Graphics.hpp>
 #include <Game.hpp>
-#include "screens/MainMenu.hpp"     // Page 0
-#include "screens/PlaySettings.hpp" // Page 1
-#include "screens/GamePlay.hpp"     // Page 2
-#include "screens/Options.hpp"      // Page 3
-#include "screens/Sound.hpp"        // page 4
+#include "screens/MainMenu.hpp"                   // Page 0
+#include "screens/PlaySettings.hpp"               // Page 1
+#include "screens/GamePlay.hpp"                   // Page 2
+#include "screens/Options.hpp"                    // Page 3
+#include "screens/Sound.hpp"                      // page 4
+#include "screens/subscreens/NumberOfPlayers.hpp" // Page 5
 
 // Global states
+
 int current_screen = 0;
+int number_of_players = 2;
 sf::Event event;
+
 // Menus
+
 Menu mainMenu = initlizeMainMenu();
 Menu opMenu = initlizeOptionsMenu();
 Menu psMenu = initlizePlaySettingsMenu();
 
+// Update Switch
 void updateGame(sf::RenderWindow &window)
 {
     switch (current_screen)
@@ -32,12 +38,18 @@ void updateGame(sf::RenderWindow &window)
         break;
     case 4:
         soundUpdate(window);
-    break;
-        
+        break;
+
+    case 5:
+        numberOfPlayersUpdate(window);
+        break;
+
     default:
         break;
     }
 }
+
+// Draw Switch
 void drawGame(sf::RenderWindow &window)
 {
     switch (current_screen)
@@ -56,6 +68,8 @@ void drawGame(sf::RenderWindow &window)
         break;
     case 4:
         soundDraw(window);
+    case 5:
+        numberOfPlayersDraw(window);
         break;
 
     default:
