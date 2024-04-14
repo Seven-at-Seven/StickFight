@@ -4,6 +4,7 @@
 #include "screens/PlaySettings.hpp" // Page 1
 #include "screens/GamePlay.hpp"     // Page 2
 #include "screens/Options.hpp"      // Page 3
+#include "screens/Sound.hpp"        // page 4
 
 // Global states
 int current_screen = 0;
@@ -29,6 +30,10 @@ void updateGame(sf::RenderWindow &window)
     case 3:
         optionsUpdate(window, opMenu);
         break;
+    case 4:
+        soundUpdate(window);
+    break;
+        
     default:
         break;
     }
@@ -48,6 +53,9 @@ void drawGame(sf::RenderWindow &window)
         break;
     case 3:
         optionsDraw(window, opMenu);
+        break;
+    case 4:
+        soundDraw(window);
         break;
 
     default:
