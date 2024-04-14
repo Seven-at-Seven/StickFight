@@ -10,7 +10,6 @@ void gamePlayUpdate(sf::RenderWindow &window)
             window.close();
     }
 }
-
 void gamePlayDraw(sf::RenderWindow &window)
 {
 }
