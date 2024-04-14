@@ -1,4 +1,3 @@
-
 CC := g++
 CFLAGS := -std=c++11 -Wall -Wextra
 SFML_LIBS := -lsfml-graphics -lsfml-window -lsfml-system
@@ -9,15 +8,13 @@ INCDIR := headers
 BUILDDIR := build
 
 
-SRCDIRS := $(shell find $(SRCDIR) -type d)
-SOURCES := $(foreach dir,$(SRCDIRS),$(wildcard $(dir)/*.cpp))
-
+SOURCES := $(wildcard $(SRCDIR)/*.cpp)
 OBJECTS := $(patsubst $(SRCDIR)/%.cpp,$(BUILDDIR)/%.o,$(SOURCES))
 MAIN := main.cpp
 
 
 TARGET := my_game
-RM := rm -rf
+RM := rm -f
 
 ifeq ($(OS),Windows_NT)
     # Change forward slashes to backslashes for Windows paths
@@ -28,15 +25,13 @@ ifeq ($(OS),Windows_NT)
 endif
 
 
-$(TARGET):  $(OBJECTS) $(MAIN) 
-	$(CC) $(CFLAGS) -I$(INCDIR) -o $@ $(MAIN) $(OBJECTS) $(SFML_LIBS) -g 
+$(TARGET): $(OBJECTS) $(MAIN)
+	$(CC) $(CFLAGS) -I$(INCDIR) -o $@ $(MAIN) $(OBJECTS) $(SFML_LIBS)
 
-BUILDDIRS:
-	mkdir -p $(BUILDDIR)
 
-$(BUILDDIR)/%.o: $(SRCDIR)/%.cpp | BUILDDIRS
-	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -I$(INCDIR) -c -o $@ $< -g
+$(BUILDDIR)/%.o: $(SRCDIR)/%.cpp
+	$(CC) $(CFLAGS) -I$(INCDIR) -c -o $@ $<
+
 
 clean:
-	$(RM) $(BUILDDIR) $(TARGET)
+	$(RM) $(BUILDDIR)*.o $(TARGET)
