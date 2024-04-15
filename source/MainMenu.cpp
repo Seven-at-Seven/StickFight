@@ -40,12 +40,7 @@ void mainUpdate(Menu &menu, int &current_screen, sf::RenderWindow &window)
                     break;
                 }
             }
-            if (event.key.code == sf::Keyboard::Escape)
-            {
 
-                current_screen = last_screen;
-                last_screen = 0;
-            }
             updateMenu(menu, event);
             break;
         }

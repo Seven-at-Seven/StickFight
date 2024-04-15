@@ -28,12 +28,7 @@ void numberOfPlayersUpdate(sf::RenderWindow &window)
                     break;
                 }
             }
-            if (event.key.code == sf::Keyboard::Escape)
-            {
-
-                current_screen = last_screen;
-                last_screen = 0;
-            }
+ 
             if (event.key.code == sf::Keyboard::Right && numOfPMenu.selectedItem == 0)
             {
                 if (number_of_players < 4)

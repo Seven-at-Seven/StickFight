@@ -29,12 +29,7 @@ void optionsUpdate(sf::RenderWindow &window, Menu &opMenu)
                     break;
                 }
             }
-            if (event.key.code == sf::Keyboard::Escape)
-            {
-
-                current_screen = last_screen;
-                last_screen = 0;
-            }
+ 
             updateMenu(opMenu, event);
             break;
         }
