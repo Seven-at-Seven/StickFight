@@ -10,14 +10,7 @@ void gamePlayUpdate(sf::RenderWindow &window, Character &character)
     }
 
     // Character movement ====
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-    {
-        character.move(-5);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-    {
-        character.move(5);
-    }
+    character.movement();
     // ====
 
     // Character gravity ====

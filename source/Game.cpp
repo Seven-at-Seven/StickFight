@@ -14,7 +14,7 @@ Menu opMenu = initlizeOptionsMenu();
 Menu psMenu = initlizePlaySettingsMenu();
 
 // create a main character instance
-Character mainCharacter(50.0f, 50.0f, sf::Color::Green, 100.0f, 100.0f);
+Character mainCharacter(50.0f, 50.f, 100.0f, 100.0f, sf::Color::Red);
 
 void updateGame(sf::RenderWindow &window)
 {
