@@ -21,12 +21,19 @@ void optionsUpdate(sf::RenderWindow &window, Menu &opMenu)
                 switch (opMenu.selectedItem)
                 {
                 case 0:
+                    last_screen = current_screen;
                     opMenu.selectedItem = 0;
                     current_screen = 0;
                     break;
                 default:
                     break;
                 }
+            }
+            if (event.key.code == sf::Keyboard::Escape)
+            {
+
+                current_screen = last_screen;
+                last_screen = 0;
             }
             updateMenu(opMenu, event);
             break;

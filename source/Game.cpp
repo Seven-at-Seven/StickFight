@@ -9,6 +9,7 @@
 // Global states
 
 int current_screen = 0;
+int last_screen = 0;
 int number_of_players = 2;
 sf::Event event;
 

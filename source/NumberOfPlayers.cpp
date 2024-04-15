@@ -20,12 +20,19 @@ void numberOfPlayersUpdate(sf::RenderWindow &window)
                 switch (numOfPMenu.selectedItem)
                 {
                 case 1:
+                    last_screen = current_screen;
                     current_screen = 1;
                     numOfPMenu.selectedItem = 0;
                     break;
                 default:
                     break;
                 }
+            }
+            if (event.key.code == sf::Keyboard::Escape)
+            {
+
+                current_screen = last_screen;
+                last_screen = 0;
             }
             if (event.key.code == sf::Keyboard::Right && numOfPMenu.selectedItem == 0)
             {

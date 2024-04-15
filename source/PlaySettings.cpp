@@ -23,18 +23,27 @@ void playSettingsUpdate(sf::RenderWindow &window, Menu &psMenu)
                 switch (psMenu.selectedItem)
                 {
                 case 0:
+                    last_screen = current_screen;
                     current_screen = 0;
                     break;
                 case 1:
+                    last_screen = current_screen;
                     current_screen = 5;
                     break;
                 case 3:
+                    last_screen = current_screen;
                     current_screen = 2;
                     break;
 
                 default:
                     break;
                 }
+            }
+            if (event.key.code == sf::Keyboard::Escape)
+            {
+
+                current_screen = last_screen;
+                last_screen = 0;
             }
             updateMenu(psMenu, event);
             break;
