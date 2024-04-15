@@ -29,7 +29,7 @@ void numberOfPlayersUpdate(sf::RenderWindow &window)
                     break;
                 }
             }
- 
+
             if (event.key.code == sf::Keyboard::Right && numOfPMenu.selectedItem == 0)
             {
                 if (number_of_players < 4)
@@ -53,7 +53,7 @@ void numberOfPlayersDraw(sf::RenderWindow &window)
     // Number of Players Counter
     sf::Text numText;
     numText.setFont(numOfPMenu.font);
-    // numText.setString(std::to_string(number_of_players));
+    numText.setString(std::to_string(number_of_players));
     numText.setPosition(SCREENWIDTH / 2 - 200, SCREENHEIGHT / (numOfPMenu.numberOfItems + 1));
     numText.setColor(sf::Color::Magenta);
     window.draw(numText);
