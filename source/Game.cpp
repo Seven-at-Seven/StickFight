@@ -4,6 +4,7 @@
 #include "screens/PlaySettings.hpp"               // Page 1
 #include "screens/GamePlay.hpp"                   // Page 2
 #include "screens/Options.hpp"                    // Page 3
+#include "screens/Sound.hpp"                      // page 4
 #include "screens/subscreens/NumberOfPlayers.hpp" // Page 5
 
 // Global states
@@ -17,6 +18,7 @@ sf::Event event;
 Menu mainMenu = initlizeMainMenu();
 Menu opMenu = initlizeOptionsMenu();
 Menu psMenu = initlizePlaySettingsMenu();
+Menu SoundMenu = initlizeSoundMenu();
 
 // Update Switch
 void updateGame(sf::RenderWindow &window)
@@ -35,6 +37,10 @@ void updateGame(sf::RenderWindow &window)
     case 3:
         optionsUpdate(window, opMenu);
         break;
+    case 4:
+        soundUpdate(window, SoundMenu);
+        break;
+
     case 5:
         numberOfPlayersUpdate(window);
         break;
@@ -60,6 +66,9 @@ void drawGame(sf::RenderWindow &window)
         break;
     case 3:
         optionsDraw(window, opMenu);
+        break;
+    case 4:
+        soundDraw(window, SoundMenu);
         break;
     case 5:
         numberOfPlayersDraw(window);

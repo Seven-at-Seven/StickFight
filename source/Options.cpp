@@ -6,6 +6,7 @@
 
 void optionsUpdate(sf::RenderWindow &window, Menu &opMenu)
 {
+   
 
     while (window.pollEvent(event))
     {
@@ -23,6 +24,9 @@ void optionsUpdate(sf::RenderWindow &window, Menu &opMenu)
                 case 0:
                     opMenu.selectedItem = 0;
                     current_screen = 0;
+                    break;
+                case 1:
+                    current_screen=4; 
                     break;
                 default:
                     break;

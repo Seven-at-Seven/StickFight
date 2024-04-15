@@ -4,7 +4,7 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(SCREENWIDTH, SCREENHEIGHT), "Snake Game", sf::Style::Default);
+    sf::RenderWindow window(sf::VideoMode(SCREENWIDTH, SCREENHEIGHT), " stick fight", sf::Style::Default);
     window.setFramerateLimit(30);
 
     while (window.isOpen())
