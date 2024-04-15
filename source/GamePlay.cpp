@@ -21,14 +21,11 @@ void gamePlayUpdate(sf::RenderWindow &window, Character &character)
     // ====
 
     // Character gravity ====
-    if (character.getShape().getPosition().y < window.getSize().y)
-    {
-        character.getShape().move(0, 5);
-    }
+
     // ====
 
     // Character jump ====
-    character.jump();
+
     // ====
 
     // Character screen collision ====

@@ -9,16 +9,12 @@
 struct Character
 {
   sf::RectangleShape c;
+  float width, height, posX, posY;
+  sf::Color color;
+
   sf::Vector2f velocity;
   float jumpSpeed = 10.0f;
   float gravity = 0.5f;
-
-  Character(float width, float height, sf::Color color, float posX, float posY)
-  {
-    c.setSize(sf::Vector2f(width, height));
-    c.setFillColor(color);
-    c.setPosition(posX, posY);
-  }
 
   sf::RectangleShape &getShape()
   {
@@ -50,32 +46,7 @@ struct Character
   {
     c.move(offsetX, 0);
   }
-
-  void jump()
-  {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && c.getPosition().y == SCREENHEIGHT)
-    {
-      std::cout << "c: " << c.getPosition().x << ", " << c.getPosition().y << ", " << SCREENHEIGHT << std::endl;
-      velocity.y = -jumpSpeed;
-    }
-    else
-    {
-      velocity.x = 0.0f;
-    }
-
-    if (c.getPosition().y < SCREENHEIGHT)
-    {
-      velocity.y += gravity;
-    }
-    else
-    {
-      c.setPosition(c.getPosition().x, SCREENHEIGHT);
-      velocity.y = 0.0f;
-    }
-
-    c.move(velocity.x, velocity.y);
-  }
-};
+ };
 
 void gamePlayUpdate(sf::RenderWindow &window, Character &character);
 void gamePlayDraw(sf::RenderWindow &window, Character &character);
