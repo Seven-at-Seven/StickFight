@@ -1,5 +1,4 @@
 #include "screens/GamePlay.hpp"
-#include "Globals.hpp"
 
 void gamePlayUpdate(sf::RenderWindow &window, Character &character)
 {
@@ -7,26 +6,13 @@ void gamePlayUpdate(sf::RenderWindow &window, Character &character)
     {
         if (event.type == sf::Event::Closed)
             window.close();
+
+        handelCharacterEvents(character, event);
     }
-
-    // Character movement ====
-    character.movement();
-    // ====
-
-    // Character gravity ====
-
-    // ====
-
-    // Character jump ====
-
-    // ====
-
-    // Character screen collision ====
-    character.checkScreenCollision(window);
-    // ====
+    characterUpdate(window, character, event);
 }
 
 void gamePlayDraw(sf::RenderWindow &window, Character &character)
 {
-    window.draw(character.getShape());
+    characterDraw(window, character);
 }

@@ -7,14 +7,16 @@
 
 // Global states
 int current_screen = 0;
+sf::Vector2f VELOCITY = sf::Vector2f(0, 0);
 sf::Event event;
+
 // Menus
 Menu mainMenu = initlizeMainMenu();
 Menu opMenu = initlizeOptionsMenu();
 Menu psMenu = initlizePlaySettingsMenu();
 
 // create a main character instance
-Character mainCharacter(50.0f, 50.f, 100.0f, 100.0f, sf::Color::Red);
+Character mainCharacter = initializeCharacter(50, 50, 100, 100, sf::Color::Green);
 
 void updateGame(sf::RenderWindow &window)
 {
