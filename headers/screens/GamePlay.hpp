@@ -3,32 +3,16 @@
 #include <SFML/Graphics.hpp>
 #include "Globals.hpp"
 
-class Block
-{
-  sf::RectangleShape b;
+#include <iostream>
+#include <string>
 
-public:
-  Block(float width, float height, sf::Color color, float posX, float posY)
-  {
-    b.setSize(sf::Vector2f(width, height));
-    b.setFillColor(color);
-    b.setPosition(posX, posY);
-  }
-
-  sf::RectangleShape &getShape()
-  {
-    return b;
-  }
-};
-
-class Character
+struct Character
 {
   sf::RectangleShape c;
   sf::Vector2f velocity;
   float jumpSpeed = 10.0f;
   float gravity = 0.5f;
 
-public:
   Character(float width, float height, sf::Color color, float posX, float posY)
   {
     c.setSize(sf::Vector2f(width, height));
@@ -69,8 +53,9 @@ public:
 
   void jump()
   {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && c.getPosition().y == SCREENHEIGHT)
     {
+      std::cout << "c: " << c.getPosition().x << ", " << c.getPosition().y << ", " << SCREENHEIGHT << std::endl;
       velocity.y = -jumpSpeed;
     }
     else
@@ -84,6 +69,7 @@ public:
     }
     else
     {
+      c.setPosition(c.getPosition().x, SCREENHEIGHT);
       velocity.y = 0.0f;
     }
 

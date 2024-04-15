@@ -15,7 +15,6 @@ Menu psMenu = initlizePlaySettingsMenu();
 
 // create a main character instance
 Character mainCharacter(50.0f, 50.0f, sf::Color::Red, 100.0f, 100.0f);
-// Block surface(SCREENWIDTH, 100.0f, sf::Color::White, 0.0f, SCREENHEIGHT - 100.0f);
 
 void updateGame(sf::RenderWindow &window)
 {
