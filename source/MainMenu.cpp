@@ -27,9 +27,11 @@ void mainUpdate(Menu &menu, int &current_screen, sf::RenderWindow &window)
                 switch (menu.selectedItem)
                 {
                 case 0:
+                    last_screen = current_screen;
                     current_screen = 1;
                     break;
                 case 1:
+                    last_screen = current_screen;
                     current_screen = 3;
                     break;
                 case 2:
@@ -38,6 +40,7 @@ void mainUpdate(Menu &menu, int &current_screen, sf::RenderWindow &window)
                     break;
                 }
             }
+
             updateMenu(menu, event);
             break;
         }

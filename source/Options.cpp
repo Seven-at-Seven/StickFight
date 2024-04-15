@@ -21,6 +21,7 @@ void optionsUpdate(sf::RenderWindow &window, Menu &opMenu)
                 switch (opMenu.selectedItem)
                 {
                 case 0:
+                    last_screen = current_screen;
                     opMenu.selectedItem = 0;
                     current_screen = 0;
                     break;
@@ -28,6 +29,7 @@ void optionsUpdate(sf::RenderWindow &window, Menu &opMenu)
                     break;
                 }
             }
+ 
             updateMenu(opMenu, event);
             break;
         }
