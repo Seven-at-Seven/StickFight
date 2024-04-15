@@ -16,7 +16,7 @@ void optionsUpdate(sf::RenderWindow &window, Menu &opMenu)
             break;
         case sf::Event::KeyReleased:
         {
-            if (event.key.code == sf::Keyboard::Space)
+            if (event.key.code == sf::Keyboard::Enter)
             {
                 switch (opMenu.selectedItem)
                 {
@@ -40,7 +40,8 @@ void optionsUpdate(sf::RenderWindow &window, Menu &opMenu)
 // draw
 void optionsDraw(sf::RenderWindow &window, Menu &opMenu)
 {
-    drawMenu(opMenu, window);
+
+    drawMenu(opMenu, window, "Options Menu");
 }
 Menu initlizeOptionsMenu()
 {

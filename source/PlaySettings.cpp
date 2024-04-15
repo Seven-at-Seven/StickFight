@@ -1,5 +1,7 @@
 #include "Globals.hpp"
 #include "screens/PlaySettings.hpp"
+#include "components/Menu.hpp"
+#include <string>
 
 #define PLAY_SETTINGS_ITEMS_NUMBER 4
 
@@ -15,16 +17,18 @@ void playSettingsUpdate(sf::RenderWindow &window, Menu &psMenu)
             break;
         case sf::Event::KeyReleased:
         {
-            if (event.key.code == sf::Keyboard::Space)
+
+            if (event.key.code == sf::Keyboard::Enter)
             {
                 switch (psMenu.selectedItem)
                 {
                 case 0:
-                    psMenu.selectedItem = 0;
                     current_screen = 0;
                     break;
+                case 1:
+                    current_screen = 5;
+                    break;
                 case 3:
-                    psMenu.selectedItem = 0;
                     current_screen = 2;
                     break;
 
@@ -41,9 +45,9 @@ void playSettingsUpdate(sf::RenderWindow &window, Menu &psMenu)
     }
 }
 
-void playSettingsDraw(sf::RenderWindow &window, Menu &psManu)
+void playSettingsDraw(sf::RenderWindow &window, Menu &psMenu)
 {
-    drawMenu(psManu, window);
+    drawMenu(psMenu, window, "Play Settings Menu");
 }
 
 Menu initlizePlaySettingsMenu()

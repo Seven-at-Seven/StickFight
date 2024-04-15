@@ -1,4 +1,3 @@
-
 CC := g++
 CFLAGS := -std=c++11 -Wall -Wextra
 SFML_LIBS := -lsfml-graphics -lsfml-window -lsfml-system
