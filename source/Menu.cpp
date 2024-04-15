@@ -55,6 +55,12 @@ void updateMenu(Menu &menu, sf::Event &event)
     {
         moveSelectionDown(menu);
     }
+    if (event.key.code == sf::Keyboard::Escape)
+    {
+
+        current_screen = last_screen;
+        last_screen = 0;
+    }
 }
 void drawMenu(Menu &menu, sf::RenderWindow &window, char *title)
 {
