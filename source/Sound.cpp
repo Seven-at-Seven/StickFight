@@ -13,31 +13,31 @@ void soundUpdate(sf::RenderWindow &window, Menu &SoundMenu)
 
     if (firstload)
     {
-        if (!textures[0].loadFromFile("0.png"))
+        if (!textures[0].loadFromFile("assets/images/sound/0.png"))
         {
             std::cout << "error on loading Sound photo" << std::endl;
         }
-        if (!textures[1].loadFromFile("20.png"))
+        if (!textures[1].loadFromFile("assets/images/sound/20.png"))
         {
             std::cout << "error on loading sound photo " << std::endl;
         }
-        if (!textures[2].loadFromFile("40.png"))
+        if (!textures[2].loadFromFile("assets/images/sound/40.png"))
         {
             std::cout << "error on loading sound photo " << std::endl;
         }
-        if (!textures[3].loadFromFile("50.png"))
+        if (!textures[3].loadFromFile("assets/images/sound/50.png"))
         {
             std::cout << "error on loading sound photo " << std::endl;
         }
-        if (!textures[4].loadFromFile("60.png"))
+        if (!textures[4].loadFromFile("assets/images/sound/60.png"))
         {
             std::cout << "error on loading sound photo " << std::endl;
         }
-        if (!textures[5].loadFromFile("80.png"))
+        if (!textures[5].loadFromFile("assets/images/sound/80.png"))
         {
             std::cout << "error on loading sound photo " << std::endl;
         }
-        if (!textures[6].loadFromFile("100.png"))
+        if (!textures[6].loadFromFile("assets/images/sound/100.png"))
         {
             std::cout << "error on loading sound photo " << std::endl;
         }
