@@ -18,6 +18,7 @@ sf::Event event;
 Menu mainMenu = initlizeMainMenu();
 Menu opMenu = initlizeOptionsMenu();
 Menu psMenu = initlizePlaySettingsMenu();
+Menu SoundMenu = initlizeSoundMenu();
 
 // Update Switch
 void updateGame(sf::RenderWindow &window)
@@ -37,7 +38,7 @@ void updateGame(sf::RenderWindow &window)
         optionsUpdate(window, opMenu);
         break;
     case 4:
-        soundUpdate(window);
+        soundUpdate(window, SoundMenu);
         break;
 
     case 5:
@@ -67,7 +68,7 @@ void drawGame(sf::RenderWindow &window)
         optionsDraw(window, opMenu);
         break;
     case 4:
-        soundDraw(window);
+        soundDraw(window, SoundMenu);
         break;
     case 5:
         numberOfPlayersDraw(window);

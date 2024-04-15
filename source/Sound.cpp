@@ -8,7 +8,7 @@ int current_sound_texture = 3;
 
 bool firstload = true;
 
-void soundUpdate(sf::RenderWindow &window)
+void soundUpdate(sf::RenderWindow &window, Menu &SoundMenu)
 {
 
     if (firstload)
@@ -51,6 +51,8 @@ void soundUpdate(sf::RenderWindow &window)
 
     while (window.pollEvent(event))
     {
+        updateMenu(SoundMenu, event);
+
         if (event.type == sf::Event::Closed)
             window.close();
         if (event.type == sf::Event::KeyReleased)
@@ -71,14 +73,27 @@ void soundUpdate(sf::RenderWindow &window)
                 {
                     break;
                 }
+
                 current_sound_texture--;
                 sp.setTexture(textures[current_sound_texture]);
+            }
+            if (event.key.code == sf::Keyboard::Enter)
+
+            {
+                current_screen = 3;
             }
         }
     }
 }
 
-void soundDraw(sf::RenderWindow &window)
+void soundDraw(sf::RenderWindow &window, Menu &SoundMenu)
 {
+    drawMenu(SoundMenu, window, "Sound Menu");
     window.draw(sp);
+}
+Menu initlizeSoundMenu()
+{
+    char *items[3] = {"Go Back", "", ""};
+    Menu SoundMenu = initlizeMenu(3, items);
+    return SoundMenu;
 }
