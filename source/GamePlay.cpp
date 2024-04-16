@@ -13,19 +13,6 @@ void declaringmap()
     map[5].background.loadFromFile("assets/images/background5.png");
     for (int i = 0; i < 6; i++)
     {
-        if (event.type == sf::Event::Closed)
-            window.close();
-
-        if (event.type == sf::Event::KeyReleased)
-        {
-
-            if (event.key.code == sf::Keyboard::Escape)
-            {
-
-                current_screen = last_screen;
-                last_screen = 0;
-            }
-        }
         map[i].background_sprite.setTexture(map[i].background);
         map[i].xdir = SCREENWIDTH / map[i].background_sprite.getGlobalBounds().width;
         map[i].ydir = SCREENHEIGHT / map[i].background_sprite.getGlobalBounds().height;
@@ -46,8 +33,15 @@ void gamePlayUpdate(sf::RenderWindow &window)
 
         if (event.type == sf::Event::Closed)
             window.close();
+
         if (event.type == sf::Event::KeyReleased)
         {
+            if (event.key.code == sf::Keyboard::Escape)
+            {
+
+                current_screen = last_screen;
+                last_screen = 0;
+            }
             if (event.key.code == sf::Keyboard::A)
             {
                 curmap--;
