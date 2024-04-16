@@ -8,7 +8,6 @@
 #include "screens/subscreens/NumberOfPlayers.hpp" // Page 5
 
 // Global states
-
 int current_screen = 0;
 int last_screen = 0;
 int number_of_players = 2;
@@ -21,6 +20,7 @@ Menu opMenu = initlizeOptionsMenu();
 Menu psMenu = initlizePlaySettingsMenu();
 Menu SoundMenu = initlizeSoundMenu();
 
+// maps
 // Update Switch
 void updateGame(sf::RenderWindow &window)
 {
