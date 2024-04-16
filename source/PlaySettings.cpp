@@ -23,12 +23,15 @@ void playSettingsUpdate(sf::RenderWindow &window, Menu &psMenu)
                 switch (psMenu.selectedItem)
                 {
                 case 0:
+                    last_screen = current_screen;
                     current_screen = 0;
                     break;
                 case 1:
+                    last_screen = current_screen;
                     current_screen = 5;
                     break;
                 case 3:
+                    last_screen = current_screen;
                     current_screen = 2;
                     break;
 
@@ -36,6 +39,7 @@ void playSettingsUpdate(sf::RenderWindow &window, Menu &psMenu)
                     break;
                 }
             }
+ 
             updateMenu(psMenu, event);
             break;
         }
