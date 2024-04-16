@@ -8,7 +8,6 @@
 #include "screens/subscreens/NumberOfPlayers.hpp" // Page 5
 
 // Global states
-
 int current_screen = 0;
 sf::Vector2f VELOCITY = sf::Vector2f(0, 0);
 int last_screen = 0;
@@ -22,9 +21,13 @@ Menu opMenu = initlizeOptionsMenu();
 Menu psMenu = initlizePlaySettingsMenu();
 Menu SoundMenu = initlizeSoundMenu();
 
+<<<<<<< HEAD
 // create a main character instance
 Character mainCharacter = initializeCharacter(50, 50, 100, 100, sf::Color::Green);
 
+=======
+// maps
+>>>>>>> feature-mainMenu
 // Update Switch
 void updateGame(sf::RenderWindow &window)
 {

@@ -2,6 +2,7 @@
 #define S_GLOBALS_H
 #include <SFML/Graphics.hpp>
 #include <unistd.h>
+#include"screens/GamePlay.hpp"
 
 #define JUMP -22
 
@@ -15,5 +16,7 @@ extern int current_screen;
 extern int last_screen;
 extern int number_of_players;
 extern sf::Event event;
+extern int curmap;
+extern maps map[6];
 
 #endif // S_GLOBALS_H
