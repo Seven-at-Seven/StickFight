@@ -2,23 +2,35 @@
 #define MAP_H
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#define MAX_STONES 9
+#define MAX_BLOCKS 6
 
-struct Blocks
+struct Stone
 {
-    float x_coordinate, y_coordinate, width, height;
-    sf::Sprite block_sprite;
-    sf::Texture block_texture;
-    sf::RectangleShape block_shape;
+    float x_coordinate, y_coordinate;
+    sf::Sprite stone_sprite;
 };
-struct maps
+
+struct Block
+{
+    sf::Vector2f position, stone_size;
+    int stone_num, rows;
+    Stone stones[MAX_STONES];
+    sf::Texture block_texture;
+    // Calculate the center point
+    // float originX = width / 2.0f;
+    // float originY = height / 2.0f;
+};
+struct Map
 {
     int num_of_blocks;
-    Blocks block[6];
+    Block blocks[MAX_BLOCKS];
     sf::Texture background;
     sf::Sprite background_sprite;
     float xdir, ydir;
 };
 // functions
-
-void declaringmap();
+Block initialize_block(sf::Texture texture, sf::Vector2f position, int numblocks, int rows);
+void loadingmap();
+void loadingblocks(int mapindex);
 #endif

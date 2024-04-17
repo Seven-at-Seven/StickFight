@@ -8,7 +8,7 @@ void gamePlayUpdate(sf::RenderWindow &window)
 
     if (firsttime)
     {
-        declaringmap();
+        loadingmap();
         firsttime = false;
     }
     while (window.pollEvent(event))
@@ -42,7 +42,8 @@ void gamePlayDraw(sf::RenderWindow &window)
     {
     case 0:
         window.draw(map[0].background_sprite);
-        window.draw(map[0].block[0].block_sprite);
+        // window.draw(map[0].block[0].block_shape);
+        // window.draw(map[1].block[1].block_shape);
         break;
     case 1:
         window.draw(map[1].background_sprite);

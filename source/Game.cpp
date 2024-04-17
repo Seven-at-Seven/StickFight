@@ -20,7 +20,7 @@ Menu opMenu = initlizeOptionsMenu();
 Menu psMenu = initlizePlaySettingsMenu();
 Menu SoundMenu = initlizeSoundMenu();
 
-// maps
+// Map
 // Update Switch
 void updateGame(sf::RenderWindow &window)
 {
