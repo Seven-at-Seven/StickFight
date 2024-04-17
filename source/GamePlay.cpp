@@ -1,5 +1,5 @@
 #include "screens/GamePlay.hpp"
-#include "components/Character.hpp"
+//#include "components/Character.hpp"
 #include "Globals.hpp"
 #include "components/Block.hpp"
 #include "Map_utility.hpp"
@@ -41,14 +41,14 @@ void gamePlayUpdate(sf::RenderWindow &window)
             }
         }
     }
-    characterUpdate(window, character, event);
+   // characterUpdate(window, character, event);
 }
 
 
    
 void gamePlayDraw(sf::RenderWindow &window)
 {
-     characterDraw(window, character);
+    // characterDraw(window, character);
     switch (curmap)
     {
     case 0:

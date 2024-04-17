@@ -15,7 +15,7 @@ public:
 
 private:
   sf::Vector2u imageCount;
-  sf::Vector2u current Image;
+  sf::Vector2u currentImage;
   float totalTime;
   float switchTime;
 };

@@ -25,9 +25,9 @@ Menu SoundMenu = initlizeSoundMenu();
 // create a main character instance
 Character mainCharacter = initializeCharacter(50, 50, 100, 100, sf::Color::Green);
 
-=======
+
 // Map
->>>>>>> feature-map
+
 // Update Switch
 void updateGame(sf::RenderWindow &window)
 {
