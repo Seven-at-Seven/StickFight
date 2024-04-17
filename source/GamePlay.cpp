@@ -10,6 +10,7 @@ Block myBlock;
 void gamePlayUpdate(sf::RenderWindow &window, Character &character)
 {
 
+    characterUpdate(window, character, map[0]);
     if (firsttime)
     {
         loadingmap();
@@ -41,7 +42,6 @@ void gamePlayUpdate(sf::RenderWindow &window, Character &character)
             }
         }
     }
-    characterUpdate(window, character, event);
 }
 
 void gamePlayDraw(sf::RenderWindow &window, Character &character)

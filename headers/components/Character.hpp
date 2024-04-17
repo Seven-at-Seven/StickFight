@@ -18,9 +18,10 @@ struct Character
 Character initializeCharacter(float width, float height, float posX, float posY, sf::Color color);
 void checkScreenCollision(Character &player, sf::RenderWindow &window);
 void move(Character &player, sf::Vector2f offset);
-
 void handelCharacterEvents(Character &character, sf::Event &event);
-void characterUpdate(sf::RenderWindow &window, Character &character, sf::Event &event);
+void characterUpdate(sf::RenderWindow &window, Character &character,
+                     Map &map);
 void characterDraw(sf::RenderWindow &window, Character &character);
+void checkBlocksCollision(Character &character, Map &map);
 
 #endif // CHARACTER_H

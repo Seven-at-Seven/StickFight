@@ -4,7 +4,7 @@
 Map map[6];
 void loadingmap()
 {
-    map[0].num_of_blocks = 3;
+    map[0].num_of_blocks = 1;
     for (int i = 0; i < 6; i++)
     {
         //   loadingblocks(i);
@@ -23,9 +23,7 @@ void loadMapBlocks(int mapIndex)
 {
     if (mapIndex == 0)
     {
-        map[0].blocks[0] = initialize_block(sf::Vector2f(50, 50), sf::Vector2f(20, 20), 10, 5);
-        map[0].blocks[1] = initialize_block(sf::Vector2f(100, 100), sf::Vector2f(20, 20), 12, 2);
-        map[0].blocks[2] = initialize_block(sf::Vector2f(200, 200), sf::Vector2f(20, 20), 30, 2);
+        map[0].blocks[0] = initialize_block(sf::Vector2f(200, SCREENHEIGHT - 2 * 40), sf::Vector2f(20, 20), 30, 2);
     }
 }
 void drawMap(sf::RenderWindow &window, Map &map)

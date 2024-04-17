@@ -1,12 +1,17 @@
 #include "components/Character.hpp"
+#include <iostream>
 
 // Character states
-bool punsing = false;
-bool moving = false;
 short texturesLimt = 6;
-short state = 0;
+short frames = 0;
+bool onGround = false;
+bool isMoving = false;
+bool isPunshing = false;
+bool onBlock = false;
+bool facingLeft = false;
 
-Character initializeCharacter(float width, float height, float posX, float posY, sf::Color color)
+Character
+initializeCharacter(float width, float height, float posX, float posY, sf::Color color)
 {
   Character player;
 
@@ -46,95 +51,120 @@ void move(Character &player, sf::Vector2f offset)
 
 void handelCharacterEvents(Character &character, sf::Event &event)
 {
+
+  // Handle Key pressed
+  if (event.type == sf::Event::KeyPressed)
+  {
+
+    switch (event.key.code)
+    {
+    case sf::Keyboard::Left:
+    {
+
+      VELOCITY.x = -5;
+      isMoving = true;
+      if (!facingLeft)
+      {
+        facingLeft = !facingLeft;
+        character.sprite.setScale(sf::Vector2f(-1.f, 1.f));
+        character.sprite.setPosition(character.sprite.getPosition().x + 64,
+                                     character.sprite.getPosition().y);
+      }
+    }
+    break;
+    case sf::Keyboard::Right:
+    {
+
+      VELOCITY.x = 5;
+      isMoving = true;
+      if (facingLeft)
+      {
+        facingLeft = !facingLeft;
+        character.sprite.setScale(sf::Vector2f(1.f, 1.f));
+        character.sprite.setPosition(character.sprite.getPosition().x - 64,
+                                     character.sprite.getPosition().y);
+      }
+    }
+    break;
+    case sf::Keyboard::Up:
+    {
+
+      if (onGround)
+      {
+        onBlock = false;
+        onGround = false;
+        VELOCITY.y = JUMP;
+      }
+      break;
+    }
+    case sf::Keyboard::Numpad0:
+    {
+      isPunshing = true;
+      break;
+    }
+    default:
+      break;
+    }
+  }
+
+  // Handle Key Released
   if (event.type == sf::Event::KeyReleased)
   {
-    if (event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::Right)
+    switch (event.key.code)
     {
+    case sf::Keyboard::Left:
+
+    case sf::Keyboard::Right:
+      isMoving = false;
       VELOCITY.x = 0;
+      break;
+
+    case sf::Keyboard::Numpad0:
+      isPunshing = false;
+    default:
+      break;
     }
   }
 }
 
-void characterUpdate(sf::RenderWindow &window, Character &character, sf::Event &event)
+void characterUpdate(sf::RenderWindow &window, Character &character,
+                     Map &map)
 {
-  bool isFalling = true;
 
+  checkScreenCollision(character, window);
   move(character, VELOCITY);
 
-  // Character movement ====
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+  if (isPunshing)
   {
-
-    moving = true;
-    texturesLimt = 9;
-    VELOCITY.x = -5;
-  }
-  else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-  {
-    moving = true;
-    texturesLimt = 9;
-    VELOCITY.x = 5;
-  }
-  else
-    moving = false;
-
-  // ====
-  if (punsing)
-  {
-
     texturesLimt = 10;
-    character.texturePath = PUNCH_TEXTURE;
+    character.texturePath = (char *)PUNCH_TEXTURE;
   }
-  else if (moving)
+  else if (isMoving)
   {
-
     texturesLimt = 9;
-    character.texturePath = MOVEING_TEXTURE;
+    character.texturePath = (char *)MOVEING_TEXTURE;
   }
   else
   {
-
     texturesLimt = 6;
-    character.texturePath = IDLE_TEXTURE;
+    character.texturePath = (char *)IDLE_TEXTURE;
   }
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::G))
-    punsing = true;
-  else
-    punsing = false;
 
-  if (state >= texturesLimt - 1)
-    state = 0;
-  state++;
+  frames++;
+  if (frames >= texturesLimt - 1)
+    frames = 0;
 
-  // isFalling ====
-  if (character.sprite.getPosition().y + character.sprite.getTextureRect().height < window.getSize().y)
+  // isFalling
+  if (character.sprite.getPosition().y + character.sprite.getTextureRect().height < SCREENHEIGHT && !onBlock)
   {
-    isFalling = true;
-  }
-  else
-  {
-    isFalling = false;
-    VELOCITY.y = 0;
-  }
-  // ====
-
-  // Character gravity ====
-  if (isFalling)
-  {
+    onGround = false;
     VELOCITY.y += GRAVITY.y;
   }
-  // ====
-
-  // Character jump ====
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !isFalling)
+  else
   {
-    VELOCITY.y = JUMP;
+    onGround = true;
+    VELOCITY.y = 0;
   }
-  // ====
-
-  // Character screen collision ====
-  checkScreenCollision(character, window);
-  // ====
 }
 
 void characterDraw(sf::RenderWindow &window, Character &character)
@@ -142,10 +172,11 @@ void characterDraw(sf::RenderWindow &window, Character &character)
 
   if (character.texture.loadFromFile(character.texturePath))
   {
-    character.sprite.setTextureRect(sf::IntRect(64 * state, 0,
+    character.sprite.setTextureRect(sf::IntRect(64 * frames, 0,
                                                 character.sprite.getGlobalBounds().width,
                                                 character.sprite.getGlobalBounds().height));
+
     character.sprite.setTexture(character.texture);
-    window.draw(character.sprite);
   }
+  window.draw(character.sprite);
 }
