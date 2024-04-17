@@ -1,5 +1,5 @@
 #include "screens/GamePlay.hpp"
-//#include "components/Character.hpp"
+#include "components/Character.hpp"
 #include "Globals.hpp"
 #include "components/Block.hpp"
 #include "Map_utility.hpp"
@@ -7,7 +7,7 @@
 int curmap = 0;
 bool firsttime = true;
 Block myBlock;
-void gamePlayUpdate(sf::RenderWindow &window)
+void gamePlayUpdate(sf::RenderWindow &window, Character &character)
 {
 
     if (firsttime)
@@ -41,14 +41,11 @@ void gamePlayUpdate(sf::RenderWindow &window)
             }
         }
     }
-   // characterUpdate(window, character, event);
+    characterUpdate(window, character, event);
 }
 
-
-   
-void gamePlayDraw(sf::RenderWindow &window)
+void gamePlayDraw(sf::RenderWindow &window, Character &character)
 {
-    // characterDraw(window, character);
     switch (curmap)
     {
     case 0:
@@ -73,4 +70,5 @@ void gamePlayDraw(sf::RenderWindow &window)
         window.draw(map[5].background_sprite);
         break;
     }
+    characterDraw(window, character);
 }

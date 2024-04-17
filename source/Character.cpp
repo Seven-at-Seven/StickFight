@@ -96,47 +96,7 @@ void characterUpdate(sf::RenderWindow &window, Character &character, sf::Event &
   // ====
 }
 
-
 void characterDraw(sf::RenderWindow &window, Character &character)
 {
-  sf::Clock clock;
-  character.rect.setPosition(206.0f, 206.0f);
-  sf::Texture playerTexture;
-  playerTexture.loadFromFile("assets/StickmanPack/Idle/thickIdleSheet.png");
-  character.rect.setTexture(&playerTexture);
-  Animation animation(&playerTexture, sf::Vector2u(5, 1), 0.2f);
-  float deltaTime = 0.0f;
-
-  deltaTime = clock.restart().asSeconds();
-
-  animation.Update(0, deltaTime);
-  character.rect.setTextureRect(animation.uvRect);
   window.draw(character.rect);
-}
-
-Animation::Animation(sf::Texture *texture, sf::Vector2u imageCount, float switchTime)
-{
-  this->imageCount = imageCount;
-  this->switchTime = switchTime;
-  totalTime = 0.0f;
-  currentImage.x = 0;
-  uvRect.width = texture->getSize().x / float(imageCount.x);
-  uvRect.height = texture->getSize().y / float(imageCount.y);
-}
-
-void Animation::Update(int row, float deltaTime)
-{
-  currentImage.y = row;
-  totalTime += deltaTime;
-  if (totalTime >= switchTime)
-  {
-    totalTime -= switchTime;
-    currentImage.x++;
-    {
-      if (currentImage.x >= imageCount.x)
-        currentImage.x = 0;
-    }
-  }
-  uvRect.left = currentImage.x * uvRect.width;
-  uvRect.top = currentImage.y * uvRect.height;
 }
