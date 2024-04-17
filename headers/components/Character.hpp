@@ -6,16 +6,18 @@
 class Animation
 {
 public:
-Animation(sf:: Texture* texture, sf:: Vector2u imageCount, float switchTime);
-~Animation();
-void Update(int row, float deltaTime);
+  Animation(sf::Texture *texture, sf::Vector2u imageCount, float switchTime);
+  ~Animation();
+  void Update(int row, float deltaTime);
+
 public:
-sf:: IntRect uvRect;
+  sf::IntRect uvRect;
+
 private:
-sf:: Vector2u imageCount;
-sf::Vector2u current Image;
-float totalTime;
-float switchTime;
+  sf::Vector2u imageCount;
+  sf::Vector2u current Image;
+  float totalTime;
+  float switchTime;
 };
 
 struct Character

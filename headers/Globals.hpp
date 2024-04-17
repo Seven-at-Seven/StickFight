@@ -2,7 +2,7 @@
 #define S_GLOBALS_H
 #include <SFML/Graphics.hpp>
 #include <unistd.h>
-#include"screens/GamePlay.hpp"
+#include "Map_utility.hpp"
 
 #define JUMP -22
 
@@ -12,11 +12,12 @@ const sf::Vector2f GRAVITY = sf::Vector2f(0, 2.8);
 
 extern sf::Vector2f VELOCITY;// = sf::Vector2f(0, 0);
 
+
 extern int current_screen;
 extern int last_screen;
 extern int number_of_players;
 extern sf::Event event;
 extern int curmap;
-extern maps map[6];
+extern Map map[6];
 
 #endif // S_GLOBALS_H

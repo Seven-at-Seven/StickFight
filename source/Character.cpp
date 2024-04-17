@@ -101,7 +101,7 @@ void characterDraw(sf::RenderWindow &window, Character &character)
 {
   character.rect.setPosition(206.0f, 206.0f);
    sf::Texture playerTexture;
-    playrTexture.loadFromFile("thickIdle");
+    playrTexture.loadFromFile("assets/StickmanPack/Idle/thickIdleSheet.png");
     character.rect.setTexture(&playerTexture);
     Animation animation (&playerTexture, sf:: Vector2u(5, 1), 0.2f);
    float deltaTime = 0.0f;
