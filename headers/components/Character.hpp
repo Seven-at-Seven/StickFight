@@ -1,11 +1,16 @@
-
 #ifndef CHARACTER_H
 #define CHARACTER_H
 #include "Globals.hpp"
 
+#define IDLE_TEXTURE "assets/StickmanPack/Idle/thickIdleSheet.png"
+#define PUNCH_TEXTURE "assets/StickmanPack/Punch/thickPunchSheet.png"
+#define MOVEING_TEXTURE "assets/StickmanPack/Run/thickRunSheet.png"
+
 struct Character
 {
-  sf::RectangleShape rect;
+  sf::Sprite sprite;
+  sf::Texture texture;
+  char *texturePath;
   float width, height, posX, posY;
   sf::Color color;
 };

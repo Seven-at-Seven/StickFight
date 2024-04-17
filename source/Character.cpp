@@ -1,40 +1,47 @@
 #include "components/Character.hpp"
 
+// Character states
+bool punsing = false;
+bool moving = false;
+short texturesLimt = 6;
+short state = 0;
+
 Character initializeCharacter(float width, float height, float posX, float posY, sf::Color color)
 {
   Character player;
 
-  player.rect.setSize(sf::Vector2f(width, height));
-  player.rect.setPosition(sf::Vector2f(posX, posY));
-  player.rect.setFillColor(color);
+  player.sprite.setTextureRect(sf::IntRect(0, 0, width, height));
+  player.sprite.setPosition(sf::Vector2f(posX, posY));
+  player.sprite.setColor(color);
+  player.texturePath = IDLE_TEXTURE;
 
   return player;
 }
 
 void checkScreenCollision(Character &player, sf::RenderWindow &window)
 {
-  if (player.rect.getPosition().x < 0)
+  if (player.sprite.getPosition().x < 0)
   {
-    player.rect.setPosition(0, player.rect.getPosition().y);
+    player.sprite.setPosition(0, player.sprite.getPosition().y);
   }
-  else if (player.rect.getPosition().x + player.rect.getSize().x > window.getSize().x)
+  else if (player.sprite.getPosition().x + player.sprite.getTextureRect().width > window.getSize().x)
   {
-    player.rect.setPosition(window.getSize().x - player.rect.getSize().x, player.rect.getPosition().y);
+    player.sprite.setPosition(window.getSize().x - player.sprite.getTextureRect().width, player.sprite.getPosition().y);
   }
 
-  if (player.rect.getPosition().y < 0)
+  if (player.sprite.getPosition().y < 0)
   {
-    player.rect.setPosition(player.rect.getPosition().x, 0);
+    player.sprite.setPosition(player.sprite.getPosition().x, 0);
   }
-  else if (player.rect.getPosition().y + player.rect.getSize().y > window.getSize().y)
+  else if (player.sprite.getPosition().y + player.sprite.getTextureRect().height > window.getSize().y)
   {
-    player.rect.setPosition(player.rect.getPosition().x, window.getSize().y - player.rect.getSize().y);
+    player.sprite.setPosition(player.sprite.getPosition().x, window.getSize().y - player.sprite.getTextureRect().height);
   }
 }
 
 void move(Character &player, sf::Vector2f offset)
 {
-  player.rect.move(offset);
+  player.sprite.move(offset);
 }
 
 void handelCharacterEvents(Character &character, sf::Event &event)
@@ -57,16 +64,50 @@ void characterUpdate(sf::RenderWindow &window, Character &character, sf::Event &
   // Character movement ====
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
   {
+
+    moving = true;
+    texturesLimt = 9;
     VELOCITY.x = -5;
   }
   else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
   {
+    moving = true;
+    texturesLimt = 9;
     VELOCITY.x = 5;
   }
+  else
+    moving = false;
+
   // ====
+  if (punsing)
+  {
+
+    texturesLimt = 10;
+    character.texturePath = PUNCH_TEXTURE;
+  }
+  else if (moving)
+  {
+
+    texturesLimt = 9;
+    character.texturePath = MOVEING_TEXTURE;
+  }
+  else
+  {
+
+    texturesLimt = 6;
+    character.texturePath = IDLE_TEXTURE;
+  }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::G))
+    punsing = true;
+  else
+    punsing = false;
+
+  if (state >= texturesLimt - 1)
+    state = 0;
+  state++;
 
   // isFalling ====
-  if (character.rect.getPosition().y + character.rect.getSize().y < window.getSize().y)
+  if (character.sprite.getPosition().y + character.sprite.getTextureRect().height < window.getSize().y)
   {
     isFalling = true;
   }
@@ -98,5 +139,13 @@ void characterUpdate(sf::RenderWindow &window, Character &character, sf::Event &
 
 void characterDraw(sf::RenderWindow &window, Character &character)
 {
-  window.draw(character.rect);
+
+  if (character.texture.loadFromFile(character.texturePath))
+  {
+    character.sprite.setTextureRect(sf::IntRect(64 * state, 0,
+                                                character.sprite.getGlobalBounds().width,
+                                                character.sprite.getGlobalBounds().height));
+    character.sprite.setTexture(character.texture);
+    window.draw(character.sprite);
+  }
 }

@@ -21,10 +21,8 @@ Menu opMenu = initlizeOptionsMenu();
 Menu psMenu = initlizePlaySettingsMenu();
 Menu SoundMenu = initlizeSoundMenu();
 
-
 // create a main character instance
-Character mainCharacter = initializeCharacter(50, 50, 100, 100, sf::Color::Green);
-
+Character mainCharacter = initializeCharacter(64, 64, 100, 100, sf::Color::Green);
 
 // Map
 
