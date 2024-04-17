@@ -1,7 +1,6 @@
 #include "screens/GamePlay.hpp"
+#include "components/Character.hpp"
 
-void gamePlayUpdate(sf::RenderWindow &window, Character &character)
-{
 int curmap = 0;
 maps map[6];
 void declaringmap()
