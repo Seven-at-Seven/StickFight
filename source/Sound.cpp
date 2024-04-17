@@ -2,52 +2,50 @@
 #include "Globals.hpp"
 #include <iostream>
 
-sf::Texture textures[7];
-sf::Sprite sp;
 int current_sound_texture = 3;
+sf::Texture soundSliderTextures[7];
+sf::Sprite soundSliderSprite;
 
 bool firstload = true;
 
-void soundUpdate(sf::RenderWindow &window, Menu &SoundMenu)
+void loadSoundAssets()
 {
 
-    if (firstload)
+    if (!soundSliderTextures[0].loadFromFile("assets/images/sound/0.png"))
     {
-        if (!textures[0].loadFromFile("assets/images/sound/0.png"))
-        {
-            std::cout << "error on loading Sound photo" << std::endl;
-        }
-        if (!textures[1].loadFromFile("assets/images/sound/20.png"))
-        {
-            std::cout << "error on loading sound photo " << std::endl;
-        }
-        if (!textures[2].loadFromFile("assets/images/sound/40.png"))
-        {
-            std::cout << "error on loading sound photo " << std::endl;
-        }
-        if (!textures[3].loadFromFile("assets/images/sound/50.png"))
-        {
-            std::cout << "error on loading sound photo " << std::endl;
-        }
-        if (!textures[4].loadFromFile("assets/images/sound/60.png"))
-        {
-            std::cout << "error on loading sound photo " << std::endl;
-        }
-        if (!textures[5].loadFromFile("assets/images/sound/80.png"))
-        {
-            std::cout << "error on loading sound photo " << std::endl;
-        }
-        if (!textures[6].loadFromFile("assets/images/sound/100.png"))
-        {
-            std::cout << "error on loading sound photo " << std::endl;
-        }
-
-        sp.setTexture(textures[current_sound_texture]);
-        // sp.setTextureRect(sf::IntRect(0, 0, SCREENWIDTH / 2, SCREENHEIGHT / 3));
-        sp.setOrigin(sf::Vector2f(sp.getLocalBounds().width / 2, sp.getLocalBounds().height / 2));
-        sp.setPosition(sf::Vector2f(SCREENWIDTH / 2, SCREENHEIGHT / 2));
-        firstload = false;
+        std::cout << "error on loading Sound photo" << std::endl;
     }
+    if (!soundSliderTextures[1].loadFromFile("assets/images/sound/20.png"))
+    {
+        std::cout << "error on loading sound photo " << std::endl;
+    }
+    if (!soundSliderTextures[2].loadFromFile("assets/images/sound/40.png"))
+    {
+        std::cout << "error on loading sound photo " << std::endl;
+    }
+    if (!soundSliderTextures[3].loadFromFile("assets/images/sound/50.png"))
+    {
+        std::cout << "error on loading sound photo " << std::endl;
+    }
+    if (!soundSliderTextures[4].loadFromFile("assets/images/sound/60.png"))
+    {
+        std::cout << "error on loading sound photo " << std::endl;
+    }
+    if (!soundSliderTextures[5].loadFromFile("assets/images/sound/80.png"))
+    {
+        std::cout << "error on loading sound photo " << std::endl;
+    }
+    if (!soundSliderTextures[6].loadFromFile("assets/images/sound/100.png"))
+    {
+        std::cout << "error on loading sound photo " << std::endl;
+    }
+    soundSliderSprite.setTexture(soundSliderTextures[current_sound_texture]);
+    soundSliderSprite.setOrigin(sf::Vector2f(soundSliderSprite.getLocalBounds().width / 2, soundSliderSprite.getLocalBounds().height / 2));
+    soundSliderSprite.setPosition(sf::Vector2f(SCREENWIDTH / 2, SCREENHEIGHT / 2));
+}
+
+void soundUpdate(sf::RenderWindow &window, Menu &SoundMenu)
+{
 
     while (window.pollEvent(event))
     {
@@ -65,7 +63,7 @@ void soundUpdate(sf::RenderWindow &window, Menu &SoundMenu)
                 }
 
                 current_sound_texture++;
-                sp.setTexture(textures[current_sound_texture]);
+                soundSliderSprite.setTexture(soundSliderTextures[current_sound_texture]);
             }
             if (event.key.code == sf::Keyboard::Left)
             {
@@ -75,7 +73,7 @@ void soundUpdate(sf::RenderWindow &window, Menu &SoundMenu)
                 }
 
                 current_sound_texture--;
-                sp.setTexture(textures[current_sound_texture]);
+                soundSliderSprite.setTexture(soundSliderTextures[current_sound_texture]);
             }
             if (event.key.code == sf::Keyboard::Enter)
 
@@ -89,7 +87,7 @@ void soundUpdate(sf::RenderWindow &window, Menu &SoundMenu)
 void soundDraw(sf::RenderWindow &window, Menu &SoundMenu)
 {
     drawMenu(SoundMenu, window, "Sound Menu");
-    window.draw(sp);
+    window.draw(soundSliderSprite);
 }
 Menu initlizeSoundMenu()
 {

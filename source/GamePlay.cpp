@@ -11,12 +11,6 @@ void gamePlayUpdate(sf::RenderWindow &window, Character &character)
 {
 
     characterUpdate(window, character, map[0]);
-    if (firsttime)
-    {
-        loadingmap();
-        loadMapBlocks(0);
-        firsttime = false;
-    }
     while (window.pollEvent(event))
     {
 

@@ -1,6 +1,14 @@
 #include "components/Menu.hpp"
 #include <iostream>
 
+sf::Text menuTitle;
+sf::Texture mainMenuBackgroundTexture;
+sf::Sprite mainMenuBackgroundSprite;
+
+void loadMenuAssets()
+{
+    mainMenuBackgroundTexture.loadFromFile("assets/images/mainMenuBackground.jpg");
+}
 Menu initlizeMenu(int numebrOfItems, char **items)
 {
 
@@ -67,12 +75,9 @@ void updateMenu(Menu &menu, sf::Event &event)
 void drawMenu(Menu &menu, sf::RenderWindow &window, char *title)
 {
     // Menu Background
-    sf::Texture tex;
-    sf::Sprite mainMenuBackground;
-    tex.loadFromFile("assets/images/mainMenuBackground.jpg");
-    mainMenuBackground.setTextureRect(sf::IntRect(-SCREENWIDTH / 2, -SCREENHEIGHT / 2, SCREENWIDTH, SCREENHEIGHT));
-    mainMenuBackground.setTexture(tex);
-    window.draw(mainMenuBackground);
+    mainMenuBackgroundSprite.setTextureRect(sf::IntRect(-SCREENWIDTH / 2, -SCREENHEIGHT / 2, SCREENWIDTH, SCREENHEIGHT));
+    mainMenuBackgroundSprite.setTexture(mainMenuBackgroundTexture);
+    window.draw(mainMenuBackgroundSprite);
 
     for (int i = 0; i < menu.numberOfItems; i++)
     {
@@ -84,7 +89,6 @@ void drawMenu(Menu &menu, sf::RenderWindow &window, char *title)
     }
 
     // Menu title
-    sf::Text menuTitle;
     menuTitle.setString(title);
     menuTitle.setFont(menu.font);
     menuTitle.setPosition(sf::Vector2f(20, 20));

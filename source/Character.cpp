@@ -1,6 +1,8 @@
 #include "components/Character.hpp"
 #include <iostream>
 
+sf::Texture CharacterTextures[3];
+
 // Character states
 short texturesLimt = 6;
 short frames = 0;
@@ -10,15 +12,29 @@ bool isPunshing = false;
 bool onBlock = false;
 bool facingLeft = false;
 
-Character
-initializeCharacter(float width, float height, float posX, float posY, sf::Color color)
+void loadCharacterAssets()
+{
+  if (!CharacterTextures[0].loadFromFile(IDLE_TEXTURE))
+  {
+    std::cout << "Error loading idle character assets" << std::endl;
+  }
+  if (!CharacterTextures[1].loadFromFile(PUNCH_TEXTURE))
+  {
+    std::cout << "Error loading punshing character assets" << std::endl;
+  }
+  if (!CharacterTextures[2].loadFromFile(MOVEING_TEXTURE))
+  {
+    std::cout << "Error loading moving character assets" << std::endl;
+  }
+}
+Character initializeCharacter(float width, float height,
+                              float posX, float posY, sf::Color color)
 {
   Character player;
 
   player.sprite.setTextureRect(sf::IntRect(0, 0, width, height));
   player.sprite.setPosition(sf::Vector2f(posX, posY));
   player.sprite.setColor(color);
-  player.texturePath = IDLE_TEXTURE;
 
   return player;
 }
@@ -137,17 +153,17 @@ void characterUpdate(sf::RenderWindow &window, Character &character,
   if (isPunshing)
   {
     texturesLimt = 10;
-    character.texturePath = (char *)PUNCH_TEXTURE;
+    character.selectedIndex = 1;
   }
   else if (isMoving)
   {
     texturesLimt = 9;
-    character.texturePath = (char *)MOVEING_TEXTURE;
+    character.selectedIndex = 2;
   }
   else
   {
     texturesLimt = 6;
-    character.texturePath = (char *)IDLE_TEXTURE;
+    character.selectedIndex = 0;
   }
 
   frames++;
@@ -170,13 +186,34 @@ void characterUpdate(sf::RenderWindow &window, Character &character,
 void characterDraw(sf::RenderWindow &window, Character &character)
 {
 
-  if (character.texture.loadFromFile(character.texturePath))
-  {
-    character.sprite.setTextureRect(sf::IntRect(64 * frames, 0,
-                                                character.sprite.getGlobalBounds().width,
-                                                character.sprite.getGlobalBounds().height));
+  character.sprite.setTextureRect(sf::IntRect(64 * frames, 0,
+                                              character.sprite.getGlobalBounds().width,
+                                              character.sprite.getGlobalBounds().height));
+  // Get textures size
+  sf::Vector2u textureSize = CharacterTextures[character.selectedIndex].getSize();
 
-    character.sprite.setTexture(character.texture);
+  // Create an image from the textures
+  sf::Image image = CharacterTextures[character.selectedIndex].copyToImage();
+
+  // Loop through each pixel
+  for (unsigned int y = 0; y < textureSize.y; ++y)
+  {
+    for (unsigned int x = 0; x < textureSize.x; ++x)
+    {
+      // Get current pixel color
+      sf::Color pixelColor = image.getPixel(x, y);
+
+      // Check if black (all color components are 0)
+      if (pixelColor.r == 20 && pixelColor.g == 16 && pixelColor.b == 19)
+      {
+        // Change to red
+        image.setPixel(x, y, sf::Color::Red);
+      }
+    }
   }
+
+  // Update the textures with the modified image
+  CharacterTextures[character.selectedIndex].update(image);
+  character.sprite.setTexture(CharacterTextures[character.selectedIndex]);
   window.draw(character.sprite);
 }

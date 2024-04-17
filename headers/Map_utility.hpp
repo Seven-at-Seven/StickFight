@@ -6,6 +6,7 @@
 #include "components/Block.hpp"
 
 #define MAX_BLOCKS 6
+#define BLOCKS_TEXTURE_PATH "assets/images/blocks.png"
 
 struct Map
 {
@@ -16,7 +17,7 @@ struct Map
     float xdir, ydir;
 };
 // functions
-void loadingmap();
-void loadMapBlocks(int mapIndex);
+void loadMapAssets();
+void loadMapBlocks();
 void drawMap(sf::RenderWindow &window, Map &map);
 #endif

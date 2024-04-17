@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <Game.hpp>
+#include "Map_utility.hpp"
 #include "screens/MainMenu.hpp"                   // Page 0
 #include "screens/PlaySettings.hpp"               // Page 1
 #include "screens/GamePlay.hpp"                   // Page 2
@@ -24,7 +25,13 @@ Menu SoundMenu = initlizeSoundMenu();
 // create a main character instance
 Character mainCharacter = initializeCharacter(64, 64, 100, 100, sf::Color::Green);
 
-// Map
+void loadGameAssets()
+{
+    loadSoundAssets();
+    loadMenuAssets();
+    loadCharacterAssets();
+    loadMapAssets();
+}
 
 // Update Switch
 void updateGame(sf::RenderWindow &window)

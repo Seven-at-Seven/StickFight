@@ -4,21 +4,15 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 
-#define MAX_NUMBER_OF_ITEMS 6
-#define MAX_STONES 20
+#define MAX_STONES 40
 
-struct Stone
-{
-    float x_coordinate, y_coordinate;
-    sf::Sprite stone_sprite;
-    sf::Texture stone_texture;
-};
+extern sf::Texture blocksTexture;
+
 struct Block
 {
     sf::Vector2f position, stone_size;
     int stone_num, rows;
-    Stone stones[MAX_STONES];
-    char *block_texture;
+    sf::Sprite blockSprites[MAX_STONES];
 };
 
 void drawBlock(sf::RenderWindow &winodw, Block &block);
