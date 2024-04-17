@@ -55,19 +55,33 @@ void updateMenu(Menu &menu, sf::Event &event)
     {
         moveSelectionDown(menu);
     }
+    if (event.key.code == sf::Keyboard::Escape)
+    {
+
+        current_screen = last_screen;
+        last_screen = 0;
+    }
 }
 void drawMenu(Menu &menu, sf::RenderWindow &window, char *title)
 {
+    // Menu Background
+    sf::Texture tex;
+    sf::Sprite mainMenuBackground;
+    tex.loadFromFile("assets/images/mainMenuBackground.jpg");
+    mainMenuBackground.setTextureRect(sf::IntRect(-SCREENWIDTH / 2, -SCREENHEIGHT / 2, SCREENWIDTH, SCREENHEIGHT));
+    mainMenuBackground.setTexture(tex);
+    window.draw(mainMenuBackground);
 
     for (int i = 0; i < menu.numberOfItems; i++)
     {
         if (i == menu.selectedItem)
             menu.text[i].setColor(sf::Color::Red);
         else
-            menu.text[i].setColor(sf::Color::White);
+            menu.text[i].setColor(sf::Color::Black);
         window.draw(menu.text[i]);
     }
 
+    // Menu title
     sf::Text menuTitle;
     menuTitle.setString(title);
     menuTitle.setFont(menu.font);
