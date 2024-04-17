@@ -5,8 +5,8 @@
 #include "screens/GamePlay.hpp"
 #include "Map_utility.hpp"
 
-const int SCREENWIDTH = 1920;
-const int SCREENHEIGHT = 1080;
+const int SCREENWIDTH = 1220;
+const int SCREENHEIGHT = 680;
 
 extern int current_screen;
 extern int last_screen;

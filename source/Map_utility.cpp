@@ -4,16 +4,10 @@
 Map map[6];
 void loadingmap()
 {
-    // map[0].block[0].height = (float)SCREENHEIGHT / 7.1;
-    // map[0].block[0].width = map[0].block[0].height * 3.9;
-    // map[0].block[0].block_shape.setSize(sf::Vector2f(map[0].block[0].width, map[0].block[0].height));
-    // map[0].block[0].block_shape.setOrigin(sf::Vector2f(map[0].block[0].originX, map[0].block[0].originY));
-    // map[0].block[0].block_shape.setPosition(sf::Vector2f(SCREENWIDTH / 2.0f, SCREENHEIGHT / 2.0f));
-    // map[0].block[0].block_texture.loadFromFile("assets/images/spaceblock.png");
-    // map[0].block[0].block_shape.setTexture(&map[0].block[0].block_texture);
+    map[0].num_of_blocks = 3;
     for (int i = 0; i < 6; i++)
     {
-     //   loadingblocks(i);
+        //   loadingblocks(i);
         map[i].background.loadFromFile("assets/images/background" + std::to_string(i) + ".png");
         map[i].background_sprite.setTexture(map[i].background);
 
@@ -25,20 +19,20 @@ void loadingmap()
         map[i].background_sprite.setScale(sf::Vector2f(scaleX, scaleY));
     }
 }
-Block initialize_block(sf::Texture texture, sf::Vector2f position, int numstones, int rows)
+void loadMapBlocks(int mapIndex)
 {
-    Block block;
-    block.block_texture = texture;
-    block.position = position;
-    block.rows = rows;
-    block.stone_num = numstones;
-    return block;
+    if (mapIndex == 0)
+    {
+        map[0].blocks[0] = initialize_block(sf::Vector2f(50, 50), sf::Vector2f(20, 20), 10, 5);
+        map[0].blocks[1] = initialize_block(sf::Vector2f(100, 100), sf::Vector2f(20, 20), 12, 2);
+        map[0].blocks[2] = initialize_block(sf::Vector2f(200, 200), sf::Vector2f(20, 20), 30, 2);
+    }
 }
-// void loadingblocks(int mapindex)
-// {
-//     int x = map[mapindex].num_of_blocks;
-//     for (int j = 0; j < x; j++)
-//     {
-//         map[mapindex].block[j] = initialize_block
-//     }
-// }
+void drawMap(sf::RenderWindow &window, Map &map)
+{
+    window.draw(map.background_sprite);
+    for (int i = 0; i < map.num_of_blocks; i++)
+    {
+        drawBlock(window, map.blocks[i]);
+    }
+}

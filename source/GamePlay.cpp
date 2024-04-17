@@ -1,14 +1,18 @@
 #include "screens/GamePlay.hpp"
 #include "Globals.hpp"
+#include "components/Block.hpp"
+#include "Map_utility.hpp"
 
 int curmap = 0;
 bool firsttime = true;
+Block myBlock;
 void gamePlayUpdate(sf::RenderWindow &window)
 {
 
     if (firsttime)
     {
         loadingmap();
+        loadMapBlocks(0);
         firsttime = false;
     }
     while (window.pollEvent(event))
@@ -41,9 +45,7 @@ void gamePlayDraw(sf::RenderWindow &window)
     switch (curmap)
     {
     case 0:
-        window.draw(map[0].background_sprite);
-        // window.draw(map[0].block[0].block_shape);
-        // window.draw(map[1].block[1].block_shape);
+        drawMap(window, map[0]);
         break;
     case 1:
         window.draw(map[1].background_sprite);
