@@ -7,17 +7,17 @@
 int curmap = 0;
 bool firsttime = true;
 Block myBlock;
-void gamePlayUpdate(sf::RenderWindow &window, Character &character)
+void gamePlayUpdate(sf::RenderWindow &window)
 {
 
-    characterUpdate(window, character, map[0]);
+    charactersUpdate(window, map[0]);
     while (window.pollEvent(event))
     {
 
         if (event.type == sf::Event::Closed)
             window.close();
 
-        handelCharacterEvents(character, event);
+        handelCharacterEvents(event);
         if (event.type == sf::Event::KeyReleased)
         {
             if (event.key.code == sf::Keyboard::Escape)
@@ -38,7 +38,7 @@ void gamePlayUpdate(sf::RenderWindow &window, Character &character)
     }
 }
 
-void gamePlayDraw(sf::RenderWindow &window, Character &character)
+void gamePlayDraw(sf::RenderWindow &window)
 {
     switch (curmap)
     {
@@ -64,5 +64,5 @@ void gamePlayDraw(sf::RenderWindow &window, Character &character)
         window.draw(map[5].background_sprite);
         break;
     }
-    characterDraw(window, character);
+    charactersDraw(window);
 }

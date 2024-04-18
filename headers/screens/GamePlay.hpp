@@ -3,7 +3,7 @@
 
 #include "components/Character.hpp"
 
-void gamePlayUpdate(sf::RenderWindow &window, Character &character);
-void gamePlayDraw(sf::RenderWindow &window, Character &character);
+void gamePlayUpdate(sf::RenderWindow &window);
+void gamePlayDraw(sf::RenderWindow &window);
 
 #endif // GAMEPLAY_H

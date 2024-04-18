@@ -4,14 +4,14 @@
 sf::Texture CharacterTextures[3];
 
 // Character states
-short texturesLimt = 6;
-short frames = 0;
-bool onGround = false;
-bool isMoving = false;
-bool isPunshing = false;
-bool onBlock = false;
-bool facingLeft = false;
-
+short texturesLimt[4] = {6};
+short frames[4] = {0};
+bool onGround[4] = {false};
+bool isMoving[4] = {false};
+bool isPunshing[4] = {false};
+bool onBlock[4] = {false};
+bool facingLeft[4] = {false};
+Character charactersArray[4];
 void loadCharacterAssets()
 {
   if (!CharacterTextures[0].loadFromFile(IDLE_TEXTURE))
@@ -26,17 +26,36 @@ void loadCharacterAssets()
   {
     std::cout << "Error loading moving character assets" << std::endl;
   }
-}
-Character initializeCharacter(float width, float height,
-                              float posX, float posY, sf::Color color)
-{
-  Character player;
+  for (int i = 0; i < 4; i++)
+  {
+    charactersArray[i].sprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
+    charactersArray[i].sprite.setPosition(sf::Vector2f(80 * i + 20, 100));
+    charactersArray[i].color = sf::Color::Red;
+    // Get textures size
+    sf::Vector2u textureSize = CharacterTextures[i].getSize();
 
-  player.sprite.setTextureRect(sf::IntRect(0, 0, width, height));
-  player.sprite.setPosition(sf::Vector2f(posX, posY));
-  player.sprite.setColor(color);
+    // Create an image from the textures
+    sf::Image image = CharacterTextures[i].copyToImage();
 
-  return player;
+    // Loop through each pixel
+    for (unsigned int y = 0; y < textureSize.y; ++y)
+    {
+      for (unsigned int x = 0; x < textureSize.x; ++x)
+      {
+        // Get current pixel color
+        sf::Color pixelColor = image.getPixel(x, y);
+
+        // Check if black (all color components are 0)
+        if (pixelColor.r == 20 && pixelColor.g == 16 && pixelColor.b == 19)
+        {
+          // Change to red
+          image.setPixel(x, y, charactersArray[i].color);
+        }
+      }
+    }
+
+    CharacterTextures[i].update(image);
+  }
 }
 
 void checkScreenCollision(Character &player, sf::RenderWindow &window)
@@ -65,7 +84,7 @@ void move(Character &player, sf::Vector2f offset)
   player.sprite.move(offset);
 }
 
-void handelCharacterEvents(Character &character, sf::Event &event)
+void handelCharacterEvents(sf::Event &event)
 {
 
   // Handle Key pressed
@@ -77,45 +96,45 @@ void handelCharacterEvents(Character &character, sf::Event &event)
     case sf::Keyboard::Left:
     {
 
-      VELOCITY.x = -5;
-      isMoving = true;
-      if (!facingLeft)
+      VELOCITY[0].x = -5;
+      isMoving[0] = true;
+      if (!facingLeft[0])
       {
-        facingLeft = !facingLeft;
-        character.sprite.setScale(sf::Vector2f(-1.f, 1.f));
-        character.sprite.setPosition(character.sprite.getPosition().x + 64,
-                                     character.sprite.getPosition().y);
+        facingLeft[0] = !facingLeft[0];
+        charactersArray[0].sprite.setScale(sf::Vector2f(-1.f, 1.f));
+        charactersArray[0].sprite.setPosition(charactersArray[0].sprite.getPosition().x + 64,
+                                              charactersArray[0].sprite.getPosition().y);
       }
     }
     break;
     case sf::Keyboard::Right:
     {
 
-      VELOCITY.x = 5;
-      isMoving = true;
-      if (facingLeft)
+      VELOCITY[0].x = 5;
+      isMoving[0] = true;
+      if (facingLeft[0])
       {
-        facingLeft = !facingLeft;
-        character.sprite.setScale(sf::Vector2f(1.f, 1.f));
-        character.sprite.setPosition(character.sprite.getPosition().x - 64,
-                                     character.sprite.getPosition().y);
+        facingLeft[0] = !facingLeft[0];
+        charactersArray[0].sprite.setScale(sf::Vector2f(1.f, 1.f));
+        charactersArray[0].sprite.setPosition(charactersArray[0].sprite.getPosition().x - 64,
+                                              charactersArray[0].sprite.getPosition().y);
       }
     }
     break;
     case sf::Keyboard::Up:
     {
 
-      if (onGround)
+      if (onGround[0])
       {
-        onBlock = false;
-        onGround = false;
-        VELOCITY.y = JUMP;
+        onBlock[0] = false;
+        onGround[0] = false;
+        VELOCITY[0].y = JUMP;
       }
       break;
     }
     case sf::Keyboard::Numpad0:
     {
-      isPunshing = true;
+      isPunshing[0] = true;
       break;
     }
     default:
@@ -131,89 +150,68 @@ void handelCharacterEvents(Character &character, sf::Event &event)
     case sf::Keyboard::Left:
 
     case sf::Keyboard::Right:
-      isMoving = false;
-      VELOCITY.x = 0;
+      isMoving[0] = false;
+      VELOCITY[0].x = 0;
       break;
 
     case sf::Keyboard::Numpad0:
-      isPunshing = false;
+      isPunshing[0] = false;
     default:
       break;
     }
   }
 }
 
-void characterUpdate(sf::RenderWindow &window, Character &character,
-                     Map &map)
+void charactersUpdate(sf::RenderWindow &window, Map &map)
 {
 
-  checkScreenCollision(character, window);
-  move(character, VELOCITY);
+  for (int i = 0; i < number_of_players; i++)
+  {
+    checkScreenCollision(charactersArray[i], window);
+    move(charactersArray[i], VELOCITY[i]);
 
-  if (isPunshing)
-  {
-    texturesLimt = 10;
-    character.selectedIndex = 1;
-  }
-  else if (isMoving)
-  {
-    texturesLimt = 9;
-    character.selectedIndex = 2;
-  }
-  else
-  {
-    texturesLimt = 6;
-    character.selectedIndex = 0;
-  }
+    if (isPunshing[i])
+    {
+      texturesLimt[i] = 10;
+      charactersArray[i].selectedIndex = 1;
+    }
+    else if (isMoving[i])
+    {
+      texturesLimt[i] = 9;
+      charactersArray[i].selectedIndex = 2;
+    }
+    else
+    {
+      texturesLimt[i] = 6;
+      charactersArray[i].selectedIndex = 0;
+    }
 
-  frames++;
-  if (frames >= texturesLimt - 1)
-    frames = 0;
+    frames[i]++;
+    if (frames[i] >= texturesLimt[i] - 1)
+      frames[i] = 0;
 
-  // isFalling
-  if (character.sprite.getPosition().y + character.sprite.getTextureRect().height < SCREENHEIGHT && !onBlock)
-  {
-    onGround = false;
-    VELOCITY.y += GRAVITY.y;
-  }
-  else
-  {
-    onGround = true;
-    VELOCITY.y = 0;
+    // isFalling
+    if (charactersArray[i].sprite.getPosition().y + charactersArray[i].sprite.getTextureRect().height < SCREENHEIGHT && !onBlock[i])
+    {
+      onGround[i] = false;
+      VELOCITY[i].y += GRAVITY.y;
+    }
+    else
+    {
+      onGround[i] = true;
+      VELOCITY[i].y = 0;
+    }
   }
 }
 
-void characterDraw(sf::RenderWindow &window, Character &character)
+void charactersDraw(sf::RenderWindow &window)
 {
-
-  character.sprite.setTextureRect(sf::IntRect(64 * frames, 0,
-                                              character.sprite.getGlobalBounds().width,
-                                              character.sprite.getGlobalBounds().height));
-  // Get textures size
-  sf::Vector2u textureSize = CharacterTextures[character.selectedIndex].getSize();
-
-  // Create an image from the textures
-  sf::Image image = CharacterTextures[character.selectedIndex].copyToImage();
-
-  // Loop through each pixel
-  for (unsigned int y = 0; y < textureSize.y; ++y)
+  for (int i = 0; i < number_of_players; i++)
   {
-    for (unsigned int x = 0; x < textureSize.x; ++x)
-    {
-      // Get current pixel color
-      sf::Color pixelColor = image.getPixel(x, y);
-
-      // Check if black (all color components are 0)
-      if (pixelColor.r == 20 && pixelColor.g == 16 && pixelColor.b == 19)
-      {
-        // Change to red
-        image.setPixel(x, y, sf::Color::Red);
-      }
-    }
+    charactersArray[i].sprite.setTextureRect(sf::IntRect(64 * frames[i], 0,
+                                                         charactersArray[i].sprite.getGlobalBounds().width,
+                                                         charactersArray[i].sprite.getGlobalBounds().height));
+    charactersArray[i].sprite.setTexture(CharacterTextures[charactersArray[i].selectedIndex]);
+    window.draw(charactersArray[i].sprite);
   }
-
-  // Update the textures with the modified image
-  CharacterTextures[character.selectedIndex].update(image);
-  character.sprite.setTexture(CharacterTextures[character.selectedIndex]);
-  window.draw(character.sprite);
 }

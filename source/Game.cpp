@@ -10,7 +10,7 @@
 
 // Global states
 int current_screen = 0;
-sf::Vector2f VELOCITY = sf::Vector2f(0, 0);
+sf::Vector2f VELOCITY[4] = {sf::Vector2f(0, 0)};
 int last_screen = 0;
 int number_of_players = 2;
 sf::Event event;
@@ -21,9 +21,6 @@ Menu mainMenu = initlizeMainMenu();
 Menu opMenu = initlizeOptionsMenu();
 Menu psMenu = initlizePlaySettingsMenu();
 Menu SoundMenu = initlizeSoundMenu();
-
-// create a main character instance
-Character mainCharacter = initializeCharacter(64, 64, 100, 100, sf::Color::Green);
 
 void loadGameAssets()
 {
@@ -45,7 +42,7 @@ void updateGame(sf::RenderWindow &window)
         playSettingsUpdate(window, psMenu);
         break;
     case 2:
-        gamePlayUpdate(window, mainCharacter);
+        gamePlayUpdate(window);
         break;
     case 3:
         optionsUpdate(window, opMenu);
@@ -75,7 +72,7 @@ void drawGame(sf::RenderWindow &window)
         playSettingsDraw(window, psMenu);
         break;
     case 2:
-        gamePlayDraw(window, mainCharacter);
+        gamePlayDraw(window);
         break;
     case 3:
         optionsDraw(window, opMenu);

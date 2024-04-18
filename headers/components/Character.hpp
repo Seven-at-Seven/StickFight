@@ -16,13 +16,12 @@ struct Character
   sf::Color color;
 };
 
-Character initializeCharacter(float width, float height, float posX, float posY, sf::Color color);
+extern Character charactersArray[4];
 void checkScreenCollision(Character &player, sf::RenderWindow &window);
 void move(Character &player, sf::Vector2f offset);
-void handelCharacterEvents(Character &character, sf::Event &event);
-void characterUpdate(sf::RenderWindow &window, Character &character,
-                     Map &map);
-void characterDraw(sf::RenderWindow &window, Character &character);
+void handelCharacterEvents(sf::Event &event);
+void charactersUpdate(sf::RenderWindow &window, Map &map);
+void charactersDraw(sf::RenderWindow &window);
 void loadCharacterAssets();
 
 #endif // CHARACTER_H
