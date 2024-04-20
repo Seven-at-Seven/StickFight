@@ -5,8 +5,8 @@
 #define IDLE_TEXTURE "assets/StickmanPack/Idle/thickIdleSheet.png"
 #define PUNCH_TEXTURE "assets/StickmanPack/Punch/thickPunchSheet.png"
 #define MOVEING_TEXTURE "assets/StickmanPack/Run/thickRunSheet.png"
-
-extern sf::Texture CharacterTextures[3];
+#define HAVING_GUN_TEXTURE "assets/StickmanPack/Punch/HavingAGun.png"
+extern sf::Texture CharacterTextures[4];
 
 struct Character
 {

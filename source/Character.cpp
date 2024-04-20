@@ -1,7 +1,7 @@
 #include "components/Character.hpp"
 #include <iostream>
 
-sf::Texture CharacterTextures[3];
+sf::Texture CharacterTextures[4];
 
 // Character states
 short texturesLimt[4] = {6};
@@ -11,6 +11,7 @@ bool isMoving[4] = {false};
 bool isPunshing[4] = {false};
 bool onBlock[4] = {false};
 bool facingLeft[4] = {false};
+bool isHavingGun[4] = {false};
 Character charactersArray[4];
 
 void loadCharacterAssets()
@@ -26,6 +27,10 @@ void loadCharacterAssets()
   if (!CharacterTextures[2].loadFromFile(MOVEING_TEXTURE))
   {
     std::cout << "Error loading moving character assets" << std::endl;
+  }
+  if (!CharacterTextures[3].loadFromFile(HAVING_GUN_TEXTURE))
+  {
+    std::cout << "Error loading idle character assets" << std::endl;
   }
   for (int i = 0; i < 4; i++)
   {
@@ -91,7 +96,7 @@ void handelCharacterEvents(sf::Event &event)
   // Handle Key pressed
   if (event.type == sf::Event::KeyPressed)
   {
-
+    
     switch (event.key.code)
     {
       // Player 0
@@ -284,6 +289,7 @@ void handelCharacterEvents(sf::Event &event)
   }
   if (event.type == sf::Event::KeyReleased)
   {
+    
     switch (event.key.code)
     {
 
@@ -338,7 +344,12 @@ void charactersUpdate(sf::RenderWindow &window, Map &map)
     checkScreenCollision(charactersArray[i], window);
     move(charactersArray[i], VELOCITY[i]);
 
-    if (isPunshing[i])
+    if (isHavingGun[i])
+    {
+      texturesLimt[i] = 0;
+      charactersArray[i].selectedIndex = 3;
+    }
+    else if (isPunshing[i])
     {
       texturesLimt[i] = 10;
       charactersArray[i].selectedIndex = 1;
