@@ -6,6 +6,7 @@
 #include "screens/Options.hpp"                    // Page 3
 #include "screens/Sound.hpp"                      // page 4
 #include "screens/subscreens/NumberOfPlayers.hpp" // Page 5
+#include "screens/Colors.hpp"                     // Page 6
 
 // Global states
 
@@ -20,6 +21,7 @@ Menu mainMenu = initlizeMainMenu();
 Menu opMenu = initlizeOptionsMenu();
 Menu psMenu = initlizePlaySettingsMenu();
 Menu SoundMenu = initlizeSoundMenu();
+Menu ColorsMenu = initlizeColorsMenu();
 
 // Update Switch
 void updateGame(sf::RenderWindow &window)
@@ -41,9 +43,11 @@ void updateGame(sf::RenderWindow &window)
     case 4:
         soundUpdate(window, SoundMenu);
         break;
-
     case 5:
         numberOfPlayersUpdate(window);
+        break;
+    case 6:
+        colorsUpdate(window, ColorsMenu);
         break;
 
     default:
@@ -73,6 +77,9 @@ void drawGame(sf::RenderWindow &window)
         break;
     case 5:
         numberOfPlayersDraw(window);
+        break;
+    case 6:
+        colorsDraw(window, ColorsMenu);
         break;
 
     default:

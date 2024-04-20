@@ -6,7 +6,6 @@
 
 void optionsUpdate(sf::RenderWindow &window, Menu &opMenu)
 {
-   
 
     while (window.pollEvent(event))
     {
@@ -27,13 +26,16 @@ void optionsUpdate(sf::RenderWindow &window, Menu &opMenu)
                     current_screen = 0;
                     break;
                 case 1:
-                    current_screen=4; 
+                    current_screen = 4;
+                    break;
+                case 2:
+                    current_screen = 6;
                     break;
                 default:
                     break;
                 }
             }
- 
+
             updateMenu(opMenu, event);
             break;
         }
