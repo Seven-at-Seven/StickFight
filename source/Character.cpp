@@ -96,7 +96,7 @@ void handelCharacterEvents(sf::Event &event)
   // Handle Key pressed
   if (event.type == sf::Event::KeyPressed)
   {
-    
+
     switch (event.key.code)
     {
       // Player 0
@@ -289,7 +289,7 @@ void handelCharacterEvents(sf::Event &event)
   }
   if (event.type == sf::Event::KeyReleased)
   {
-    
+
     switch (event.key.code)
     {
 
@@ -336,7 +336,7 @@ void handelCharacterEvents(sf::Event &event)
   }
 }
 
-void charactersUpdate(sf::RenderWindow &window, Map &map)
+void charactersUpdate(sf::RenderWindow &window)
 {
 
   for (int i = 0; i < number_of_players; i++)

@@ -20,7 +20,7 @@ extern Character charactersArray[4];
 void checkScreenCollision(Character &player, sf::RenderWindow &window);
 void move(Character &player, sf::Vector2f offset);
 void handelCharacterEvents(sf::Event &event);
-void charactersUpdate(sf::RenderWindow &window, Map &map);
+void charactersUpdate(sf::RenderWindow &window);
 void charactersDraw(sf::RenderWindow &window);
 void loadCharacterAssets();
 
