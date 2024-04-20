@@ -9,7 +9,7 @@
 extern sf::Texture blocksTexture;
 
 struct Block
-{
+{ 
     sf::Vector2f position, stone_size;
     int stone_num, rows;
     sf::Sprite blockSprites[MAX_STONES];

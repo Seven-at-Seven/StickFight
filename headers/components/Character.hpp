@@ -6,6 +6,8 @@
 #define PUNCH_TEXTURE "assets/StickmanPack/Punch/thickPunchSheet.png"
 #define MOVEING_TEXTURE "assets/StickmanPack/Run/thickRunSheet.png"
 #define HAVING_GUN_TEXTURE "assets/StickmanPack/Punch/HavingAGun.png"
+#define JUMP -22
+
 extern sf::Texture CharacterTextures[4];
 
 struct Character

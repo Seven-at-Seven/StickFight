@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include "Map_utility.hpp"
 
-#define JUMP -22
+
 
 const float SCREENWIDTH = 1240.f;
 const float SCREENHEIGHT = 480.f;
@@ -17,6 +17,6 @@ extern int last_screen;
 extern int number_of_players;
 extern sf::Event event;
 extern int curmap;
-extern Map map[6];
+
 
 #endif // S_GLOBALS_H

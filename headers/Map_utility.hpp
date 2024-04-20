@@ -7,6 +7,8 @@
 
 #define MAX_BLOCKS 6
 #define BLOCKS_TEXTURE_PATH "assets/images/blocks.png"
+#define MAX_JUMP_Y_AXIS 84
+#define MAX_JUMP_X_AXIS 78
 
 struct Map
 {
@@ -16,6 +18,7 @@ struct Map
     sf::Sprite background_sprite;
     float xdir, ydir;
 };
+extern Map map[6];
 // functions
 void loadMapAssets();
 void loadMapBlocks();

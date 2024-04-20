@@ -4,7 +4,7 @@
 #include "components/Block.hpp"
 #include "Map_utility.hpp"
 
-int curmap = 5;
+int curmap = 0;
 Block myBlock;
 void gamePlayUpdate(sf::RenderWindow &window)
 {
@@ -24,6 +24,16 @@ void gamePlayUpdate(sf::RenderWindow &window)
 
                 current_screen = last_screen;
                 last_screen = 0;
+            }
+            if (event.key.code == sf::Keyboard::Space)
+            {
+
+               if(curmap==5)
+                   curmap = 0;
+               
+               else
+                   curmap++;
+                   
             }
         }
     }

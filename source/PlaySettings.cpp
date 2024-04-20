@@ -3,7 +3,7 @@
 #include "components/Menu.hpp"
 #include <string>
 
-#define PLAY_SETTINGS_ITEMS_NUMBER 4
+#define PLAY_SETTINGS_ITEMS_NUMBER 3
 
 void playSettingsUpdate(sf::RenderWindow &window, Menu &psMenu)
 {
@@ -30,7 +30,7 @@ void playSettingsUpdate(sf::RenderWindow &window, Menu &psMenu)
                     last_screen = current_screen;
                     current_screen = 5;
                     break;
-                case 3:
+                case 2:
                     last_screen = current_screen;
                     current_screen = 2;
                     break;
@@ -56,7 +56,7 @@ void playSettingsDraw(sf::RenderWindow &window, Menu &psMenu)
 
 Menu initlizePlaySettingsMenu()
 {
-    char *settings[PLAY_SETTINGS_ITEMS_NUMBER] = {"Main Menu", "Number Of Players", "Map", "Start Game"};
+    char *settings[PLAY_SETTINGS_ITEMS_NUMBER] = {"Main Menu", "Number Of Players", "Start Game"};
     Menu menu = initlizeMenu(PLAY_SETTINGS_ITEMS_NUMBER, settings);
     return menu;
 }
