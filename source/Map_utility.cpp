@@ -26,6 +26,8 @@ void loadMapAssets()
 void loadMapBlocks()
 {
     map[0].blocks[0] = initialize_block(sf::Vector2f(200, SCREENHEIGHT - 2 * 40), sf::Vector2f(20, 20), 30, 2);
+    map[5].num_of_blocks++;
+    map[5].blocks[0] = initialize_block(sf::Vector2f(200, SCREENHEIGHT - 2 * 40), sf::Vector2f(20, 20), 30, 2);
 }
 void drawMap(sf::RenderWindow &window, Map &map)
 {

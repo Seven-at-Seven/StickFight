@@ -5,12 +5,11 @@
 #include "Map_utility.hpp"
 
 int curmap = 5;
-bool firsttime = true;
 Block myBlock;
 void gamePlayUpdate(sf::RenderWindow &window)
 {
 
-    charactersUpdate(window, map[0]);
+    charactersUpdate(window);
     while (window.pollEvent(event))
     {
 
@@ -38,22 +37,21 @@ void gamePlayDraw(sf::RenderWindow &window)
         drawMap(window, map[0]);
         break;
     case 1:
-        window.draw(map[1].background_sprite);
+        drawMap(window, map[1]);
         break;
     case 2:
-        window.draw(map[2].background_sprite);
+        drawMap(window, map[2]);
         break;
     case 3:
-        window.draw(map[3].background_sprite);
+        drawMap(window, map[3]);
         break;
     case 4:
-        window.draw(map[4].background_sprite);
+        drawMap(window, map[4]);
         break;
     case 5:
-        window.draw(map[5].background_sprite);
+        drawMap(window, map[5]);
         break;
     default:
-        window.draw(map[5].background_sprite);
         break;
     }
     charactersDraw(window);
