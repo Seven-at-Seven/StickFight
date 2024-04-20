@@ -12,6 +12,7 @@ bool isPunshing[4] = {false};
 bool onBlock[4] = {false};
 bool facingLeft[4] = {false};
 Character charactersArray[4];
+
 void loadCharacterAssets()
 {
   if (!CharacterTextures[0].loadFromFile(IDLE_TEXTURE))
@@ -93,7 +94,8 @@ void handelCharacterEvents(sf::Event &event)
 
     switch (event.key.code)
     {
-    case sf::Keyboard::Left:
+      // Player 0
+    case sf::Keyboard::A:
     {
 
       VELOCITY[0].x = -5;
@@ -107,7 +109,7 @@ void handelCharacterEvents(sf::Event &event)
       }
     }
     break;
-    case sf::Keyboard::Right:
+    case sf::Keyboard::D:
     {
 
       VELOCITY[0].x = 5;
@@ -119,9 +121,9 @@ void handelCharacterEvents(sf::Event &event)
         charactersArray[0].sprite.setPosition(charactersArray[0].sprite.getPosition().x - 64,
                                               charactersArray[0].sprite.getPosition().y);
       }
+      break;
     }
-    break;
-    case sf::Keyboard::Up:
+    case sf::Keyboard::W:
     {
 
       if (onGround[0])
@@ -132,30 +134,196 @@ void handelCharacterEvents(sf::Event &event)
       }
       break;
     }
-    case sf::Keyboard::Numpad0:
+    case sf::Keyboard::E:
     {
       isPunshing[0] = true;
       break;
     }
+      // Player 1
+    case sf::Keyboard::H:
+    {
+
+      VELOCITY[1].x = -5;
+      isMoving[1] = true;
+      if (!facingLeft[1])
+      {
+        facingLeft[1] = !facingLeft[1];
+        charactersArray[1].sprite.setScale(sf::Vector2f(-1.f, 1.f));
+        charactersArray[1].sprite.setPosition(charactersArray[1].sprite.getPosition().x + 64,
+                                              charactersArray[1].sprite.getPosition().y);
+      }
+    }
+    break;
+    case sf::Keyboard::K:
+    {
+
+      VELOCITY[1].x = 5;
+      isMoving[1] = true;
+      if (facingLeft[1])
+      {
+        facingLeft[1] = !facingLeft[1];
+        charactersArray[1].sprite.setScale(sf::Vector2f(1.f, 1.f));
+        charactersArray[1].sprite.setPosition(charactersArray[1].sprite.getPosition().x - 64,
+                                              charactersArray[1].sprite.getPosition().y);
+      }
+    }
+    break;
+    case sf::Keyboard::U:
+    {
+
+      if (onGround[1])
+      {
+        onBlock[1] = false;
+        onGround[1] = false;
+        VELOCITY[1].y = JUMP;
+      }
+      break;
+    }
+    case sf::Keyboard::I:
+    {
+      isPunshing[1] = true;
+      break;
+    }
+
+      // Player 2
+    case sf::Keyboard::Left:
+    {
+
+      VELOCITY[2].x = -5;
+      isMoving[2] = true;
+      if (!facingLeft[2])
+      {
+        facingLeft[2] = !facingLeft[2];
+        charactersArray[2].sprite.setScale(sf::Vector2f(-1.f, 1.f));
+        charactersArray[2].sprite.setPosition(charactersArray[2].sprite.getPosition().x + 64,
+                                              charactersArray[2].sprite.getPosition().y);
+      }
+    }
+    break;
+    case sf::Keyboard::Right:
+    {
+
+      VELOCITY[2].x = 5;
+      isMoving[2] = true;
+      if (facingLeft[2])
+      {
+        facingLeft[2] = !facingLeft[2];
+        charactersArray[2].sprite.setScale(sf::Vector2f(1.f, 1.f));
+        charactersArray[2].sprite.setPosition(charactersArray[2].sprite.getPosition().x - 64,
+                                              charactersArray[2].sprite.getPosition().y);
+      }
+    }
+    break;
+    case sf::Keyboard::Up:
+    {
+
+      if (onGround[2])
+      {
+        onBlock[2] = false;
+        onGround[2] = false;
+        VELOCITY[2].y = JUMP;
+      }
+      break;
+    }
+    case sf::Keyboard::Numpad0:
+    {
+      isPunshing[2] = true;
+      break;
+    }
+      // Player 3
+    case sf::Keyboard::Numpad4:
+    {
+
+      VELOCITY[3].x = -5;
+      isMoving[3] = true;
+      if (!facingLeft[3])
+      {
+        facingLeft[3] = !facingLeft[3];
+        charactersArray[3].sprite.setScale(sf::Vector2f(-1.f, 1.f));
+        charactersArray[3].sprite.setPosition(charactersArray[3].sprite.getPosition().x + 64,
+                                              charactersArray[3].sprite.getPosition().y);
+      }
+    }
+    break;
+    case sf::Keyboard::Numpad6:
+    {
+
+      VELOCITY[3].x = 5;
+      isMoving[3] = true;
+      if (facingLeft[3])
+      {
+        facingLeft[3] = !facingLeft[3];
+        charactersArray[3].sprite.setScale(sf::Vector2f(1.f, 1.f));
+        charactersArray[3].sprite.setPosition(charactersArray[3].sprite.getPosition().x - 64,
+                                              charactersArray[3].sprite.getPosition().y);
+      }
+    }
+    break;
+    case sf::Keyboard::Numpad8:
+    {
+
+      if (onGround[3])
+      {
+        onBlock[3] = false;
+        onGround[3] = false;
+        VELOCITY[3].y = JUMP;
+      }
+      break;
+    }
+    case sf::Keyboard::Numpad9:
+    {
+      isPunshing[3] = true;
+      break;
+    }
+
     default:
       break;
     }
-  }
 
-  // Handle Key Released
+    // Handle Key Released
+  }
   if (event.type == sf::Event::KeyReleased)
   {
     switch (event.key.code)
     {
-    case sf::Keyboard::Left:
 
-    case sf::Keyboard::Right:
+    // Player 0
+    case sf::Keyboard::A:
+    case sf::Keyboard::D:
       isMoving[0] = false;
       VELOCITY[0].x = 0;
       break;
-
-    case sf::Keyboard::Numpad0:
+    case sf::Keyboard::E:
       isPunshing[0] = false;
+      break;
+    // Player 1
+    case sf::Keyboard::K:
+    case sf::Keyboard::H:
+      isMoving[1] = false;
+      VELOCITY[1].x = 0;
+      break;
+    case sf::Keyboard::I:
+      isPunshing[1] = false;
+      break;
+    // Player 2
+    case sf::Keyboard::Left:
+    case sf::Keyboard::Right:
+      isMoving[2] = false;
+      VELOCITY[2].x = 0;
+      break;
+    case sf::Keyboard::Numpad0:
+      isPunshing[2] = false;
+      break;
+
+    // Player 3
+    case sf::Keyboard::Numpad4:
+    case sf::Keyboard::Numpad6:
+      isMoving[3] = false;
+      VELOCITY[3].x = 0;
+      break;
+    case sf::Keyboard::Numpad9:
+      isPunshing[3] = false;
+      break;
     default:
       break;
     }
