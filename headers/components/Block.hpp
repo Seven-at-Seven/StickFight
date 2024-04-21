@@ -9,13 +9,13 @@
 extern sf::Texture blocksTexture;
 
 struct Block
-{ 
+{
     sf::Vector2f position, stone_size;
     int stone_num, rows;
     sf::Sprite blockSprites[MAX_STONES];
 };
 
 void drawBlock(sf::RenderWindow &winodw, Block &block);
-Block initialize_block(sf::Vector2f position, sf::Vector2f stoneSize, int numStones, int rows);
+Block initialize_block(sf::Vector2f position, int numStones, int rows);
 
 #endif

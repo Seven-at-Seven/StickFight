@@ -8,7 +8,7 @@
 #define HAVING_GUN_TEXTURE "assets/StickmanPack/Punch/HavingAGun.png"
 #define JUMP -22
 
-extern sf::Texture CharacterTextures[4];
+extern sf::Texture CharacterTextures[4][4];
 
 struct Character
 {

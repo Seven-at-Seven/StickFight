@@ -1,7 +1,7 @@
 #include "components/Character.hpp"
 #include <iostream>
 
-sf::Texture CharacterTextures[4];
+sf::Texture CharacterTextures[4][4];
 
 // Character states
 short texturesLimt[4] = {6};
@@ -16,32 +16,35 @@ Character charactersArray[4];
 
 void loadCharacterAssets()
 {
-  if (!CharacterTextures[0].loadFromFile(IDLE_TEXTURE))
-  {
-    std::cout << "Error loading idle character assets" << std::endl;
-  }
-  if (!CharacterTextures[1].loadFromFile(PUNCH_TEXTURE))
-  {
-    std::cout << "Error loading punshing character assets" << std::endl;
-  }
-  if (!CharacterTextures[2].loadFromFile(MOVEING_TEXTURE))
-  {
-    std::cout << "Error loading moving character assets" << std::endl;
-  }
-  if (!CharacterTextures[3].loadFromFile(HAVING_GUN_TEXTURE))
-  {
-    std::cout << "Error loading idle character assets" << std::endl;
-  }
+
   for (int i = 0; i < 4; i++)
   {
+
+    if (!CharacterTextures[0][i].loadFromFile(IDLE_TEXTURE))
+    {
+      std::cout << "Error loading idle character assets" << std::endl;
+    }
+    if (!CharacterTextures[1][i].loadFromFile(PUNCH_TEXTURE))
+    {
+      std::cout << "Error loading punshing character assets" << std::endl;
+    }
+    if (!CharacterTextures[2][i].loadFromFile(MOVEING_TEXTURE))
+    {
+      std::cout << "Error loading moving character assets" << std::endl;
+    }
+    if (!CharacterTextures[3][i].loadFromFile(HAVING_GUN_TEXTURE))
+    {
+      std::cout << "Error loading idle character assets" << std::endl;
+    }
     charactersArray[i].sprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
     charactersArray[i].sprite.setPosition(sf::Vector2f(80 * i + 20, 100));
-    charactersArray[i].color = sf::Color::Red;
+    charactersArray[i].color = palyersColors[i];
+
     // Get textures size
-    sf::Vector2u textureSize = CharacterTextures[i].getSize();
+    sf::Vector2u textureSize = CharacterTextures[i][0].getSize();
 
     // Create an image from the textures
-    sf::Image image = CharacterTextures[i].copyToImage();
+    sf::Image image = CharacterTextures[i][0].copyToImage();
 
     // Loop through each pixel
     for (unsigned int y = 0; y < textureSize.y; ++y)
@@ -60,7 +63,10 @@ void loadCharacterAssets()
       }
     }
 
-    CharacterTextures[i].update(image);
+    for (int j = 0; j < 4; j++)
+    {
+      CharacterTextures[i][j].update(image);
+    }
   }
 }
 
@@ -390,7 +396,7 @@ void charactersDraw(sf::RenderWindow &window)
     charactersArray[i].sprite.setTextureRect(sf::IntRect(64 * frames[i], 0,
                                                          charactersArray[i].sprite.getGlobalBounds().width,
                                                          charactersArray[i].sprite.getGlobalBounds().height));
-    charactersArray[i].sprite.setTexture(CharacterTextures[charactersArray[i].selectedIndex]);
+    charactersArray[i].sprite.setTexture(CharacterTextures[i][charactersArray[i].selectedIndex]);
     window.draw(charactersArray[i].sprite);
   }
 }
