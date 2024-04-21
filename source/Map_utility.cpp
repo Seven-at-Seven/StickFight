@@ -45,9 +45,15 @@ void loadMapBlocks()
     for (int i = 0; i < map[1].num_of_blocks; i++)
     {
 
-        map[1].blocks[i] = initialize_block(sf::Vector2f((100 + MAX_JUMP_X_AXIS) * i + MAX_JUMP_X_AXIS + 200, SCREENHEIGHT - MAX_JUMP_Y_AXIS * (-1 * abs(i - 2) + 3)),
+        map[1].blocks[i] = initialize_block(sf::Vector2f((MAX_JUMP_X_AXIS / 2 + STONE_SIZE * 7) * i,
+                                                         SCREENHEIGHT - MAX_JUMP_Y_AXIS * (-1 * abs(i - 2) + 3)),
                                             14, 2);
     }
+
+    // map[2]
+    map[2].num_of_blocks = 2;
+    map[2].blocks[0] = initialize_block(sf::Vector2f(SCREENWIDTH / 2, SCREENHEIGHT / 2), 2, 1);
+    map[2].blocks[1] = initialize_block(sf::Vector2f(SCREENWIDTH / 4, SCREENHEIGHT / 3), 2, 1);
 
     map[5].num_of_blocks++;
     map[5].blocks[0] = initialize_block(sf::Vector2f(200, SCREENHEIGHT - 2 * 40), 30, 2);

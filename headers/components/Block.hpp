@@ -4,7 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 
-#define MAX_STONES 40
+#define MAX_STONES 60
+#define STONE_SIZE 30
 
 extern sf::Texture blocksTexture;
 
