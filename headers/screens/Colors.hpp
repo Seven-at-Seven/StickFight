@@ -5,5 +5,6 @@
 
 void colorsDraw(sf::RenderWindow &window, Menu &Menu);
 void colorsUpdate(sf::RenderWindow &window, Menu &Menu);
+void loadColorsAssets();
 Menu initlizeColorsMenu();
 #endif // GAMEPLAY_H

@@ -27,6 +27,7 @@ Menu ColorsMenu = initlizeColorsMenu();
 void loadGameAssets()
 {
     loadSoundAssets();
+    loadColorsAssets();
     loadMenuAssets();
     loadCharacterAssets();
     loadMapAssets();

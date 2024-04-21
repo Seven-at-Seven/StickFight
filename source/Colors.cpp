@@ -1,188 +1,103 @@
 #include "screens/Colors.hpp"
 #include "Globals.hpp"
 #include <iostream>
-#include <vector>
 
-sf::RectangleShape current_rect;
+int current_square = 0;
+int avaliable_index = 0;
 
-sf::RectangleShape rectTopLeft;
-sf::RectangleShape rectTopRight;
-sf::RectangleShape rectBottomLeft;
-sf::RectangleShape rectBottomRight;
-
-sf::Vector2f size = sf::Vector2f(400.0f, 400.0f);
-
-float x = size.x / 4;
-float y = size.y / 4;
-
-float originX = x / 2;
-float originY = y / 2;
-float centerX = SCREENWIDTH / 2;
-float centerY = SCREENHEIGHT / 2;
-
-float delta = 10.f;
-
-sf::Color brown(150, 75, 0);
-
-std::vector<sf::Color> colors = {
-    brown,
+sf::Color swapColor;
+sf::Color palyersColors[MAX_PLAYERS_NUMBER] = {
+    sf::Color::Red,
+    sf::Color::Yellow,
+    sf::Color::Magenta,
+    sf::Color::Blue};
+sf::Color availableColors[7] = {
     sf::Color::Green,
-    sf::Color::Cyan};
+    sf::Color::Cyan,
+    sf::Color(255, 192, 203), // pink
+};
 
-bool firstloadColors = true;
+sf::Vector2f size = sf::Vector2f(100.0f, 100.0f);
 
-void setupRect(sf::RectangleShape rect, sf::Color color)
+sf::RectangleShape colorPalettes[MAX_PLAYERS_NUMBER];
+
+float plattes_x = SCREENWIDTH / 2 - 150;
+float plattes_y = SCREENHEIGHT / 2;
+
+void colorsDraw(sf::RenderWindow &window, Menu &colorsMenu)
 {
-    rect.setSize(sf::Vector2f(x, y));
-    rect.setOrigin(sf::Vector2f(rect.getSize().x / 2, rect.getSize().y / 2));
-    rect.setFillColor(color);
-}
-
-void colorsDraw(sf::RenderWindow &window, Menu &Menu)
-{
-    // drawMenu(Menu, window, "Sound Menu");
-    window.draw(rectTopLeft);
-    window.draw(rectTopRight);
-    window.draw(rectBottomLeft);
-    window.draw(rectBottomRight);
-    window.draw(current_rect);
-}
-
-int current_square = 1;
-int current_color = 0;
-
-void colorsUpdate(sf::RenderWindow &window, Menu &Menu)
-{
-
-    if (firstloadColors)
+    drawMenu(colorsMenu, window, "Colors");
+    for (int i = 0; i < MAX_PLAYERS_NUMBER; i++)
     {
-        rectTopLeft.setSize(sf::Vector2f(x, y));
-        rectTopLeft.setOrigin(sf::Vector2f(rectTopLeft.getSize().x / 2, rectTopLeft.getSize().y / 2));
-        rectTopLeft.setFillColor(sf::Color::Red);
-        rectTopLeft.setPosition(centerX - originX - delta, centerY - originY - delta);
+        if (i == current_square)
+        {
 
-        // rectTopRight
-        rectTopRight.setSize(sf::Vector2f(x, y));
-        rectTopRight.setOrigin(sf::Vector2f(originX, originY));
-        rectTopRight.setFillColor(sf::Color::Yellow);
-        rectTopRight.setPosition(centerX + originX + delta, centerY - originY - delta);
-
-        // rectBottomLeft
-        rectBottomLeft.setSize(sf::Vector2f(x, y));
-        rectBottomLeft.setOrigin(sf::Vector2f(originX, originY));
-        rectBottomLeft.setFillColor(sf::Color::Magenta);
-        rectBottomLeft.setPosition(centerX - originX - delta, centerY + originY + delta);
-
-        // rectBottomLeft
-        rectBottomRight.setSize(sf::Vector2f(x, y));
-        rectBottomRight.setOrigin(sf::Vector2f(originX, originY));
-        rectBottomRight.setFillColor(sf::Color::Blue);
-        rectBottomRight.setPosition(centerX + originX + delta, centerY + originY + delta);
-        current_rect = rectTopLeft;
-        current_rect.setOutlineThickness(4.f);
-        current_rect.setOutlineColor(sf::Color::White);
-        window.draw(rectTopLeft);
-        window.draw(rectTopRight);
-        window.draw(rectBottomLeft);
-        window.draw(rectBottomRight);
-        window.draw(current_rect);
-        firstloadColors = false;
+            colorPalettes[i].setOutlineThickness(4.f);
+            colorPalettes[i].setOutlineColor(sf::Color::Black);
+        }
+        else
+            colorPalettes[i].setOutlineThickness(0.f);
+        colorPalettes[i].setFillColor(palyersColors[i]);
+        window.draw(colorPalettes[i]);
     }
+}
+
+void loadColorsAssets()
+{
+
+    for (int i = 0; i < 4; i++)
+    {
+        colorPalettes[i].setSize(size);
+        colorPalettes[i].setFillColor(palyersColors[i]);
+        if (i < 2)
+        {
+            colorPalettes[i].setPosition(sf::Vector2f(plattes_x + (size.x + 20) * i, plattes_y));
+        }
+        else
+        {
+            // i - (4/2) + 1 gives 1 when i = 3 and gives 2 when i = 3
+            colorPalettes[i].setPosition(sf::Vector2f(plattes_x + (size.x + 20) * (i - (4 / 2)), plattes_y + size.y + 30));
+        }
+    }
+}
+
+void colorsUpdate(sf::RenderWindow &window, Menu &colorsMenu)
+{
 
     while (window.pollEvent(event))
     {
-        updateMenu(Menu, event);
+        updateMenu(colorsMenu, event);
 
         if (event.type == sf::Event::Closed)
             window.close();
         if (event.type == sf::Event::KeyReleased)
         {
-            if (event.key.code == sf::Keyboard::Right)
+            if (event.key.code == sf::Keyboard::Right && colorsMenu.selectedItem != 0)
             {
                 ++current_square;
-                switch (current_square)
-                {
-                case 1:
-                    current_rect.setPosition(rectTopLeft.getPosition());
-                    current_rect.setFillColor(rectTopLeft.getFillColor());
-                    break;
-                case 2:
-                    current_rect.setPosition(rectTopRight.getPosition());
-                    current_rect.setFillColor(rectTopRight.getFillColor());
-                    break;
-                case 3:
-                    current_rect.setPosition(rectBottomLeft.getPosition());
-                    current_rect.setFillColor(rectBottomLeft.getFillColor());
-                    break;
-                case 4:
-                    current_rect.setPosition(rectBottomRight.getPosition());
-                    current_rect.setFillColor(rectBottomRight.getFillColor());
-                    break;
-                default:
-                    current_square = 1;
-                    current_rect.setPosition(rectTopLeft.getPosition());
-                    current_rect.setFillColor(rectTopLeft.getFillColor());
-                    break;
-                }
+                if (current_square > 3)
+                    current_square = 0;
             }
-        }
-        else if (event.key.code == sf::Keyboard::Left)
-        {
-            --current_square;
-            switch (current_square)
+            else if (event.key.code == sf::Keyboard::Left && colorsMenu.selectedItem != 0)
             {
-            case 1:
-                current_rect.setPosition(rectTopLeft.getPosition());
-                current_rect.setFillColor(rectTopLeft.getFillColor());
-                break;
-            case 2:
-                current_rect.setPosition(rectTopRight.getPosition());
-                current_rect.setFillColor(rectTopRight.getFillColor());
-                break;
-            case 3:
-                current_rect.setPosition(rectBottomLeft.getPosition());
-                current_rect.setFillColor(rectBottomLeft.getFillColor());
-                break;
-            case 4:
-                current_rect.setPosition(rectBottomRight.getPosition());
-                current_rect.setFillColor(rectBottomRight.getFillColor());
-                break;
-            default:
-                current_square = 4;
-                current_rect.setPosition(rectBottomRight.getPosition());
-                current_rect.setFillColor(rectBottomRight.getFillColor());
-                break;
+                --current_square;
+                if (current_square < 0)
+                    current_square = 3;
             }
-        }
-        else if (event.key.code == sf::Keyboard::Enter)
-        {
-            if (current_color > colors.size())
+            else if (event.key.code == sf::Keyboard::Enter && colorsMenu.selectedItem != 0)
             {
-                current_color = 0;
+                swapColor = palyersColors[current_square];
+                palyersColors[current_square] = availableColors[avaliable_index];
+                availableColors[avaliable_index] = swapColor;
+                avaliable_index++;
+                if (avaliable_index > 2)
+                    avaliable_index = 0;
             }
-            current_rect.setFillColor(colors[current_color]);
-            switch (current_square)
+            else if (event.key.code == sf::Keyboard::Enter && colorsMenu.selectedItem == 0)
             {
-            case 1:
-                colors.push_back(rectTopLeft.getFillColor());
-                rectTopLeft.setFillColor(colors[current_color]);
-                break;
-            case 2:
-                colors.push_back(rectTopRight.getFillColor());
-                rectTopRight.setFillColor(colors[current_color]);
-                break;
-            case 3:
-                colors.push_back(rectBottomLeft.getFillColor());
-                rectBottomLeft.setFillColor(colors[current_color]);
-
-                break;
-            case 4:
-                colors.push_back(rectBottomRight.getFillColor());
-                rectBottomRight.setFillColor(colors[current_color]);
-                break;
+                last_screen = current_screen;
+                current_screen = 3;
             }
-            colors.erase(colors.begin() + current_color);
-            ++current_color;
         }
     }
 }
