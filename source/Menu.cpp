@@ -1,6 +1,14 @@
 #include "components/Menu.hpp"
 #include <iostream>
 
+sf::Text menuTitle;
+sf::Texture mainMenuBackgroundTexture;
+sf::Sprite mainMenuBackgroundSprite;
+
+void loadMenuAssets()
+{
+    mainMenuBackgroundTexture.loadFromFile("assets/images/mainMenuBackground.jpg");
+}
 Menu initlizeMenu(int numebrOfItems, char **items)
 {
 
@@ -19,7 +27,9 @@ Menu initlizeMenu(int numebrOfItems, char **items)
         menu.text[i].setFont(menu.font);
         menu.text[i].setColor(sf::Color::White);
         menu.text[i].setString(items[i]);
-        menu.text[i].setPosition(sf::Vector2f(menu.width / 2 - 40, menu.height / (numebrOfItems + 1) * (i + 1)));
+        menu.text[i].setCharacterSize(30);
+        menu.text[i].setOrigin(sf::Vector2f(menu.text[i].getGlobalBounds().width / 2, menu.text[i].getGlobalBounds().height / 2));
+        menu.text[i].setPosition(sf::Vector2f(menu.width / 2, menu.height / (numebrOfItems + 1) * (i + 1)));
     }
 
     return menu;
@@ -64,17 +74,21 @@ void updateMenu(Menu &menu, sf::Event &event)
 }
 void drawMenu(Menu &menu, sf::RenderWindow &window, char *title)
 {
+    // Menu Background
+    mainMenuBackgroundSprite.setTextureRect(sf::IntRect(-SCREENWIDTH / 2, -SCREENHEIGHT / 2, SCREENWIDTH, SCREENHEIGHT));
+    mainMenuBackgroundSprite.setTexture(mainMenuBackgroundTexture);
+    window.draw(mainMenuBackgroundSprite);
 
     for (int i = 0; i < menu.numberOfItems; i++)
     {
         if (i == menu.selectedItem)
             menu.text[i].setColor(sf::Color::Red);
         else
-            menu.text[i].setColor(sf::Color::White);
+            menu.text[i].setColor(sf::Color::Black);
         window.draw(menu.text[i]);
     }
 
-    sf::Text menuTitle;
+    // Menu title
     menuTitle.setString(title);
     menuTitle.setFont(menu.font);
     menuTitle.setPosition(sf::Vector2f(20, 20));

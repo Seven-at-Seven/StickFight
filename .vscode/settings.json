@@ -1,6 +1,5 @@
 {
   "files.associations": {
-    "*.embeddedhtml": "html",
     "iostream": "cpp",
     "array": "cpp",
     "atomic": "cpp",
@@ -47,8 +46,7 @@
     "stdexcept": "cpp",
     "streambuf": "cpp",
     "typeinfo": "cpp",
-    "__bit_reference": "cpp",
-    "bitset": "cpp"
+    "format": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }

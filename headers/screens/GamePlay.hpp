@@ -1,7 +1,9 @@
 #ifndef GAMEPLAY_H
 #define GAMEPLAY_H
-#include <SFML/Graphics.hpp>
 
-void gamePlayDraw(sf::RenderWindow &window);
+#include "components/Character.hpp"
+
 void gamePlayUpdate(sf::RenderWindow &window);
+void gamePlayDraw(sf::RenderWindow &window);
+
 #endif // GAMEPLAY_H

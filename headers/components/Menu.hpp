@@ -20,6 +20,9 @@ void moveSelectionUp(Menu &menu);
 void moveSelectionDown(Menu &menu);
 void drawMenu(Menu &menu, sf::RenderWindow &window, char *title);
 void updateMenu(Menu &menu, sf::Event &event);
+void loadMenuAssets();
 Menu initlizeMenu(int numebrOfItems, char **items);
 
+extern sf::Texture mainMenuBackgroundTexture;
+extern sf::Sprite mainMenuBackgroundSprite;
 #endif

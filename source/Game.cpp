@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <Game.hpp>
+#include "Map_utility.hpp"
 #include "screens/MainMenu.hpp"                   // Page 0
 #include "screens/PlaySettings.hpp"               // Page 1
 #include "screens/GamePlay.hpp"                   // Page 2
@@ -9,8 +10,8 @@
 #include "screens/Colors.hpp"                     // Page 6
 
 // Global states
-
 int current_screen = 0;
+sf::Vector2f VELOCITY[4] = {sf::Vector2f(0, 0)};
 int last_screen = 0;
 int number_of_players = 2;
 sf::Event event;
@@ -22,6 +23,14 @@ Menu opMenu = initlizeOptionsMenu();
 Menu psMenu = initlizePlaySettingsMenu();
 Menu SoundMenu = initlizeSoundMenu();
 Menu ColorsMenu = initlizeColorsMenu();
+
+void loadGameAssets()
+{
+    loadSoundAssets();
+    loadMenuAssets();
+    loadCharacterAssets();
+    loadMapAssets();
+}
 
 // Update Switch
 void updateGame(sf::RenderWindow &window)
