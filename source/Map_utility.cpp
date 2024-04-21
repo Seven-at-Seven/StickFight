@@ -2,14 +2,18 @@
 #include "Globals.hpp"
 
 Map map[6];
-
+int abs(int x)
+{
+    x = x < 0 ? x * -1 : x;
+    return x;
+}
 void loadMapAssets()
 {
     if (!blocksTexture.loadFromFile(BLOCKS_TEXTURE_PATH))
     {
         std::cout << "Error loading map assets" << std::endl;
     }
-    map[0].num_of_blocks = 1;
+
     for (int i = 0; i < 6; i++)
     {
         map[i].background.loadFromFile("assets/images/background" + std::to_string(i) + ".png");
@@ -25,7 +29,26 @@ void loadMapAssets()
 
 void loadMapBlocks()
 {
+
+    // map[0]has 3 blocks
+
+    map[0].num_of_blocks = 3; // The block position is based on the law of projectiles....
     map[0].blocks[0] = initialize_block(sf::Vector2f(200, SCREENHEIGHT - 2 * 40), sf::Vector2f(20, 20), 30, 2);
+    map[0].blocks[1] = initialize_block(sf::Vector2f(100 + MAX_JUMP_X_AXIS, SCREENHEIGHT - MAX_JUMP_Y_AXIS),
+                                        sf::Vector2f(40, 40), 1, 1);
+    map[0].blocks[2] = initialize_block(sf::Vector2f(20 + MAX_JUMP_X_AXIS, SCREENHEIGHT - MAX_JUMP_Y_AXIS),
+                                        sf::Vector2f(40, 40), 1, 1);
+
+    // map[1] "map of prabola shape"
+    
+        map[1].num_of_blocks = 5;
+    for (int i = 0; i < map[1].num_of_blocks; i++)
+    {
+
+        map[1].blocks[i] = initialize_block(sf::Vector2f((100+MAX_JUMP_X_AXIS)*i + MAX_JUMP_X_AXIS+200, SCREENHEIGHT - MAX_JUMP_Y_AXIS *(-1*abs(i-2)+3) ),
+                                            sf::Vector2f(18, 18), 14, 2);
+    }
+
     map[5].num_of_blocks++;
     map[5].blocks[0] = initialize_block(sf::Vector2f(200, SCREENHEIGHT - 2 * 40), sf::Vector2f(20, 20), 30, 2);
 }

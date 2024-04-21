@@ -20,6 +20,5 @@ extern int last_screen;
 extern int number_of_players;
 extern sf::Event event;
 extern int curmap;
-extern Map map[6];
 
 #endif // S_GLOBALS_H
