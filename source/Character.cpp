@@ -20,51 +20,50 @@ void loadCharacterAssets()
   for (int i = 0; i < 4; i++)
   {
 
-    if (!CharacterTextures[0][i].loadFromFile(IDLE_TEXTURE))
+    if (!CharacterTextures[i][0].loadFromFile(IDLE_TEXTURE))
     {
       std::cout << "Error loading idle character assets" << std::endl;
     }
-    if (!CharacterTextures[1][i].loadFromFile(PUNCH_TEXTURE))
+    if (!CharacterTextures[i][1].loadFromFile(PUNCH_TEXTURE))
     {
       std::cout << "Error loading punshing character assets" << std::endl;
     }
-    if (!CharacterTextures[2][i].loadFromFile(MOVEING_TEXTURE))
+    if (!CharacterTextures[i][2].loadFromFile(MOVEING_TEXTURE))
     {
       std::cout << "Error loading moving character assets" << std::endl;
     }
-    if (!CharacterTextures[3][i].loadFromFile(HAVING_GUN_TEXTURE))
+    if (!CharacterTextures[i][3].loadFromFile(HAVING_GUN_TEXTURE))
     {
       std::cout << "Error loading idle character assets" << std::endl;
     }
     charactersArray[i].sprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
     charactersArray[i].sprite.setPosition(sf::Vector2f(80 * i + 20, 100));
     charactersArray[i].color = palyersColors[i];
-
-    // Get textures size
-    sf::Vector2u textureSize = CharacterTextures[i][0].getSize();
-
-    // Create an image from the textures
-    sf::Image image = CharacterTextures[i][0].copyToImage();
-
-    // Loop through each pixel
-    for (unsigned int y = 0; y < textureSize.y; ++y)
-    {
-      for (unsigned int x = 0; x < textureSize.x; ++x)
-      {
-        // Get current pixel color
-        sf::Color pixelColor = image.getPixel(x, y);
-
-        // Check if black (all color components are 0)
-        if (pixelColor.r == 20 && pixelColor.g == 16 && pixelColor.b == 19)
-        {
-          // Change to red
-          image.setPixel(x, y, charactersArray[i].color);
-        }
-      }
-    }
-
     for (int j = 0; j < 4; j++)
     {
+
+      // Get textures size
+      sf::Vector2u textureSize = CharacterTextures[i][j].getSize();
+
+      // Create an image from the textures
+      sf::Image image = CharacterTextures[i][j].copyToImage();
+
+      // Loop through each pixel
+      for (unsigned int y = 0; y < textureSize.y; ++y)
+      {
+        for (unsigned int x = 0; x < textureSize.x; ++x)
+        {
+          // Get current pixel color
+          sf::Color pixelColor = image.getPixel(x, y);
+
+          // Check if black (all color components are 0)
+          if (pixelColor.r == 20 && pixelColor.g == 16 && pixelColor.b == 19)
+          {
+            // Change to red
+            image.setPixel(x, y, charactersArray[i].color);
+          }
+        }
+      }
       CharacterTextures[i][j].update(image);
     }
   }
