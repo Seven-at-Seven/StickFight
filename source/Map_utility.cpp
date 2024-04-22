@@ -60,11 +60,11 @@ void loadMapBlocks()
     map[5].num_of_blocks++;
     map[5].blocks[0] = initialize_block(sf::Vector2f(200, SCREENHEIGHT - 2 * 40), 30, 2);
 }
-void drawMap(sf::RenderWindow &window, Map &map)
+void drawMap(sf::RenderWindow &window, Map &map, int num_row_index, int num_col_index)
 {
     window.draw(map.background_sprite);
     for (int i = 0; i < map.num_of_blocks; i++)
     {
-        drawBlock(window, map.blocks[i]);
+        drawBlock(window, map.blocks[i],num_row_index, num_col_index);
     }
 }

@@ -22,5 +22,5 @@ extern Map map[6];
 // functions
 void loadMapAssets();
 void loadMapBlocks();
-void drawMap(sf::RenderWindow &window, Map &map);
+void drawMap(sf::RenderWindow &window, Map &map, int num_row_index = 4, int num_col_index = 0);
 #endif
