@@ -118,8 +118,8 @@ void handelCharacterEvents(sf::Event &event)
         charactersArray[0].sprite.setPosition(charactersArray[0].sprite.getPosition().x + 64,
                                               charactersArray[0].sprite.getPosition().y);
       }
+      break;
     }
-    break;
     case sf::Keyboard::D:
     {
 
@@ -345,36 +345,24 @@ void handelCharacterEvents(sf::Event &event)
 
 void checkBlockCollision(Character &player, int playerIndex)
 {
-  float playerLeftSide, playerTopSide, playerRightSide, playerBottomSide;
-  float blockLeftSide, blockTopSide, blockRightSide, blockBottomSide;
 
-  // Player boundaries
-  playerLeftSide = player.sprite.getGlobalBounds().left;
-  playerTopSide = player.sprite.getGlobalBounds().top;
-  playerRightSide = playerLeftSide + player.sprite.getGlobalBounds().width;
-  playerBottomSide = playerTopSide + player.sprite.getGlobalBounds().height;
+  sf::Vector2f playerPosition = player.sprite.getPosition();
+  auto playerBounds = player.sprite.getGlobalBounds();
 
   for (int i = 0; i < map[curmap].num_of_blocks; i++)
   {
-    // Block boundaries
-    blockLeftSide = map[curmap].blocks[i].block_area.getPosition().x;
-    blockTopSide = map[curmap].blocks[i].block_area.getPosition().y;
-    blockRightSide = blockLeftSide + map[curmap].blocks[i].block_area.getSize().x;
-    blockBottomSide = blockTopSide + map[curmap].blocks[i].block_area.getSize().y;
+    auto blockBounds = map[curmap].blocks[i].block_area.getGlobalBounds();
 
-    float nextYPosition = playerBottomSide + VELOCITY[playerIndex].y;
-    if (playerBottomSide > blockTopSide && playerBottomSide <= blockBottomSide &&
-        playerRightSide > blockLeftSide && playerLeftSide < blockRightSide
-
-    )
+    if (blockBounds.intersects(playerBounds))
     {
-
-      player.sprite.setPosition(sf::Vector2f(player.sprite.getPosition().x,
-                                             blockTopSide - player.sprite.getGlobalBounds().height));
-      onBlock[playerIndex] = true;
+      if (playerPosition.y < blockBounds.top)
+      {
+        player.sprite.setPosition(sf::Vector2f(playerPosition.x, blockBounds.top - playerBounds.height));
+        onBlock[playerIndex] = true;
+        break;
+      }
     }
-    else if ((playerLeftSide + VELOCITY[playerIndex].x >= blockRightSide && playerLeftSide < blockRightSide) ||
-             (playerRightSide + VELOCITY[playerIndex].x <= blockLeftSide && playerRightSide > blockLeftSide))
+    else
     {
       onBlock[playerIndex] = false;
     }
@@ -431,7 +419,7 @@ void charactersDraw(sf::RenderWindow &window)
   {
     charactersArray[i].sprite.setTextureRect(sf::IntRect(64 * frames[i], 0,
                                                          charactersArray[i].sprite.getGlobalBounds().width,
-                                                         charactersArray[i].sprite.getGlobalBounds().height));
+                                                         charactersArray[i].sprite.getLocalBounds().height));
     charactersArray[i].sprite.setTexture(CharacterTextures[i][charactersArray[i].selectedIndex]);
     window.draw(charactersArray[i].sprite);
   }
