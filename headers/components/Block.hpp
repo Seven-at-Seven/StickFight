@@ -17,7 +17,7 @@ struct Block
     sf::RectangleShape block_area;
 };
 
-void drawBlock(sf::RenderWindow &winodw, Block &block);
+void drawBlock(sf::RenderWindow &winodw, Block &block, int texture_row_index, int texture_col_index);
 Block initialize_block(sf::Vector2f position, int numStones, int rows);
 
 #endif

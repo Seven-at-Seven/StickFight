@@ -28,12 +28,11 @@ void gamePlayUpdate(sf::RenderWindow &window)
             if (event.key.code == sf::Keyboard::Space)
             {
 
-               if(curmap==5)
-                   curmap = 0;
-               
-               else
-                   curmap++;
-                   
+                if (curmap == 5)
+                    curmap = 0;
+
+                else
+                    curmap++;
             }
         }
     }
@@ -44,10 +43,10 @@ void gamePlayDraw(sf::RenderWindow &window)
     switch (curmap)
     {
     case 0:
-        drawMap(window, map[0]);
+        drawMap(window, map[0], 4, 0);
         break;
     case 1:
-        drawMap(window, map[1]);
+        drawMap(window, map[1], 4, 3);
         break;
     case 2:
         drawMap(window, map[2]);
