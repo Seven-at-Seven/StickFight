@@ -37,7 +37,7 @@ void loadCharacterAssets()
       std::cout << "Error loading idle character assets" << std::endl;
     }
     charactersArray[i].sprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
-    charactersArray[i].sprite.setPosition(sf::Vector2f(80 * i + 20, 100));
+    charactersArray[i].sprite.setPosition(sf::Vector2f(200 * i + 20, 100));
     charactersArray[i].color = palyersColors[i];
     for (int j = 0; j < 4; j++)
     {
@@ -69,24 +69,25 @@ void loadCharacterAssets()
   }
 }
 
-void checkScreenCollision(Character &player, sf::RenderWindow &window)
+void checkScreenCollision(Character &player, int playerIndex)
 {
-  if (player.sprite.getPosition().x < 0)
+  if (player.sprite.getPosition().x <= 0)
   {
     player.sprite.setPosition(0, player.sprite.getPosition().y);
   }
-  else if (player.sprite.getPosition().x + player.sprite.getTextureRect().width > window.getSize().x)
+  else if (player.sprite.getPosition().x + player.sprite.getTextureRect().width > SCREENWIDTH)
   {
-    player.sprite.setPosition(window.getSize().x - player.sprite.getTextureRect().width, player.sprite.getPosition().y);
+    player.sprite.setPosition(SCREENWIDTH - player.sprite.getTextureRect().width, player.sprite.getPosition().y);
   }
 
-  if (player.sprite.getPosition().y < 0)
+  if (player.sprite.getPosition().y <= 0)
   {
     player.sprite.setPosition(player.sprite.getPosition().x, 0);
   }
-  else if (player.sprite.getPosition().y + player.sprite.getTextureRect().height > window.getSize().y)
+  else if (player.sprite.getPosition().y + player.sprite.getTextureRect().height >= SCREENHEIGHT)
   {
-    player.sprite.setPosition(player.sprite.getPosition().x, window.getSize().y - player.sprite.getTextureRect().height);
+    onGround[playerIndex] = true;
+    player.sprite.setPosition(player.sprite.getPosition().x, SCREENHEIGHT - player.sprite.getTextureRect().height);
   }
 }
 
@@ -136,8 +137,9 @@ void handelCharacterEvents(sf::Event &event)
     case sf::Keyboard::W:
     {
 
-      if (onGround[0])
+      if (onGround[0] || onBlock[0])
       {
+
         onBlock[0] = false;
         onGround[0] = false;
         VELOCITY[0].y = JUMP;
@@ -181,7 +183,7 @@ void handelCharacterEvents(sf::Event &event)
     case sf::Keyboard::U:
     {
 
-      if (onGround[1])
+      if (onGround[1] || onBlock[1])
       {
         onBlock[1] = false;
         onGround[1] = false;
@@ -227,7 +229,7 @@ void handelCharacterEvents(sf::Event &event)
     case sf::Keyboard::Up:
     {
 
-      if (onGround[2])
+      if (onGround[2] || onBlock[2])
       {
         onBlock[2] = false;
         onGround[2] = false;
@@ -272,7 +274,7 @@ void handelCharacterEvents(sf::Event &event)
     case sf::Keyboard::Numpad8:
     {
 
-      if (onGround[3])
+      if (onGround[0] || onBlock[0])
       {
         onBlock[3] = false;
         onGround[3] = false;
@@ -341,13 +343,51 @@ void handelCharacterEvents(sf::Event &event)
   }
 }
 
+void checkBlockCollision(Character &player, int playerIndex)
+{
+  float playerLeftSide, playerTopSide, playerRightSide, playerBottomSide;
+  float blockLeftSide, blockTopSide, blockRightSide, blockBottomSide;
+
+  // Player boundaries
+  playerLeftSide = player.sprite.getGlobalBounds().left;
+  playerTopSide = player.sprite.getGlobalBounds().top;
+  playerRightSide = playerLeftSide + player.sprite.getGlobalBounds().width;
+  playerBottomSide = playerTopSide + player.sprite.getGlobalBounds().height;
+
+  for (int i = 0; i < map[curmap].num_of_blocks; i++)
+  {
+    // Block boundaries
+    blockLeftSide = map[curmap].blocks[i].block_area.getPosition().x;
+    blockTopSide = map[curmap].blocks[i].block_area.getPosition().y;
+    blockRightSide = blockLeftSide + map[curmap].blocks[i].block_area.getSize().x;
+    blockBottomSide = blockTopSide + map[curmap].blocks[i].block_area.getSize().y;
+
+    float nextYPosition = playerBottomSide + VELOCITY[playerIndex].y;
+    if (playerBottomSide > blockTopSide && playerBottomSide <= blockBottomSide &&
+        playerRightSide > blockLeftSide && playerLeftSide < blockRightSide
+
+    )
+    {
+
+      player.sprite.setPosition(sf::Vector2f(player.sprite.getPosition().x,
+                                             blockTopSide - player.sprite.getGlobalBounds().height));
+      onBlock[playerIndex] = true;
+    }
+    else if ((playerLeftSide + VELOCITY[playerIndex].x >= blockRightSide && playerLeftSide < blockRightSide) ||
+             (playerRightSide + VELOCITY[playerIndex].x <= blockLeftSide && playerRightSide > blockLeftSide))
+    {
+      onBlock[playerIndex] = false;
+    }
+  }
+}
 void charactersUpdate(sf::RenderWindow &window)
 {
 
   for (int i = 0; i < number_of_players; i++)
   {
-    checkScreenCollision(charactersArray[i], window);
     move(charactersArray[i], VELOCITY[i]);
+    checkScreenCollision(charactersArray[i], i);
+    checkBlockCollision(charactersArray[i], i);
 
     if (isHavingGun[i])
     {
@@ -374,16 +414,13 @@ void charactersUpdate(sf::RenderWindow &window)
     if (frames[i] >= texturesLimt[i] - 1)
       frames[i] = 0;
 
-    // isFalling
-    if (charactersArray[i].sprite.getPosition().y + charactersArray[i].sprite.getTextureRect().height < SCREENHEIGHT && !onBlock[i])
+    if (onBlock[i] || onGround[i])
     {
-      onGround[i] = false;
-      VELOCITY[i].y += GRAVITY.y;
+      VELOCITY[i].y = 0;
     }
     else
     {
-      onGround[i] = true;
-      VELOCITY[i].y = 0;
+      VELOCITY[i].y += GRAVITY.y;
     }
   }
 }

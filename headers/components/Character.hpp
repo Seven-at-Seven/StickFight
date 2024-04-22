@@ -20,6 +20,7 @@ struct Character
 
 extern Character charactersArray[4];
 void checkScreenCollision(Character &player, sf::RenderWindow &window);
+void checkBlockCollision(Character &player, int current_map);
 void move(Character &player, sf::Vector2f offset);
 void handelCharacterEvents(sf::Event &event);
 void charactersUpdate(sf::RenderWindow &window);

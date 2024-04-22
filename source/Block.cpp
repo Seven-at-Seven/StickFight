@@ -27,6 +27,7 @@ Block initialize_block(sf::Vector2f position, int numStones, int rows)
     block.position = position;
     block.stone_num = numStones;
     block.rows = rows;
-
+    block.block_area.setSize(sf::Vector2f(STONE_SIZE * (numStones / rows), STONE_SIZE * rows));
+    block.block_area.setPosition(position);
     return block;
 }

@@ -1,5 +1,6 @@
 #include "screens/Colors.hpp"
 #include "Globals.hpp"
+#include "components/Character.hpp"
 #include <iostream>
 
 int current_square = 0;
@@ -92,6 +93,7 @@ void colorsUpdate(sf::RenderWindow &window, Menu &colorsMenu)
                 avaliable_index++;
                 if (avaliable_index > 2)
                     avaliable_index = 0;
+                loadCharacterAssets();
             }
             else if (event.key.code == sf::Keyboard::Enter && colorsMenu.selectedItem == 0)
             {
