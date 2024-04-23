@@ -27,7 +27,6 @@ void drawBlock(sf::RenderWindow &winodw, Block &block, int texture_row_index, in
         if (temp_texture_col_index % 3 == 0 && temp_texture_col_index != texture_col_index)
             temp_texture_col_index = texture_col_index;
     }
-    winodw.draw(block.block_area);
 }
 Block initialize_block(sf::Vector2f position, int numStones, int rows)
 {
