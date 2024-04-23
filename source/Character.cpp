@@ -394,7 +394,7 @@ void charactersUpdate(sf::RenderWindow &window)
     checkScreenCollision(charactersArray[i], i);
     checkBlockCollision(charactersArray[i], i);
     if (facingLeft[i])
-      charactersArray[i].sprite.setPosition(charactersArray[i].area.getPosition() + sf::Vector2f(10, 0));
+      charactersArray[i].sprite.setPosition(charactersArray[i].area.getPosition() + sf::Vector2f(-18, 0));
     else
       charactersArray[i].sprite.setPosition(charactersArray[i].area.getPosition() + sf::Vector2f(-10, 0));
 
@@ -442,6 +442,7 @@ void charactersDraw(sf::RenderWindow &window)
                                                          charactersArray[i].sprite.getLocalBounds().height));
     charactersArray[i].sprite.setTexture(CharacterTextures[i][charactersArray[i].selectedIndex]);
 
+    window.draw(charactersArray[i].area);
     window.draw(charactersArray[i].sprite);
   }
 }
