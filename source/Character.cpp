@@ -442,7 +442,6 @@ void charactersDraw(sf::RenderWindow &window)
                                                          charactersArray[i].sprite.getLocalBounds().height));
     charactersArray[i].sprite.setTexture(CharacterTextures[i][charactersArray[i].selectedIndex]);
 
-    window.draw(charactersArray[i].area);
     window.draw(charactersArray[i].sprite);
   }
 }
