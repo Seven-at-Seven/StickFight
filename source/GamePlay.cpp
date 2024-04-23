@@ -49,16 +49,16 @@ void gamePlayDraw(sf::RenderWindow &window)
         drawMap(window, map[1], 4, 3);
         break;
     case 2:
-        drawMap(window, map[2]);
+        drawMap(window, map[2], 4, 0);
         break;
     case 3:
-        drawMap(window, map[3]);
+        drawMap(window, map[3], 4, 0);
         break;
     case 4:
-        drawMap(window, map[4]);
+        drawMap(window, map[4], 4, 0);
         break;
     case 5:
-        drawMap(window, map[5]);
+        drawMap(window, map[5], 4, 0);
         break;
     default:
         break;

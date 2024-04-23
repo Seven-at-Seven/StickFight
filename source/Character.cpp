@@ -37,8 +37,10 @@ void loadCharacterAssets()
       std::cout << "Error loading idle character assets" << std::endl;
     }
     charactersArray[i].sprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
-    charactersArray[i].sprite.setPosition(sf::Vector2f(200 * i + 20, 100));
+    charactersArray[i].area.setPosition(sf::Vector2f(200 * i + 20, 100));
+    charactersArray[i].area.setSize(sf::Vector2f(40, 64));
     charactersArray[i].color = palyersColors[i];
+    charactersArray[i].area.setFillColor(sf::Color::Red);
     for (int j = 0; j < 4; j++)
     {
 
@@ -71,29 +73,29 @@ void loadCharacterAssets()
 
 void checkScreenCollision(Character &player, int playerIndex)
 {
-  if (player.sprite.getPosition().x <= 0)
+  if (player.area.getPosition().x <= 0)
   {
-    player.sprite.setPosition(0, player.sprite.getPosition().y);
+    player.area.setPosition(0, player.area.getPosition().y);
   }
-  else if (player.sprite.getPosition().x + player.sprite.getTextureRect().width > SCREENWIDTH)
+  else if (player.area.getPosition().x + player.area.getSize().x > SCREENWIDTH)
   {
-    player.sprite.setPosition(SCREENWIDTH - player.sprite.getTextureRect().width, player.sprite.getPosition().y);
+    player.area.setPosition(SCREENWIDTH - player.area.getSize().x, player.area.getPosition().y);
   }
 
-  if (player.sprite.getPosition().y <= 0)
+  if (player.area.getPosition().y <= 0)
   {
-    player.sprite.setPosition(player.sprite.getPosition().x, 0);
+    player.area.setPosition(player.area.getPosition().x, 0);
   }
-  else if (player.sprite.getPosition().y + player.sprite.getTextureRect().height >= SCREENHEIGHT)
+  else if (player.area.getPosition().y + player.area.getSize().y >= SCREENHEIGHT)
   {
     onGround[playerIndex] = true;
-    player.sprite.setPosition(player.sprite.getPosition().x, SCREENHEIGHT - player.sprite.getTextureRect().height);
+    player.area.setPosition(player.area.getPosition().x, SCREENHEIGHT - player.area.getSize().y);
   }
 }
 
 void move(Character &player, sf::Vector2f offset)
 {
-  player.sprite.move(offset);
+  player.area.move(offset);
 }
 
 void handelCharacterEvents(sf::Event &event)
@@ -115,8 +117,8 @@ void handelCharacterEvents(sf::Event &event)
       {
         facingLeft[0] = !facingLeft[0];
         charactersArray[0].sprite.setScale(sf::Vector2f(-1.f, 1.f));
-        charactersArray[0].sprite.setPosition(charactersArray[0].sprite.getPosition().x + 64,
-                                              charactersArray[0].sprite.getPosition().y);
+        charactersArray[0].sprite.setOrigin(sf::Vector2f(charactersArray[0].sprite.getGlobalBounds().width,
+                                                         0));
       }
       break;
     }
@@ -129,8 +131,7 @@ void handelCharacterEvents(sf::Event &event)
       {
         facingLeft[0] = !facingLeft[0];
         charactersArray[0].sprite.setScale(sf::Vector2f(1.f, 1.f));
-        charactersArray[0].sprite.setPosition(charactersArray[0].sprite.getPosition().x - 64,
-                                              charactersArray[0].sprite.getPosition().y);
+        charactersArray[0].sprite.setOrigin(sf::Vector2f(0, 0));
       }
       break;
     }
@@ -161,8 +162,8 @@ void handelCharacterEvents(sf::Event &event)
       {
         facingLeft[1] = !facingLeft[1];
         charactersArray[1].sprite.setScale(sf::Vector2f(-1.f, 1.f));
-        charactersArray[1].sprite.setPosition(charactersArray[1].sprite.getPosition().x + 64,
-                                              charactersArray[1].sprite.getPosition().y);
+        charactersArray[1].sprite.setOrigin(sf::Vector2f(charactersArray[1].sprite.getGlobalBounds().width,
+                                                         0));
       }
     }
     break;
@@ -175,8 +176,7 @@ void handelCharacterEvents(sf::Event &event)
       {
         facingLeft[1] = !facingLeft[1];
         charactersArray[1].sprite.setScale(sf::Vector2f(1.f, 1.f));
-        charactersArray[1].sprite.setPosition(charactersArray[1].sprite.getPosition().x - 64,
-                                              charactersArray[1].sprite.getPosition().y);
+        charactersArray[1].sprite.setOrigin(sf::Vector2f(0, 0));
       }
     }
     break;
@@ -207,8 +207,8 @@ void handelCharacterEvents(sf::Event &event)
       {
         facingLeft[2] = !facingLeft[2];
         charactersArray[2].sprite.setScale(sf::Vector2f(-1.f, 1.f));
-        charactersArray[2].sprite.setPosition(charactersArray[2].sprite.getPosition().x + 64,
-                                              charactersArray[2].sprite.getPosition().y);
+        charactersArray[2].sprite.setOrigin(sf::Vector2f(charactersArray[2].sprite.getGlobalBounds().width,
+                                                         0));
       }
     }
     break;
@@ -221,8 +221,7 @@ void handelCharacterEvents(sf::Event &event)
       {
         facingLeft[2] = !facingLeft[2];
         charactersArray[2].sprite.setScale(sf::Vector2f(1.f, 1.f));
-        charactersArray[2].sprite.setPosition(charactersArray[2].sprite.getPosition().x - 64,
-                                              charactersArray[2].sprite.getPosition().y);
+        charactersArray[2].sprite.setOrigin(sf::Vector2f(0, 0));
       }
     }
     break;
@@ -252,8 +251,8 @@ void handelCharacterEvents(sf::Event &event)
       {
         facingLeft[3] = !facingLeft[3];
         charactersArray[3].sprite.setScale(sf::Vector2f(-1.f, 1.f));
-        charactersArray[3].sprite.setPosition(charactersArray[3].sprite.getPosition().x + 64,
-                                              charactersArray[3].sprite.getPosition().y);
+        charactersArray[3].sprite.setOrigin(sf::Vector2f(charactersArray[3].sprite.getGlobalBounds().width,
+                                                         0));
       }
     }
     break;
@@ -266,8 +265,7 @@ void handelCharacterEvents(sf::Event &event)
       {
         facingLeft[3] = !facingLeft[3];
         charactersArray[3].sprite.setScale(sf::Vector2f(1.f, 1.f));
-        charactersArray[3].sprite.setPosition(charactersArray[3].sprite.getPosition().x - 64,
-                                              charactersArray[3].sprite.getPosition().y);
+        charactersArray[2].sprite.setOrigin(sf::Vector2f(0, 0));
       }
     }
     break;
@@ -346,20 +344,39 @@ void handelCharacterEvents(sf::Event &event)
 void checkBlockCollision(Character &player, int playerIndex)
 {
 
-  sf::Vector2f playerPosition = player.sprite.getPosition();
-  auto playerBounds = player.sprite.getGlobalBounds();
+  sf::Vector2f playerPosition = player.area.getPosition();
+  auto playerBounds = player.area.getGlobalBounds();
 
   for (int i = 0; i < map[curmap].num_of_blocks; i++)
   {
     auto blockBounds = map[curmap].blocks[i].block_area.getGlobalBounds();
 
-    if (blockBounds.intersects(playerBounds))
+    if (blockBounds.intersects(playerBounds) && !onBlock[i])
     {
+      // Collision from top
       if (playerPosition.y < blockBounds.top)
       {
-        player.sprite.setPosition(sf::Vector2f(playerPosition.x, blockBounds.top - playerBounds.height));
+        player.area.setPosition(sf::Vector2f(playerPosition.x, blockBounds.top - playerBounds.height));
         onBlock[playerIndex] = true;
         break;
+      }
+      // Collision from Right
+      else if (playerBounds.left + playerBounds.width > blockBounds.left + blockBounds.width)
+      {
+
+        player.area.setPosition(sf::Vector2f(blockBounds.left + blockBounds.width, playerBounds.top));
+      }
+      // Collision from Left
+      else if (playerBounds.left < blockBounds.left)
+      {
+
+        player.area.setPosition(sf::Vector2f(blockBounds.left - playerBounds.width, playerBounds.top));
+      }
+      // Collision from Bottom
+      else if (playerBounds.top + playerBounds.height > blockBounds.top + blockBounds.height)
+      {
+
+        player.area.setPosition(sf::Vector2f(playerPosition.x, blockBounds.top + blockBounds.height + 3));
       }
     }
     else
@@ -376,6 +393,10 @@ void charactersUpdate(sf::RenderWindow &window)
     move(charactersArray[i], VELOCITY[i]);
     checkScreenCollision(charactersArray[i], i);
     checkBlockCollision(charactersArray[i], i);
+    if (facingLeft[i])
+      charactersArray[i].sprite.setPosition(charactersArray[i].area.getPosition() + sf::Vector2f(10, 0));
+    else
+      charactersArray[i].sprite.setPosition(charactersArray[i].area.getPosition() + sf::Vector2f(-10, 0));
 
     if (isHavingGun[i])
     {
@@ -412,7 +433,6 @@ void charactersUpdate(sf::RenderWindow &window)
     }
   }
 }
-
 void charactersDraw(sf::RenderWindow &window)
 {
   for (int i = 0; i < number_of_players; i++)
@@ -421,6 +441,7 @@ void charactersDraw(sf::RenderWindow &window)
                                                          charactersArray[i].sprite.getGlobalBounds().width,
                                                          charactersArray[i].sprite.getLocalBounds().height));
     charactersArray[i].sprite.setTexture(CharacterTextures[i][charactersArray[i].selectedIndex]);
+
     window.draw(charactersArray[i].sprite);
   }
 }

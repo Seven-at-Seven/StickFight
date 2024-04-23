@@ -16,7 +16,7 @@ void drawBlock(sf::RenderWindow &winodw, Block &block, int texture_row_index, in
                                               block.position.y + i * STONE_SIZE);
             // Choosing the block from the image
             block.blockSprites[i].setTextureRect(sf::IntRect(temp_texture_row_index * 18,
-                                                             temp_texture_col_index * 18, 18, 18));
+                                                             temp_texture_col_index * 18, 16, 16));
             temp_texture_row_index++;
             if (temp_texture_row_index % 2 == 0 && temp_texture_row_index != texture_row_index)
                 temp_texture_row_index = texture_row_index;
@@ -37,7 +37,7 @@ Block initialize_block(sf::Vector2f position, int numStones, int rows)
     block.stone_num = numStones;
     block.rows = rows;
     block.block_area.setSize(sf::Vector2f((STONE_SIZE * (numStones / rows)), STONE_SIZE * rows));
-    block.block_area.setPosition(sf::Vector2f(position.x + STONE_SIZE,
-                                              position.y));
+    block.block_area.setPosition(sf::Vector2f(position.x, position.y));
+    block.block_area.setFillColor(sf::Color::Green);
     return block;
 }

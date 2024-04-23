@@ -14,8 +14,8 @@ struct Character
 {
   sf::Sprite sprite;
   int selectedIndex;
-  float width, height, posX, posY;
   sf::Color color;
+  sf::RectangleShape area;
 };
 
 extern Character charactersArray[4];

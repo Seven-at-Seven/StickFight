@@ -5,7 +5,7 @@
 #include <string>
 
 #define MAX_STONES 60
-#define STONE_SIZE 30
+#define STONE_SIZE 32
 
 extern sf::Texture blocksTexture;
 
