@@ -1,23 +1,23 @@
 #include "components/Character.hpp"
 #include <iostream>
 
-sf::Texture CharacterTextures[4][4];
+sf::Texture CharacterTextures[MAX_PLAYERS_NUMBER][4];
 
 // Character states
-short texturesLimt[4] = {6};
-short frames[4] = {0};
-bool onGround[4] = {false};
-bool isMoving[4] = {false};
-bool isPunshing[4] = {false};
-bool onBlock[4] = {false};
-bool facingLeft[4] = {false};
-bool isHavingGun[4] = {false};
-Character charactersArray[4];
+short texturesLimt[MAX_PLAYERS_NUMBER] = {6};
+short frames[MAX_PLAYERS_NUMBER] = {0};
+bool onGround[MAX_PLAYERS_NUMBER] = {false};
+bool isMoving[MAX_PLAYERS_NUMBER] = {false};
+bool isPunshing[MAX_PLAYERS_NUMBER] = {false};
+bool onBlock[MAX_PLAYERS_NUMBER] = {false};
+bool facingLeft[MAX_PLAYERS_NUMBER] = {false};
+bool isHavingGun[MAX_PLAYERS_NUMBER] = {false};
+Character charactersArray[MAX_PLAYERS_NUMBER];
 
 void loadCharacterAssets()
 {
 
-  for (int i = 0; i < 4; i++)
+  for (int i = 0; i < MAX_PLAYERS_NUMBER; i++)
   {
 
     if (!CharacterTextures[i][0].loadFromFile(IDLE_TEXTURE))

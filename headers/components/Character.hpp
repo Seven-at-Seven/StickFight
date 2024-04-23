@@ -18,7 +18,7 @@ struct Character
   sf::RectangleShape area;
 };
 
-extern Character charactersArray[4];
+extern Character charactersArray[MAX_PLAYERS_NUMBER];
 void checkScreenCollision(Character &player, sf::RenderWindow &window);
 void checkBlockCollision(Character &player, int current_map);
 void move(Character &player, sf::Vector2f offset);
