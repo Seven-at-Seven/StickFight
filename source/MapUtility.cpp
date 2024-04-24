@@ -56,13 +56,24 @@ void loadMapBlocks()
                                             14, 2);
     }
 
-    // map[2]
-    map[2].num_of_blocks = 2;
-    map[2].blocks[0] = initialize_block(sf::Vector2f(SCREENWIDTH / 2, SCREENHEIGHT / 2), 2, 1);
-    map[2].blocks[1] = initialize_block(sf::Vector2f(SCREENWIDTH / 4, SCREENHEIGHT / 3), 2, 1);
+    // map[2] "map of straight blocks "
+    map[2].num_of_blocks = 5;
+    for (int i = 0; i < map[2].num_of_blocks; i++)
+    {
+        map[2].blocks[i] = initialize_block(sf::Vector2f(75 + i * 5 * STONE_SIZE + i * (MAX_JUMP_X_AXIS - 10),
+                                                         SCREENHEIGHT - 200),
+                                            10, 2);
+    }
 
-    map[5].num_of_blocks++;
-    map[5].blocks[0] = initialize_block(sf::Vector2f(200, SCREENHEIGHT - 2 * 40), 30, 2);
+    // map[3]"map of up and down"
+    map[3].num_of_blocks = 5;
+    for (int i = 0; i < map[3].num_of_blocks; i++)
+    { 
+        //the modulo is responsible for "up and down" 
+        map[3].blocks[i] = initialize_block(sf::Vector2f(140 + (i) * 5 * STONE_SIZE + i * (MAX_JUMP_X_AXIS / 2 ),
+                                                        SCREENHEIGHT-150-(i%2)*(MAX_JUMP_Y_AXIS)),
+                                           10, 2);
+    }
 }
 void drawMap(sf::RenderWindow &window, Map &map, int texture_row_index = 4, int texture_col_index = 0)
 {
