@@ -4,9 +4,11 @@
 #include "MapUtility.hpp"
 #include "components/Character.hpp"
 #include "Configurations.hpp"
+#include "components/HealthBar.hpp"
 
 // Global Variables
 extern Character charactersArray[MAX_PLAYERS_NUMBER];
+extern HealthBar healthBarArray[MAX_PLAYERS_NUMBER];
 extern sf::Texture blocksTexture;
 extern sf::Color palyersColors[];
 extern int number_of_players;

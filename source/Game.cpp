@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Game.hpp"
 #include "MapUtility.hpp"
+#include "components/HealthBar.hpp"
 #include "screens/MainMenu.hpp"                   // Screen 0
 #include "screens/PlaySettings.hpp"               // Screen 1
 #include "screens/GamePlay.hpp"                   // Screen 2
@@ -30,6 +31,7 @@ void loadGameAssets()
     loadMenuAssets();
     loadCharacterAssets();
     loadMapAssets();
+    loadHealthBarAssets();
 }
 
 // Update Switch

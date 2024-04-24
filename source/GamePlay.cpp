@@ -2,6 +2,7 @@
 #include "Globals.hpp"
 #include "components/Character.hpp"
 #include "MapUtility.hpp"
+#include "components/HealthBar.hpp"
 
 int current_map = 0;
 void gamePlayUpdate(sf::RenderWindow &window)
@@ -62,4 +63,5 @@ void gamePlayDraw(sf::RenderWindow &window)
         break;
     }
     charactersDraw(window);
+    drawHealthBar(window);
 }

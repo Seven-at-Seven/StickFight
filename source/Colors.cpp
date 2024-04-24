@@ -2,6 +2,7 @@
 #include "Configurations.hpp"
 #include "components/Character.hpp"
 #include "Globals.hpp"
+#include "components/HealthBar.hpp"
 
 int current_square = 0;
 int avaliable_index = 0;
@@ -94,6 +95,7 @@ void colorsUpdate(sf::RenderWindow &window, Menu &colorsMenu)
                 if (avaliable_index > 2)
                     avaliable_index = 0;
                 loadCharacterAssets();
+                loadHealthBarAssets();
             }
             else if (event.key.code == sf::Keyboard::Enter && colorsMenu.selectedItem == 0)
             {
