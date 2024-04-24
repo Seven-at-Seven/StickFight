@@ -1,14 +1,15 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
-#include "Globals.hpp"
+#include <SFML/Graphics.hpp>
+#include "Configurations.hpp"
 
+#define JUMP -22
+
+// Textures
 #define IDLE_TEXTURE "assets/StickmanPack/Idle/thickIdleSheet.png"
 #define PUNCH_TEXTURE "assets/StickmanPack/Punch/thickPunchSheet.png"
 #define MOVEING_TEXTURE "assets/StickmanPack/Run/thickRunSheet.png"
 #define HAVING_GUN_TEXTURE "assets/StickmanPack/Punch/HavingAGun.png"
-#define JUMP -22
-
-extern sf::Texture CharacterTextures[4][4];
 
 struct Character
 {
@@ -18,8 +19,7 @@ struct Character
   sf::RectangleShape area;
 };
 
-extern Character charactersArray[MAX_PLAYERS_NUMBER];
-void checkScreenCollision(Character &player, sf::RenderWindow &window);
+void checkScreenCollision(Character &player, int playerIndex);
 void checkBlockCollision(Character &player, int current_map);
 void move(Character &player, sf::Vector2f offset);
 void handelCharacterEvents(sf::Event &event);

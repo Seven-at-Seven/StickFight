@@ -1,7 +1,6 @@
 #ifndef MAP_H
 #define MAP_H
 #include <SFML/Graphics.hpp>
-#include <iostream>
 
 #include "components/Block.hpp"
 
@@ -18,7 +17,6 @@ struct Map
     sf::Sprite background_sprite;
     float xdir, ydir;
 };
-extern Map map[6];
 // functions
 void loadMapAssets();
 void loadMapBlocks();

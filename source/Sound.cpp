@@ -1,5 +1,6 @@
 #include "screens/Sound.hpp"
 #include "Globals.hpp"
+#include "Configurations.hpp"
 #include <iostream>
 
 int current_sound_texture = 3;

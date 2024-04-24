@@ -1,4 +1,6 @@
 #include "components/Menu.hpp"
+#include "Configurations.hpp"
+#include "Globals.hpp"
 #include <iostream>
 
 sf::Text menuTitle;

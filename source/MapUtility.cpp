@@ -1,7 +1,11 @@
-#include "Map_utility.hpp"
-#include "Globals.hpp"
+#include "MapUtility.hpp"
+#include <iostream>
+#include "Configurations.hpp"
+#include <string>
 
 Map map[6];
+sf::Texture blocksTexture;
+
 int abs(int x)
 {
     x = x < 0 ? x * -1 : x;
@@ -34,10 +38,10 @@ void loadMapBlocks()
 
     map[0].num_of_blocks = 3; // The block position is based on the law of projectiles....but some positions only for a good shape
     map[0].blocks[0] = initialize_block(sf::Vector2f(SCREENWIDTH / 2 - (17 * STONE_SIZE) / 2, SCREENHEIGHT / 2 + 70), 34, 2);
-    map[0].blocks[1] = initialize_block(sf::Vector2f((SCREENWIDTH / 2 - (17 * STONE_SIZE)/2-(4*STONE_SIZE) ) - MAX_JUMP_X_AXIS / 2 + 10,
-                                                     SCREENHEIGHT / 2 + 70 - (MAX_JUMP_Y_AXIS-10)),
+    map[0].blocks[1] = initialize_block(sf::Vector2f((SCREENWIDTH / 2 - (17 * STONE_SIZE) / 2 - (4 * STONE_SIZE)) - MAX_JUMP_X_AXIS / 2 + 10,
+                                                     SCREENHEIGHT / 2 + 70 - (MAX_JUMP_Y_AXIS - 10)),
                                         4, 1);
-    map[0].blocks[2] = initialize_block(sf::Vector2f((SCREENWIDTH / 2 + (17 * STONE_SIZE) / 2 )+ MAX_JUMP_X_AXIS / 2 - 10,
+    map[0].blocks[2] = initialize_block(sf::Vector2f((SCREENWIDTH / 2 + (17 * STONE_SIZE) / 2) + MAX_JUMP_X_AXIS / 2 - 10,
                                                      SCREENHEIGHT / 2 + 70 - (MAX_JUMP_Y_AXIS - 10)),
                                         4, 1);
 
@@ -47,7 +51,7 @@ void loadMapBlocks()
     for (int i = 0; i < map[1].num_of_blocks; i++)
     {
 
-        map[1].blocks[i] = initialize_block(sf::Vector2f((MAX_JUMP_X_AXIS / 2 + STONE_SIZE * 7) * i+10,
+        map[1].blocks[i] = initialize_block(sf::Vector2f((MAX_JUMP_X_AXIS / 2 + STONE_SIZE * 7) * i + 10,
                                                          SCREENHEIGHT - MAX_JUMP_Y_AXIS * (-1 * abs(i - 2) + 3)),
                                             14, 2);
     }
@@ -60,11 +64,11 @@ void loadMapBlocks()
     map[5].num_of_blocks++;
     map[5].blocks[0] = initialize_block(sf::Vector2f(200, SCREENHEIGHT - 2 * 40), 30, 2);
 }
-void drawMap(sf::RenderWindow &window, Map &map,int texture_row_index = 4, int texture_col_index = 0)
+void drawMap(sf::RenderWindow &window, Map &map, int texture_row_index = 4, int texture_col_index = 0)
 {
     window.draw(map.background_sprite);
     for (int i = 0; i < map.num_of_blocks; i++)
     {
-        drawBlock(window, map.blocks[i],texture_row_index, texture_col_index);
+        drawBlock(window, map.blocks[i], texture_row_index, texture_col_index);
     }
 }

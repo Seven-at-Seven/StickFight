@@ -6,8 +6,6 @@
 void soundDraw(sf::RenderWindow &window, Menu &SoundMenu);
 void soundUpdate(sf::RenderWindow &window, Menu &SoundMenu);
 
-extern sf::Texture soundSliderTextures[];
-extern sf::Sprite soundSliderSprite;
 Menu initlizeSoundMenu();
 void loadSoundAssets();
 #endif // GAMEPLAY_H

@@ -1,7 +1,7 @@
 #include "screens/Colors.hpp"
-#include "Globals.hpp"
+#include "Configurations.hpp"
 #include "components/Character.hpp"
-#include <iostream>
+#include "Globals.hpp"
 
 int current_square = 0;
 int avaliable_index = 0;

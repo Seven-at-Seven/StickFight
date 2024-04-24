@@ -1,5 +1,5 @@
 #include "headers/Game.hpp"
-#include "headers/Globals.hpp"
+#include "headers/Configurations.hpp"
 #include <iostream>
 
 int main()

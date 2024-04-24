@@ -1,15 +1,12 @@
 #include "screens/GamePlay.hpp"
-#include "components/Character.hpp"
 #include "Globals.hpp"
-#include "components/Block.hpp"
-#include "Map_utility.hpp"
+#include "components/Character.hpp"
+#include "MapUtility.hpp"
 
-int curmap = 0;
-Block myBlock;
+int current_map = 0;
 void gamePlayUpdate(sf::RenderWindow &window)
 {
 
-    charactersUpdate(window);
     while (window.pollEvent(event))
     {
 
@@ -28,19 +25,20 @@ void gamePlayUpdate(sf::RenderWindow &window)
             if (event.key.code == sf::Keyboard::Space)
             {
 
-                if (curmap == 5)
-                    curmap = 0;
+                if (current_map == 5)
+                    current_map = 0;
 
                 else
-                    curmap++;
+                    current_map++;
             }
         }
     }
+    charactersUpdate(window);
 }
 
 void gamePlayDraw(sf::RenderWindow &window)
 {
-    switch (curmap)
+    switch (current_map)
     {
     case 0:
         drawMap(window, map[0], 4, 0);

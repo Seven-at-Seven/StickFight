@@ -2,12 +2,9 @@
 #define BLOCKS_H
 
 #include <SFML/Graphics.hpp>
-#include <string>
 
 #define MAX_STONES 60
 #define STONE_SIZE 32
-
-extern sf::Texture blocksTexture;
 
 struct Block
 {

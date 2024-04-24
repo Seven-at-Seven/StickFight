@@ -1,9 +1,6 @@
 #ifndef MENU_H
 #define MENU_H
-
 #include <SFML/Graphics.hpp>
-
-#include "Globals.hpp"
 
 #define MAX_NUMBER_OF_ITEMS 6
 
@@ -23,6 +20,4 @@ void updateMenu(Menu &menu, sf::Event &event);
 void loadMenuAssets();
 Menu initlizeMenu(int numebrOfItems, char **items);
 
-extern sf::Texture mainMenuBackgroundTexture;
-extern sf::Sprite mainMenuBackgroundSprite;
 #endif

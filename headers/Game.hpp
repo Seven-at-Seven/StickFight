@@ -2,7 +2,9 @@
 #define S_GAME_H
 #include <SFML/Graphics.hpp>
 
+// Game functions
 void updateGame(sf::RenderWindow &window);
 void drawGame(sf::RenderWindow &window);
 void loadGameAssets();
+
 #endif // S_GAME_H

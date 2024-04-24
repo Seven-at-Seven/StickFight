@@ -1,6 +1,8 @@
 #include "components/Character.hpp"
+#include "Globals.hpp"
 #include <iostream>
 
+// Textures
 sf::Texture CharacterTextures[MAX_PLAYERS_NUMBER][4];
 
 // Character states
@@ -12,6 +14,9 @@ bool isPunshing[MAX_PLAYERS_NUMBER] = {false};
 bool onBlock[MAX_PLAYERS_NUMBER] = {false};
 bool facingLeft[MAX_PLAYERS_NUMBER] = {false};
 bool isHavingGun[MAX_PLAYERS_NUMBER] = {false};
+sf::Vector2f VELOCITY[MAX_PLAYERS_NUMBER];
+
+// Characters
 Character charactersArray[MAX_PLAYERS_NUMBER];
 
 void loadCharacterAssets()
@@ -347,9 +352,9 @@ void checkBlockCollision(Character &player, int playerIndex)
   sf::Vector2f playerPosition = player.area.getPosition();
   auto playerBounds = player.area.getGlobalBounds();
 
-  for (int i = 0; i < map[curmap].num_of_blocks; i++)
+  for (int i = 0; i < map[current_map].num_of_blocks; i++)
   {
-    auto blockBounds = map[curmap].blocks[i].block_area.getGlobalBounds();
+    auto blockBounds = map[current_map].blocks[i].block_area.getGlobalBounds();
 
     if (blockBounds.intersects(playerBounds) && !onBlock[i])
     {

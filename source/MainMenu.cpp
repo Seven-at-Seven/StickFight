@@ -1,5 +1,5 @@
-#include "../headers/screens/MainMenu.hpp"
-#include "../headers/Globals.hpp"
+#include "screens/MainMenu.hpp"
+#include "Globals.hpp"
 
 #define MAIN_MENU_ITEMS_NUMBER 3
 

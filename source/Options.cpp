@@ -1,6 +1,5 @@
-#include "../headers/screens/Options.hpp"
-#include "../headers/Globals.hpp"
-#include <unistd.h>
+#include "screens/Options.hpp"
+#include "Globals.hpp"
 
 #define OPTIONS_ITEMS_NUMBER 3
 

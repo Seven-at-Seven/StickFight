@@ -1,7 +1,6 @@
 #include "Globals.hpp"
 #include "screens/PlaySettings.hpp"
 #include "components/Menu.hpp"
-#include <string>
 
 #define PLAY_SETTINGS_ITEMS_NUMBER 3
 
@@ -39,7 +38,7 @@ void playSettingsUpdate(sf::RenderWindow &window, Menu &psMenu)
                     break;
                 }
             }
- 
+
             updateMenu(psMenu, event);
             break;
         }

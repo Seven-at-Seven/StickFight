@@ -3,7 +3,6 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "Globals.hpp"
 #include "components/Menu.hpp"
 
 void mainDraw(Menu &menu, sf::RenderWindow &window);

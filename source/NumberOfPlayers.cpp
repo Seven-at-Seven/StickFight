@@ -1,5 +1,6 @@
 #include "screens/subscreens/NumberOfPlayers.hpp"
-#include <string>
+#include "Globals.hpp"
+#include "Configurations.hpp"
 
 #define NUMBER_OF_PLAYERS_ITEMS_NUMBER 2
 

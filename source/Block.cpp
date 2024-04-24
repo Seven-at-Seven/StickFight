@@ -1,7 +1,6 @@
 #include "components/Block.hpp"
+#include "Globals.hpp"
 #include <iostream>
-
-sf::Texture blocksTexture;
 
 void drawBlock(sf::RenderWindow &winodw, Block &block, int texture_row_index, int texture_col_index)
 {
