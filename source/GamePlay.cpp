@@ -3,7 +3,7 @@
 #include "components/Character.hpp"
 #include "MapUtility.hpp"
 #include "components/HealthBar.hpp"
-#include "components/Wepons.hpp"
+#include "components/Weapons.hpp"
 
 int current_map = 0;
 void gamePlayUpdate(sf::RenderWindow &window)

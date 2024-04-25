@@ -9,7 +9,7 @@
 #include "screens/Sound.hpp"                      // Screen 4
 #include "screens/subscreens/NumberOfPlayers.hpp" // Screen 5
 #include "screens/Colors.hpp"                     // Screen 6
-#include "components/Wepons.hpp"
+#include "components/Weapons.hpp"
 
 // Global states
 int current_screen = 0;

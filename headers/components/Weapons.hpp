@@ -13,7 +13,7 @@ struct Weapon
 };
 
 void loadWeaponsAssets();
-void updateWeapons(int weaponIndex);
+void updateWeapons();
 void drawWeapons(sf::RenderWindow &window);
 
 #endif

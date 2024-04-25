@@ -5,7 +5,7 @@
 #include "components/Character.hpp"
 #include "Configurations.hpp"
 #include "components/HealthBar.hpp"
-#include "components/Wepons.hpp"
+#include "components/Weapons.hpp"
 
 // Global Variables
 extern Character charactersArray[MAX_PLAYERS_NUMBER];

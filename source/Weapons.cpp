@@ -1,4 +1,4 @@
-#include "components/Wepons.hpp"
+#include "components/Weapons.hpp"
 #include "Configurations.hpp"
 #include "Globals.hpp"
 #include "string.h"
