@@ -21,8 +21,9 @@ bool isPunshing[MAX_PLAYERS_NUMBER] = {false};
 bool isOnBlock[MAX_PLAYERS_NUMBER] = {false};
 bool isFacingLeft[MAX_PLAYERS_NUMBER] = {false};
 bool isHavingGun[MAX_PLAYERS_NUMBER] = {false};
+bool isFlying[MAX_PLAYERS_NUMBER] = {false};
 Damage isDamaged[MAX_PLAYERS_NUMBER] = {};
-sf::Vector2f VELOCITY[MAX_PLAYERS_NUMBER];
+sf::Vector2f playerVelocity[MAX_PLAYERS_NUMBER] = {};
 
 // Characters
 Character charactersArray[MAX_PLAYERS_NUMBER];
@@ -124,7 +125,8 @@ void handelCharacterEvents(sf::Event &event)
     case sf::Keyboard::A:
     {
 
-      VELOCITY[0].x = -5;
+      if (!isFlying[0])
+        playerVelocity[0].x = -5;
       isMoving[0] = true;
       if (!isFacingLeft[0])
       {
@@ -138,7 +140,8 @@ void handelCharacterEvents(sf::Event &event)
     case sf::Keyboard::D:
     {
 
-      VELOCITY[0].x = 5;
+      if (!isFlying[0])
+        playerVelocity[0].x = 5;
       isMoving[0] = true;
       if (isFacingLeft[0])
       {
@@ -156,7 +159,7 @@ void handelCharacterEvents(sf::Event &event)
 
         isOnBlock[0] = false;
         onGround[0] = false;
-        VELOCITY[0].y = JUMP;
+        playerVelocity[0].y = JUMP;
       }
       break;
     }
@@ -169,7 +172,8 @@ void handelCharacterEvents(sf::Event &event)
     case sf::Keyboard::H:
     {
 
-      VELOCITY[1].x = -5;
+      if (!isFlying[1])
+        playerVelocity[1].x = -5;
       isMoving[1] = true;
       if (!isFacingLeft[1])
       {
@@ -183,7 +187,8 @@ void handelCharacterEvents(sf::Event &event)
     case sf::Keyboard::K:
     {
 
-      VELOCITY[1].x = 5;
+      if (!isFlying[1])
+        playerVelocity[1].x = 5;
       isMoving[1] = true;
       if (isFacingLeft[1])
       {
@@ -200,7 +205,7 @@ void handelCharacterEvents(sf::Event &event)
       {
         isOnBlock[1] = false;
         onGround[1] = false;
-        VELOCITY[1].y = JUMP;
+        playerVelocity[1].y = JUMP;
       }
       break;
     }
@@ -214,7 +219,8 @@ void handelCharacterEvents(sf::Event &event)
     case sf::Keyboard::Left:
     {
 
-      VELOCITY[2].x = -5;
+      if (!isFlying[2])
+        playerVelocity[2].x = -5;
       isMoving[2] = true;
       if (!isFacingLeft[2])
       {
@@ -228,7 +234,8 @@ void handelCharacterEvents(sf::Event &event)
     case sf::Keyboard::Right:
     {
 
-      VELOCITY[2].x = 5;
+      if (!isFlying[2])
+        playerVelocity[2].x = 5;
       isMoving[2] = true;
       if (isFacingLeft[2])
       {
@@ -245,7 +252,7 @@ void handelCharacterEvents(sf::Event &event)
       {
         isOnBlock[2] = false;
         onGround[2] = false;
-        VELOCITY[2].y = JUMP;
+        playerVelocity[2].y = JUMP;
       }
       break;
     }
@@ -258,7 +265,8 @@ void handelCharacterEvents(sf::Event &event)
     case sf::Keyboard::Numpad4:
     {
 
-      VELOCITY[3].x = -5;
+      if (!isFlying[3])
+        playerVelocity[3].x = -5;
       isMoving[3] = true;
       if (!isFacingLeft[3])
       {
@@ -272,7 +280,8 @@ void handelCharacterEvents(sf::Event &event)
     case sf::Keyboard::Numpad6:
     {
 
-      VELOCITY[3].x = 5;
+      if (!isFlying[3])
+        playerVelocity[3].x = 5;
       isMoving[3] = true;
       if (isFacingLeft[3])
       {
@@ -289,7 +298,7 @@ void handelCharacterEvents(sf::Event &event)
       {
         isOnBlock[3] = false;
         onGround[3] = false;
-        VELOCITY[3].y = JUMP;
+        playerVelocity[3].y = JUMP;
       }
       break;
     }
@@ -315,7 +324,7 @@ void handelCharacterEvents(sf::Event &event)
     case sf::Keyboard::A:
     case sf::Keyboard::D:
       isMoving[0] = false;
-      VELOCITY[0].x = 0;
+      playerVelocity[0].x = 0;
       break;
     case sf::Keyboard::E:
       isPunshing[0] = false;
@@ -324,7 +333,7 @@ void handelCharacterEvents(sf::Event &event)
     case sf::Keyboard::K:
     case sf::Keyboard::H:
       isMoving[1] = false;
-      VELOCITY[1].x = 0;
+      playerVelocity[1].x = 0;
       break;
     case sf::Keyboard::I:
       isPunshing[1] = false;
@@ -333,7 +342,7 @@ void handelCharacterEvents(sf::Event &event)
     case sf::Keyboard::Left:
     case sf::Keyboard::Right:
       isMoving[2] = false;
-      VELOCITY[2].x = 0;
+      playerVelocity[2].x = 0;
       break;
     case sf::Keyboard::Numpad0:
       isPunshing[2] = false;
@@ -343,7 +352,7 @@ void handelCharacterEvents(sf::Event &event)
     case sf::Keyboard::Numpad4:
     case sf::Keyboard::Numpad6:
       isMoving[3] = false;
-      VELOCITY[3].x = 0;
+      playerVelocity[3].x = 0;
       break;
     case sf::Keyboard::Numpad9:
       isPunshing[3] = false;
@@ -409,18 +418,15 @@ void checkPlayerHitCollision(Character &player, int playerIndex)
     auto otherPlayerBounds = charactersArray[i].sprite.getGlobalBounds();
     if (playerBounds.intersects(otherPlayerBounds))
     {
-      if (isPunshing[playerIndex])
+      if (isPunshing[playerIndex] && !isFlying[playerIndex])
       {
 
-        if (isFacingLeft[playerIndex])
-        {
-
-          charactersArray[i].area.setPosition(sf::Vector2f(playerBounds.left - 30, otherPlayerBounds.top));
-        }
-        else
-          charactersArray[i].area.setPosition(sf::Vector2f(playerBounds.left + 30, otherPlayerBounds.top));
+        playerVelocity[i].x = isFacingLeft[playerIndex] ? -20 : 20;
+        playerVelocity[i].y = JUMP / 4;
+        isFlying[i] = true;
+        onGround[i] = false;
         isDamaged[i].yes = true;
-        isDamaged[i].damageQuantity = 1;
+        isDamaged[i].damageQuantity = 3;
       }
     }
   }
@@ -431,10 +437,12 @@ void charactersUpdate(sf::RenderWindow &window)
 
   for (int i = 0; i < number_of_players; i++)
   {
-    move(charactersArray[i], VELOCITY[i]);
+    move(charactersArray[i], playerVelocity[i]);
+    // Collision Checks
     checkScreenCollision(charactersArray[i], i);
     checkBlockCollision(charactersArray[i], i);
     checkPlayerHitCollision(charactersArray[i], i);
+
     if (isFacingLeft[i])
       charactersArray[i].sprite.setPosition(charactersArray[i].area.getPosition() + sf::Vector2f(-18, 0));
     else
@@ -467,11 +475,24 @@ void charactersUpdate(sf::RenderWindow &window)
 
     if (isOnBlock[i] || onGround[i])
     {
-      VELOCITY[i].y = 0;
+      playerVelocity[i].y = 0;
     }
     else
     {
-      VELOCITY[i].y += GRAVITY.y;
+      playerVelocity[i].y += GRAVITY.y;
+    }
+    if (isFlying[i])
+    {
+      if (playerVelocity[i].x > 0)
+      {
+        playerVelocity[i].x -= 2;
+      }
+      else if (playerVelocity[i].x < 0)
+      {
+        playerVelocity[i].x += 2;
+      }
+      else
+        isFlying[i] = false;
     }
 
     // Handle hit

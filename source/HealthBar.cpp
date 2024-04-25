@@ -24,7 +24,7 @@ void drawHealthBar(sf::RenderWindow &window)
     for (int i = 0; i < number_of_players; i++)
     {
         healthBarArray[i].healthRectangle.setSize(sf::Vector2f(3 * healthBarArray[i].currentHP, 20));
-        if (healthBarArray[i].currentHP == 0)
+        if (healthBarArray[i].currentHP <= 0)
         {
             deathMessage.setFont(deathMessageFont);
             deathMessage.setString("DEAD");

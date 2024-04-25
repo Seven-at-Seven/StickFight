@@ -9,6 +9,7 @@
 #include "screens/Sound.hpp"                      // Screen 4
 #include "screens/subscreens/NumberOfPlayers.hpp" // Screen 5
 #include "screens/Colors.hpp"                     // Screen 6
+#include "components/Wepons.hpp"
 
 // Global states
 int current_screen = 0;
@@ -32,6 +33,7 @@ void loadGameAssets()
     loadCharacterAssets();
     loadMapAssets();
     loadHealthBarAssets();
+    loadWeaponsAssets();
 }
 
 // Update Switch

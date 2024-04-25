@@ -3,6 +3,7 @@
 #include "components/Character.hpp"
 #include "MapUtility.hpp"
 #include "components/HealthBar.hpp"
+#include "components/Wepons.hpp"
 
 int current_map = 0;
 void gamePlayUpdate(sf::RenderWindow &window)
@@ -35,6 +36,7 @@ void gamePlayUpdate(sf::RenderWindow &window)
         }
     }
     charactersUpdate(window);
+    updateWeapons();
 }
 
 void gamePlayDraw(sf::RenderWindow &window)
@@ -64,4 +66,5 @@ void gamePlayDraw(sf::RenderWindow &window)
     }
     charactersDraw(window);
     drawHealthBar(window);
+    drawWeapons(window);
 }
