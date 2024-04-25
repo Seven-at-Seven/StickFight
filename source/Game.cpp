@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Game.hpp"
 #include "MapUtility.hpp"
+#include "components/HealthBar.hpp"
 #include "screens/MainMenu.hpp"                   // Screen 0
 #include "screens/PlaySettings.hpp"               // Screen 1
 #include "screens/GamePlay.hpp"                   // Screen 2
@@ -8,6 +9,7 @@
 #include "screens/Sound.hpp"                      // Screen 4
 #include "screens/subscreens/NumberOfPlayers.hpp" // Screen 5
 #include "screens/Colors.hpp"                     // Screen 6
+#include "components/Wepons.hpp"
 
 // Global states
 int current_screen = 0;
@@ -30,6 +32,8 @@ void loadGameAssets()
     loadMenuAssets();
     loadCharacterAssets();
     loadMapAssets();
+    loadHealthBarAssets();
+    loadWeaponsAssets();
 }
 
 // Update Switch
