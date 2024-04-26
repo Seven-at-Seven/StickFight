@@ -23,8 +23,4 @@ extern int current_map;
 
 extern Map map[6];
 
-// Global Character states
-extern bool isHavingGun[MAX_PLAYERS_NUMBER];
-extern sf::Vector2f playerVelocity[MAX_PLAYERS_NUMBER];
-
 #endif // S_GLOBALS_H

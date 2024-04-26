@@ -40,7 +40,7 @@ void checkPlayerWeaponCollision(int weaponIndex)
     auto weaponBounds = weaponArray[weaponIndex].sprite.getGlobalBounds();
     for (int i = 0; i < number_of_players; i++)
     {
-        if (isHavingGun[i])
+        if (charactersArray[i].isHavingGun)
             continue;
         auto playerBounds = charactersArray[i].sprite.getGlobalBounds();
         if (playerBounds.intersects(weaponBounds))
@@ -48,7 +48,7 @@ void checkPlayerWeaponCollision(int weaponIndex)
             isweaponOnBlock[weaponIndex] = false;
             isWeaponHeld[i].isHeld = true;
             isWeaponHeld[weaponIndex].playerIndex = i;
-            isHavingGun[i] = true;
+            charactersArray[i].isHavingGun = true;
         }
     }
 }

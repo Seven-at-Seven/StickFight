@@ -11,17 +11,35 @@
 #define MOVEING_TEXTURE "assets/StickmanPack/Run/thickRunSheet.png"
 #define HAVING_GUN_TEXTURE "assets/StickmanPack/Punch/HavingAGun.png"
 
+struct Damage
+{
+  bool yes;
+  int damageQuantity;
+};
+
 struct Character
 {
   sf::Sprite sprite;
   int selectedIndex;
   sf::Color color;
   sf::RectangleShape area;
+
+  short texturesLimt = 6;
+  short frames = 0;
+  bool onGround = false;
+  bool isMoving = false;
+  bool isPunshing = false;
+  bool isOnBlock = false;
+  bool isFacingLeft = false;
+  bool isHavingGun = false;
+  bool isFlying = false;
+  Damage isDamaged = {};
+  sf::Vector2f playerVelocity = {};
 };
 
-void checkScreenCollision(Character &player, int playerIndex);
-void checkBlockCollision(Character &player, int current_map);
-void move(Character &player, sf::Vector2f offset);
+void checkScreenCollision(Character &player);
+void checkBlockCollision(Character &player);
+void move(Character &player);
 void handelCharacterEvents(sf::Event &event);
 void charactersUpdate(sf::RenderWindow &window);
 void charactersDraw(sf::RenderWindow &window);
