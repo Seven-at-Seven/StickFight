@@ -68,12 +68,13 @@ void loadMapBlocks()
     // map[3]"map of up and down"
     map[3].num_of_blocks = 5;
     for (int i = 0; i < map[3].num_of_blocks; i++)
-    { 
-        //the modulo is responsible for "up and down" 
-        map[3].blocks[i] = initialize_block(sf::Vector2f(140 + (i) * 5 * STONE_SIZE + i * (MAX_JUMP_X_AXIS / 2 ),
-                                                        SCREENHEIGHT-150-(i%2)*(MAX_JUMP_Y_AXIS)),
-                                           10, 2);
+    {
+        // the modulo is responsible for "up and down"
+        map[3].blocks[i] = initialize_block(sf::Vector2f(140 + (i) * 5 * STONE_SIZE + i * (MAX_JUMP_X_AXIS / 2),
+                                                         SCREENHEIGHT - 150 - (i % 2) * (MAX_JUMP_Y_AXIS)),
+                                            10, 2);
     }
+    map[4].num_of_blocks = 5;
 }
 void drawMap(sf::RenderWindow &window, Map &map, int texture_row_index = 4, int texture_col_index = 0)
 {

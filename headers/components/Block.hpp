@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #define MAX_STONES 60
-#define STONE_SIZE 32
+#define STONE_SIZE 30
 
 struct Block
 {

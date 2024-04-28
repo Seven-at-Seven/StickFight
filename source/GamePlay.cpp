@@ -45,7 +45,7 @@ void gamePlayDraw(sf::RenderWindow &window)
     switch (current_map)
     {
     case 0:
-        drawMap(window, map[0], 4, 0);
+        drawMap(window, map[0], 2, 3);
         break;
     case 1:
         drawMap(window, map[1], 4, 3);
