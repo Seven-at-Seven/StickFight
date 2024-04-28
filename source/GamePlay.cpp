@@ -37,6 +37,7 @@ void gamePlayUpdate(sf::RenderWindow &window)
     }
     charactersUpdate(window);
     updateWeapons();
+    updateBullets();
 }
 
 void gamePlayDraw(sf::RenderWindow &window)
@@ -67,4 +68,5 @@ void gamePlayDraw(sf::RenderWindow &window)
     charactersDraw(window);
     drawHealthBar(window);
     drawWeapons(window);
+    drawBullets(window);
 }

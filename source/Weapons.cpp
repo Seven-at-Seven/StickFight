@@ -20,6 +20,8 @@ short weaponCharacterMap[MAX_WEAPONS_NUMBER] = {};
 WeaponState isWeaponHeld[MAX_WEAPONS_NUMBER] = {};
 bool isweaponOnBlock[MAX_WEAPONS_NUMBER] = {};
 
+int timeBetweenAttacks = 0;
+
 void loadWeaponsAssets()
 {
     for (int i = 0; i < MAX_WEAPONS_NUMBER; i++)
@@ -54,6 +56,18 @@ void checkPlayerWeaponCollision(int weaponIndex)
 }
 void fire(int weaponIndex, int playerIndex)
 {
+    if (timeBetweenAttacks == 0)
+    {
+        timeBetweenAttacks = 10;
+        auto bulletSpawnPosition = sf::Vector2f(weaponArray[weaponIndex].area.getGlobalBounds().left + weaponArray[weaponIndex].area.getGlobalBounds().width,
+                                                weaponArray[weaponIndex].area.getGlobalBounds().top);
+        createBullet(bulletSpawnPosition, !charactersArray[playerIndex].isFacingLeft, weaponArray[weaponIndex].damage);
+        std::cout << "bullet number # " << lastBulletIndeiesElement << std::endl;
+    }
+    else
+    {
+        timeBetweenAttacks--;
+    }
 }
 void updateWeapons()
 {
