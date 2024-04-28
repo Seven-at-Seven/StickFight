@@ -42,6 +42,8 @@ void checkPlayerWeaponCollision(int weaponIndex)
     auto weaponBounds = weaponArray[weaponIndex].sprite.getGlobalBounds();
     for (int i = 0; i < number_of_players; i++)
     {
+        if (isWeaponHeld[weaponIndex].isHeld)
+            break;
         if (charactersArray[i].isHavingGun)
             continue;
         auto playerBounds = charactersArray[i].sprite.getGlobalBounds();
