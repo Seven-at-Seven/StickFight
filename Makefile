@@ -1,6 +1,6 @@
 CC := g++
 CFLAGS := -std=c++11 -Wall -Wextra
-SFML_LIBS := -lsfml-graphics -lsfml-window -lsfml-system
+SFML_LIBS := -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 
 SRCDIR := source

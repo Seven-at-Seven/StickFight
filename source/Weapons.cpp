@@ -46,11 +46,14 @@ void checkPlayerWeaponCollision(int weaponIndex)
         if (playerBounds.intersects(weaponBounds))
         {
             isweaponOnBlock[weaponIndex] = false;
-            isWeaponHeld[i].isHeld = true;
+            isWeaponHeld[weaponIndex].isHeld = true;
             isWeaponHeld[weaponIndex].playerIndex = i;
             charactersArray[i].isHavingGun = true;
         }
     }
+}
+void fire(int weaponIndex, int playerIndex)
+{
 }
 void updateWeapons()
 {
@@ -66,6 +69,14 @@ void updateWeapons()
             weaponArray[i].area.setPosition(sf::Vector2f(
                 charactersArray[isWeaponHeld[i].playerIndex].area.getPosition().x + 20,
                 charactersArray[isWeaponHeld[i].playerIndex].area.getPosition().y));
+            if (charactersArray[isWeaponHeld[i].playerIndex].isFiring)
+            {
+                fire(i, isWeaponHeld[i].playerIndex);
+            }
+            if (charactersArray[isWeaponHeld[i].playerIndex].isFacingLeft)
+                weaponArray[i].sprite.setScale(sf::Vector2f(-1.0, 1.0));
+            else
+                weaponArray[i].sprite.setScale(sf::Vector2f(1.0, 1.0));
         }
         else if (!isweaponOnBlock[i] && weaponArray[i].area.getPosition().y > SCREENHEIGHT)
         {
@@ -80,6 +91,7 @@ void updateWeapons()
         }
     }
 }
+
 void drawWeapons(sf::RenderWindow &window)
 {
     for (int i = 0; i < MAX_WEAPONS_NUMBER; i++)

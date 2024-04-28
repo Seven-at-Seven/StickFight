@@ -29,6 +29,7 @@ struct Character
   bool onGround = false;
   bool isMoving = false;
   bool isPunshing = false;
+  bool isFiring = false;
   bool isOnBlock = false;
   bool isFacingLeft = false;
   bool isHavingGun = false;

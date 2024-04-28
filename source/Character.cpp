@@ -1,6 +1,7 @@
 #include "components/Character.hpp"
 #include "Globals.hpp"
 #include <iostream>
+#include "SFML/Audio.hpp"
 
 // Textures
 sf::Texture CharacterTextures[MAX_PLAYERS_NUMBER][4];
@@ -110,7 +111,7 @@ void handelCharacterEvents(sf::Event &event)
       charactersArray[0].isMoving = true;
       if (!charactersArray[0].isFacingLeft)
       {
-        charactersArray[0].isFacingLeft = !charactersArray[0].isFacingLeft;
+        charactersArray[0].isFacingLeft = true;
         charactersArray[0].sprite.setScale(sf::Vector2f(-1.f, 1.f));
         charactersArray[0].sprite.setOrigin(sf::Vector2f(charactersArray[0].sprite.getGlobalBounds().width,
                                                          0));
@@ -125,7 +126,7 @@ void handelCharacterEvents(sf::Event &event)
       charactersArray[0].isMoving = true;
       if (charactersArray[0].isFacingLeft)
       {
-        charactersArray[0].isFacingLeft = !charactersArray[0].isFacingLeft;
+        charactersArray[0].isFacingLeft = false;
         charactersArray[0].sprite.setScale(sf::Vector2f(1.f, 1.f));
         charactersArray[0].sprite.setOrigin(sf::Vector2f(0, 0));
       }
@@ -145,7 +146,11 @@ void handelCharacterEvents(sf::Event &event)
     }
     case sf::Keyboard::E:
     {
-      charactersArray[0].isPunshing = true;
+
+      if (charactersArray[0].isHavingGun)
+        charactersArray[0].isFiring = true;
+      else
+        charactersArray[0].isPunshing = true;
       break;
     }
       // Player 1
@@ -191,7 +196,10 @@ void handelCharacterEvents(sf::Event &event)
     }
     case sf::Keyboard::I:
     {
-      charactersArray[1].isPunshing = true;
+      if (charactersArray[1].isHavingGun)
+        charactersArray[1].isFiring = true;
+      else
+        charactersArray[1].isPunshing = true;
       break;
     }
 
@@ -238,7 +246,10 @@ void handelCharacterEvents(sf::Event &event)
     }
     case sf::Keyboard::Numpad0:
     {
-      charactersArray[2].isPunshing = true;
+      if (charactersArray[2].isHavingGun)
+        charactersArray[2].isFiring = true;
+      else
+        charactersArray[2].isPunshing = true;
       break;
     }
       // Player 3
@@ -284,7 +295,11 @@ void handelCharacterEvents(sf::Event &event)
     }
     case sf::Keyboard::Numpad9:
     {
-      charactersArray[3].isPunshing = true;
+
+      if (charactersArray[3].isHavingGun)
+        charactersArray[3].isFiring = true;
+      else
+        charactersArray[3].isPunshing = true;
       break;
     }
 
@@ -307,7 +322,10 @@ void handelCharacterEvents(sf::Event &event)
       charactersArray[0].playerVelocity.x = 0;
       break;
     case sf::Keyboard::E:
-      charactersArray[0].isPunshing = false;
+      if (charactersArray[0].isHavingGun)
+        charactersArray[0].isFiring = false;
+      else
+        charactersArray[0].isPunshing = false;
       break;
     // Player 1
     case sf::Keyboard::K:
@@ -316,7 +334,11 @@ void handelCharacterEvents(sf::Event &event)
       charactersArray[1].playerVelocity.x = 0;
       break;
     case sf::Keyboard::I:
-      charactersArray[1].isPunshing = false;
+
+      if (charactersArray[1].isHavingGun)
+        charactersArray[1].isFiring = false;
+      else
+        charactersArray[1].isPunshing = false;
       break;
     // Player 2
     case sf::Keyboard::Left:
@@ -325,7 +347,10 @@ void handelCharacterEvents(sf::Event &event)
       charactersArray[2].playerVelocity.x = 0;
       break;
     case sf::Keyboard::Numpad0:
-      charactersArray[2].isPunshing = false;
+      if (charactersArray[2].isHavingGun)
+        charactersArray[2].isFiring = false;
+      else
+        charactersArray[2].isPunshing = false;
       break;
 
     // Player 3
@@ -335,7 +360,10 @@ void handelCharacterEvents(sf::Event &event)
       charactersArray[3].playerVelocity.x = 0;
       break;
     case sf::Keyboard::Numpad9:
-      charactersArray[3].isPunshing = false;
+      if (charactersArray[3].isHavingGun)
+        charactersArray[3].isFiring = false;
+      else
+        charactersArray[3].isPunshing = false;
       break;
     default:
       break;
@@ -400,15 +428,15 @@ void checkPlayerHitCollision(Character &player)
       continue;
     if (playerBounds.intersects(otherPlayerBounds))
     {
-      if (player.isPunshing && !player.isFlying)
+      if (player.isPunshing && !player.isFlying && !player.isHavingGun)
       {
 
-        player.playerVelocity.x = player.isFacingLeft ? -20 : 20;
-        player.playerVelocity.y = JUMP / 4;
-        player.isFlying = true;
-        player.onGround = false;
-        player.isDamaged.yes = true;
-        player.isDamaged.damageQuantity = 3;
+        charactersArray[i].playerVelocity.x = player.isFacingLeft ? -20 : 20;
+        charactersArray[i].playerVelocity.y = JUMP / 4;
+        charactersArray[i].isFlying = true;
+        charactersArray[i].onGround = false;
+        charactersArray[i].isDamaged.yes = true;
+        charactersArray[i].isDamaged.damageQuantity = 3;
       }
     }
   }
@@ -429,6 +457,10 @@ void charactersUpdate(sf::RenderWindow &window)
       charactersArray[i].sprite.setPosition(charactersArray[i].area.getPosition() + sf::Vector2f(-18, 0));
     else
       charactersArray[i].sprite.setPosition(charactersArray[i].area.getPosition() + sf::Vector2f(-10, 0));
+
+    if (charactersArray[i].isFiring)
+    {
+    }
 
     if (charactersArray[i].isHavingGun)
     {
