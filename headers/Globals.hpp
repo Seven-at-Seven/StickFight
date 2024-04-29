@@ -26,6 +26,6 @@ extern int current_screen;
 extern int last_screen;
 extern int current_map;
 
-extern Map map[6];
+extern Map map[4];
 
 #endif // S_GLOBALS_H

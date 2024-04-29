@@ -6,6 +6,8 @@
 #include "components/Weapons.hpp"
 
 int current_map = 0;
+int alive_counter = number_of_players;
+int round_over_timer = 30;
 
 void loadGamePlayAssets()
 {
@@ -16,9 +18,38 @@ void loadGamePlayAssets()
     loadWeaponsAssets();
     loadBulletsAssets();
 }
+void restartGamePlay()
+{
+    spawnCharacters();
+    spawnWeapons();
+}
 
 void gamePlayUpdate(sf::RenderWindow &window)
 {
+    alive_counter = number_of_players;
+    for (int i = 0; i < number_of_players; i++)
+    {
+        if (!charactersArray[i].isDead)
+            alive_counter--;
+    }
+    if (alive_counter == 1)
+    {
+        if (round_over_timer == 0)
+        {
+            round_over_timer = 30;
+            if (current_map == 3)
+            {
+
+                restartGamePlay();
+                current_screen = 0;
+                current_map = 0;
+            }
+            else
+                current_map++;
+        }
+        else
+            round_over_timer--;
+    }
 
     while (window.pollEvent(event))
     {
@@ -34,15 +65,6 @@ void gamePlayUpdate(sf::RenderWindow &window)
 
                 current_screen = last_screen;
                 last_screen = 0;
-            }
-            if (event.key.code == sf::Keyboard::Space)
-            {
-
-                if (current_map == 4)
-                    current_map = 0;
-
-                else
-                    current_map++;
             }
         }
     }

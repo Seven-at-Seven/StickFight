@@ -6,9 +6,9 @@
 #include "Globals.hpp"
 #include <string>
 
-Map map[6];
+Map map[4];
 sf::Texture blocksTexture;
-bool spawnNewMap[6] = {};
+bool spawnNewMap[4] = {};
 
 int abs(int x)
 {
@@ -22,7 +22,7 @@ void loadMapAssets()
         std::cout << "Error loading map assets" << std::endl;
     }
 
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 4; i++)
     {
         map[i].background.loadFromFile("assets/images/background" + std::to_string(i) + ".png");
         map[i].background_sprite.setTexture(map[i].background);
