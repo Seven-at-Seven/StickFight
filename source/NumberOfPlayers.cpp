@@ -46,23 +46,38 @@ void numberOfPlayersUpdate(sf::RenderWindow &window)
         }
     }
 }
+
 void numberOfPlayersDraw(sf::RenderWindow &window)
 {
-
-    drawMenu(numOfPMenu, window, "Number of players menu");
+    drawMenu(numOfPMenu, window, "Number of players");
 
     // Number of Players Counter
     sf::Text numText;
     numText.setFont(numOfPMenu.font);
     numText.setString(std::to_string(number_of_players));
-    numText.setPosition(SCREENWIDTH / 2 - 200, SCREENHEIGHT / (numOfPMenu.numberOfItems + 1));
-    numText.setColor(sf::Color::Magenta);
+    numText.setPosition(SCREENWIDTH / 2 - numText.getLocalBounds().width / 2, SCREENHEIGHT / 2 - numText.getLocalBounds().height / 2);
+    numText.setColor(sf::Color::Black);
     window.draw(numText);
+
+    // Right and Left Text
+    sf::Text rightText;
+    rightText.setFont(numOfPMenu.font);
+    rightText.setString(" ->");
+    rightText.setPosition(SCREENWIDTH / 2 + numText.getLocalBounds().width / 2 + 10, SCREENHEIGHT / 2 - numText.getLocalBounds().height / 2);
+    rightText.setColor(sf::Color::Black);
+    window.draw(rightText);
+
+    sf::Text leftText;
+    leftText.setFont(numOfPMenu.font);
+    leftText.setString("<- ");
+    leftText.setPosition(SCREENWIDTH / 2 - numText.getLocalBounds().width / 2 - 10 - leftText.getLocalBounds().width, SCREENHEIGHT / 2 - numText.getLocalBounds().height / 2);
+    leftText.setColor(sf::Color::Black);
+    window.draw(leftText);
 }
 
 Menu initlizeNumberOfPlayersMenu()
 {
-    char *settings[NUMBER_OF_PLAYERS_ITEMS_NUMBER] = {"Change Number Of Players", "Go Back"};
+    char *settings[NUMBER_OF_PLAYERS_ITEMS_NUMBER] = {"Change Number Of Players", "Back"};
     Menu menu = initlizeMenu(NUMBER_OF_PLAYERS_ITEMS_NUMBER, settings);
     return menu;
 }
