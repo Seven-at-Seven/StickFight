@@ -61,8 +61,13 @@ void fire(int weaponIndex, int playerIndex)
     if (timeBetweenAttacks == 0)
     {
         timeBetweenAttacks = 10;
-        auto bulletSpawnPosition = sf::Vector2f(weaponArray[weaponIndex].area.getGlobalBounds().left + weaponArray[weaponIndex].area.getGlobalBounds().width,
+        auto bulletSpawnPosition = sf::Vector2f(weaponArray[weaponIndex].area.getGlobalBounds().left,
                                                 weaponArray[weaponIndex].area.getGlobalBounds().top);
+
+        if (charactersArray[playerIndex].isFacingLeft)
+        {
+            bulletSpawnPosition.x -= charactersArray[playerIndex].area.getGlobalBounds().width;
+        }
         createBullet(bulletSpawnPosition, !charactersArray[playerIndex].isFacingLeft, weaponArray[weaponIndex].damage);
         std::cout << "bullet number # " << lastBulletIndeiesElement << std::endl;
     }
