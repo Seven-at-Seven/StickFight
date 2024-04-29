@@ -83,8 +83,17 @@ void spawnCharacters(int mapIndex)
   }
   else if (mapIndex == 2)
   {
+    charactersArray[0].area.setPosition(sf::Vector2f(100, 100));
+    charactersArray[1].area.setPosition(sf::Vector2f(200, 100));
+    charactersArray[2].area.setPosition(sf::Vector2f(300, 100));
+    charactersArray[3].area.setPosition(sf::Vector2f(400, 100));
   }
+  else
   {
+    charactersArray[0].area.setPosition(sf::Vector2f(100, 100));
+    charactersArray[1].area.setPosition(sf::Vector2f(900, 100));
+    charactersArray[2].area.setPosition(sf::Vector2f(500, 100));
+    charactersArray[3].area.setPosition(sf::Vector2f(700, 100));
   }
 }
 void checkScreenCollision(Character &player)
@@ -426,7 +435,8 @@ void checkBlockCollision(Character &player)
         player.area.setPosition(sf::Vector2f(playerPosition.x, blockBounds.top + blockBounds.height + 3));
       }
     }
-    else if (blockBounds.top - playerBounds.height == player.area.getPosition().y)
+    else if (blockBounds.top - playerBounds.height == player.area.getPosition().y &&
+             blockBounds.left < playerBounds.left && blockBounds.width + blockBounds.left > playerBounds.left + playerBounds.width)
     {
       tmpIsOnBlock = true;
       break;
