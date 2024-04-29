@@ -6,6 +6,17 @@
 #include "components/Weapons.hpp"
 
 int current_map = 0;
+
+void loadGamePlayAssets()
+{
+
+    loadCharacterAssets();
+    loadMapAssets();
+    loadHealthBarAssets();
+    loadWeaponsAssets();
+    loadBulletsAssets();
+}
+
 void gamePlayUpdate(sf::RenderWindow &window)
 {
 
@@ -35,37 +46,16 @@ void gamePlayUpdate(sf::RenderWindow &window)
             }
         }
     }
-    charactersUpdate(window);
+    updateCharacters();
     updateWeapons();
     updateBullets();
 }
 
 void gamePlayDraw(sf::RenderWindow &window)
 {
-    switch (current_map)
-    {
-    case 0:
-        drawMap(window, map[0], 2, 3, current_map);
-        break;
-    case 1:
-        drawMap(window, map[1], 4, 3, current_map);
-        break;
-    case 2:
-        drawMap(window, map[2], 4, 0, current_map);
-        break;
-    case 3:
-        drawMap(window, map[3], 4, 0, current_map);
-        break;
-    case 4:
-        drawMap(window, map[4], 4, 0, current_map);
-        break;
-    // case 5:
-    //     drawMap(window, map[5], 4, 0, current_map);
-    //     break;
-    default:
-        break;
-    }
-    charactersDraw(window);
+
+    drawMap(window);
+    drawCharacters(window);
     drawHealthBar(window);
     drawWeapons(window);
     drawBullets(window);

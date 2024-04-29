@@ -31,11 +31,7 @@ void loadGameAssets()
     loadSoundAssets();
     loadColorsAssets();
     loadMenuAssets();
-    loadCharacterAssets();
-    loadMapAssets();
-    loadHealthBarAssets();
-    loadWeaponsAssets();
-    loadBulletsAssets();
+    loadGamePlayAssets() :
 }
 
 // Update Switch

@@ -24,6 +24,7 @@ struct Weapon
 
 void loadWeaponsAssets();
 void updateWeapons();
+void spawnWeapons();
 void drawWeapons(sf::RenderWindow &window);
 
 #endif

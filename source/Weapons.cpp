@@ -45,41 +45,24 @@ void checkPlayerWeaponCollision(int weaponIndex)
     }
 }
 
-void spawnWeapons(int mapIndex)
+void spawnWeapons()
 {
-    for (int i = 0; i < MAX_PLAYERS_NUMBER; i++)
-    {
-        charactersArray[i].isDead = false;
-        healthBarArray[i].currentHP = 100;
-    }
 
-    if (mapIndex == 0)
+    if (current_map == 0)
     {
-        charactersArray[0].area.setPosition(sf::Vector2f(220, 100));
-        charactersArray[1].area.setPosition(sf::Vector2f(900, 100));
-        charactersArray[2].area.setPosition(sf::Vector2f(500, 100));
-        charactersArray[3].area.setPosition(sf::Vector2f(700, 100));
+        weaponArray[0].area.setPosition(sf::Vector2f(100, 100));
+        weaponArray[1].area.setPosition(sf::Vector2f(200, 100));
+        weaponArray[2].area.setPosition(sf::Vector2f(300, 100));
+        weaponArray[3].area.setPosition(sf::Vector2f(400, 100));
     }
-    else if (mapIndex == 1)
+    else if (current_map == 1)
     {
-        charactersArray[0].area.setPosition(sf::Vector2f(300, 100));
-        charactersArray[1].area.setPosition(sf::Vector2f(900, 100));
-        charactersArray[2].area.setPosition(sf::Vector2f(500, 100));
-        charactersArray[3].area.setPosition(sf::Vector2f(700, 100));
     }
-    else if (mapIndex == 2)
+    else if (current_map == 2)
     {
-        charactersArray[0].area.setPosition(sf::Vector2f(100, 100));
-        charactersArray[1].area.setPosition(sf::Vector2f(340, 100));
-        charactersArray[2].area.setPosition(sf::Vector2f(540, 100));
-        charactersArray[3].area.setPosition(sf::Vector2f(740, 100));
     }
     else
     {
-        charactersArray[0].area.setPosition(sf::Vector2f(130, 100));
-        charactersArray[1].area.setPosition(sf::Vector2f(930, 100));
-        charactersArray[2].area.setPosition(sf::Vector2f(530, 100));
-        charactersArray[3].area.setPosition(sf::Vector2f(730, 100));
     }
 }
 
@@ -149,6 +132,8 @@ void updateWeapons()
         }
     }
 }
+
+bool firstDraw = true;
 
 void drawWeapons(sf::RenderWindow &window)
 {

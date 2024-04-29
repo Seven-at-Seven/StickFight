@@ -65,7 +65,7 @@ void loadCharacterAssets()
   }
 }
 
-void spawnCharacters(int mapIndex)
+void spawnCharacters()
 {
   for (int i = 0; i < MAX_PLAYERS_NUMBER; i++)
   {
@@ -73,21 +73,21 @@ void spawnCharacters(int mapIndex)
     healthBarArray[i].currentHP = 100;
   }
 
-  if (mapIndex == 0)
+  if (current_map == 0)
   {
     charactersArray[0].area.setPosition(sf::Vector2f(220, 100));
     charactersArray[1].area.setPosition(sf::Vector2f(900, 100));
     charactersArray[2].area.setPosition(sf::Vector2f(500, 100));
     charactersArray[3].area.setPosition(sf::Vector2f(700, 100));
   }
-  else if (mapIndex == 1)
+  else if (current_map == 1)
   {
     charactersArray[0].area.setPosition(sf::Vector2f(300, 100));
     charactersArray[1].area.setPosition(sf::Vector2f(900, 100));
     charactersArray[2].area.setPosition(sf::Vector2f(500, 100));
     charactersArray[3].area.setPosition(sf::Vector2f(700, 100));
   }
-  else if (mapIndex == 2)
+  else if (current_map == 2)
   {
     charactersArray[0].area.setPosition(sf::Vector2f(100, 100));
     charactersArray[1].area.setPosition(sf::Vector2f(340, 100));
@@ -482,14 +482,16 @@ void checkPlayerHitCollision(Character &player)
   }
 }
 
-void charactersUpdate(sf::RenderWindow &window)
+void updateCharacters()
 {
 
   for (int i = 0; i < number_of_players; i++)
   {
     if (charactersArray[i].isDead)
       continue;
+
     move(charactersArray[i]);
+
     // Collision Checks
     checkScreenCollision(charactersArray[i]);
     checkBlockCollision(charactersArray[i]);
@@ -550,14 +552,12 @@ void charactersUpdate(sf::RenderWindow &window)
     // Handle hit
     if (charactersArray[i].isDamaged.yes && healthBarArray[i].currentHP > 0)
     {
-      std::cout << "interscet with player" << i << std::endl;
       healthBarArray[i].currentHP -= charactersArray[i].isDamaged.damageQuantity;
-      std::cout << "player" << i << "'s Health = " << healthBarArray[i].currentHP << std::endl;
       charactersArray[i].isDamaged.yes = false;
     }
   }
 }
-void charactersDraw(sf::RenderWindow &window)
+void drawCharacters(sf::RenderWindow &window)
 {
   for (int i = 0; i < number_of_players; i++)
   {

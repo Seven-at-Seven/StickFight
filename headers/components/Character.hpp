@@ -44,10 +44,10 @@ void checkBlockCollision(Character &player);
 
 void handelCharacterEvents(sf::Event &event);
 
-void charactersUpdate(sf::RenderWindow &window);
-void charactersDraw(sf::RenderWindow &window);
+void updateCharacters();
+void drawCharacters(sf::RenderWindow &window);
 
-void spawnCharacters(int mapIndex);
+void spawnCharacters();
 void loadCharacterAssets();
 
 void move(Character &player);

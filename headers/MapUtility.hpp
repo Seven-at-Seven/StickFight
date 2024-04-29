@@ -15,11 +15,9 @@ struct Map
     Block blocks[MAX_BLOCKS];
     sf::Texture background;
     sf::Sprite background_sprite;
-    float xdir, ydir;
 };
 // functions
 void loadMapAssets();
 void loadMapBlocks();
-void drawMap(sf::RenderWindow &window, Map &map,
-             int texture_row_index, int texture_col_index, int mapIndex);
+void drawMap(sf::RenderWindow &window);
 #endif

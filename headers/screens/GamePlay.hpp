@@ -3,6 +3,7 @@
 
 #include "components/Character.hpp"
 
+void loadGamePlayAssets();
 void gamePlayUpdate(sf::RenderWindow &window);
 void gamePlayDraw(sf::RenderWindow &window);
 

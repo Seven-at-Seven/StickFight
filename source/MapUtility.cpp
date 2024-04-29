@@ -2,6 +2,8 @@
 #include <iostream>
 #include "Configurations.hpp"
 #include "components/Character.hpp"
+#include "components/Weapons.hpp"
+#include "Globals.hpp"
 #include <string>
 
 Map map[6];
@@ -47,48 +49,44 @@ void loadMapBlocks()
                                                      SCREENHEIGHT / 2 + 70 - (MAX_JUMP_Y_AXIS - 10)),
                                         4, 1);
 
-    // map[1] "map of prabola shape"
-
     map[1].num_of_blocks = 5;
     for (int i = 0; i < map[1].num_of_blocks; i++)
     {
+        auto x = (MAX_JUMP_X_AXIS / 2 + STONE_SIZE * 7) * i + 10;
+        auto y = SCREENHEIGHT - MAX_JUMP_Y_AXIS * (-1 * abs(i - 2) + 3);
 
-        map[1].blocks[i] = initialize_block(sf::Vector2f((MAX_JUMP_X_AXIS / 2 + STONE_SIZE * 7) * i + 10,
-                                                         SCREENHEIGHT - MAX_JUMP_Y_AXIS * (-1 * abs(i - 2) + 3)),
-                                            14, 2);
+        map[1].blocks[i] = initialize_block(sf::Vector2f(x, y), 14, 2);
     }
 
-    // map[2] "map of straight blocks "
     map[2].num_of_blocks = 5;
     for (int i = 0; i < map[2].num_of_blocks; i++)
     {
-        map[2].blocks[i] = initialize_block(sf::Vector2f(75 + i * 5 * STONE_SIZE + i * (MAX_JUMP_X_AXIS - 10),
-                                                         SCREENHEIGHT - 200),
-                                            10, 2);
+        auto x = 75 + i * 5 * STONE_SIZE + i * (MAX_JUMP_X_AXIS - 10);
+        auto y = SCREENHEIGHT - 200;
+
+        map[2].blocks[i] = initialize_block(sf::Vector2f(x, y), 10, 2);
     }
 
-    // map[3]"map of up and down"
     map[3].num_of_blocks = 5;
     for (int i = 0; i < map[3].num_of_blocks; i++)
     {
-        // the modulo is responsible for "up and down"
-        map[3].blocks[i] = initialize_block(sf::Vector2f(140 + (i) * 5 * STONE_SIZE + i * (MAX_JUMP_X_AXIS / 2),
-                                                         SCREENHEIGHT - 150 - (i % 2) * (MAX_JUMP_Y_AXIS)),
-                                            10, 2);
+        auto x = 140 + (i) * 5 * STONE_SIZE + i * (MAX_JUMP_X_AXIS / 2);
+        auto y = SCREENHEIGHT - 150 - (i % 2) * (MAX_JUMP_Y_AXIS);
+
+        map[3].blocks[i] = initialize_block(sf::Vector2f(x, y), 10, 2);
     }
 }
-void drawMap(sf::RenderWindow &window, Map &map,
-             int texture_row_index = 4, int texture_col_index = 0, int mapIndex = 0)
+void drawMap(sf::RenderWindow &window)
 {
-    if (!spawnNewMap[mapIndex])
+    if (!spawnNewMap[current_map])
     {
-        spawnNewMap[mapIndex] = true;
-        spawnCharacters(mapIndex);
-        // spawnWeapons(mapIndex);
+        spawnNewMap[current_map] = true;
+        spawnCharacters();
+        spawnWeapons();
     }
-    window.draw(map.background_sprite);
-    for (int i = 0; i < map.num_of_blocks; i++)
+    window.draw(map[current_map].background_sprite);
+    for (int i = 0; i < map[current_map].num_of_blocks; i++)
     {
-        drawBlock(window, map.blocks[i], texture_row_index, texture_col_index);
+        drawBlock(window, map[current_map].blocks[i]);
     }
 }
