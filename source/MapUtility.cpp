@@ -1,10 +1,12 @@
 #include "MapUtility.hpp"
 #include <iostream>
 #include "Configurations.hpp"
+#include "components/Character.hpp"
 #include <string>
 
 Map map[6];
 sf::Texture blocksTexture;
+bool spawnNewMap[6] = {};
 
 int abs(int x)
 {
@@ -76,8 +78,14 @@ void loadMapBlocks()
     }
     map[4].num_of_blocks = 5;
 }
-void drawMap(sf::RenderWindow &window, Map &map, int texture_row_index = 4, int texture_col_index = 0)
+void drawMap(sf::RenderWindow &window, Map &map,
+             int texture_row_index = 4, int texture_col_index = 0, int mapIndex = 0)
 {
+    if (!spawnNewMap[mapIndex])
+    {
+        spawnNewMap[mapIndex] = true;
+        spawnCharacters(mapIndex);
+    }
     window.draw(map.background_sprite);
     for (int i = 0; i < map.num_of_blocks; i++)
     {

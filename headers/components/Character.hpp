@@ -41,10 +41,15 @@ struct Character
 
 void checkScreenCollision(Character &player);
 void checkBlockCollision(Character &player);
-void move(Character &player);
+
 void handelCharacterEvents(sf::Event &event);
+
 void charactersUpdate(sf::RenderWindow &window);
 void charactersDraw(sf::RenderWindow &window);
+
+void spawnCharacters(int mapIndex);
 void loadCharacterAssets();
+
+void move(Character &player);
 
 #endif // CHARACTER_H

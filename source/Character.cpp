@@ -32,7 +32,6 @@ void loadCharacterAssets()
       std::cout << "Error loading idle character assets" << std::endl;
     }
     charactersArray[i].sprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
-    charactersArray[i].area.setPosition(sf::Vector2f(200 * i + 20, 100));
     charactersArray[i].area.setSize(sf::Vector2f(40, 64));
     charactersArray[i].color = palyersColors[i];
     charactersArray[i].area.setFillColor(sf::Color::Red);
@@ -66,6 +65,28 @@ void loadCharacterAssets()
   }
 }
 
+void spawnCharacters(int mapIndex)
+{
+  if (mapIndex == 0)
+  {
+    charactersArray[0].area.setPosition(sf::Vector2f(220, 100));
+    charactersArray[1].area.setPosition(sf::Vector2f(900, 100));
+    charactersArray[2].area.setPosition(sf::Vector2f(500, 100));
+    charactersArray[3].area.setPosition(sf::Vector2f(700, 100));
+  }
+  else if (mapIndex == 1)
+  {
+    charactersArray[0].area.setPosition(sf::Vector2f(300, 100));
+    charactersArray[1].area.setPosition(sf::Vector2f(900, 100));
+    charactersArray[2].area.setPosition(sf::Vector2f(500, 100));
+    charactersArray[3].area.setPosition(sf::Vector2f(700, 100));
+  }
+  else if (mapIndex == 2)
+  {
+  }
+  {
+  }
+}
 void checkScreenCollision(Character &player)
 {
   if (player.area.getPosition().x <= 0)
@@ -83,7 +104,6 @@ void checkScreenCollision(Character &player)
   }
   else if (player.area.getPosition().y + player.area.getSize().y >= SCREENHEIGHT)
   {
-    player.onGround = true;
     player.area.setPosition(player.area.getPosition().x, SCREENHEIGHT - player.area.getSize().y);
   }
 }
@@ -135,11 +155,10 @@ void handelCharacterEvents(sf::Event &event)
     case sf::Keyboard::W:
     {
 
-      if (charactersArray[0].onGround || charactersArray[0].isOnBlock)
+      if (charactersArray[0].isOnBlock)
       {
 
         charactersArray[0].isOnBlock = false;
-        charactersArray[0].onGround = false;
         charactersArray[0].playerVelocity.y = JUMP;
       }
       break;
@@ -186,10 +205,9 @@ void handelCharacterEvents(sf::Event &event)
     case sf::Keyboard::U:
     {
 
-      if (charactersArray[1].onGround || charactersArray[1].isOnBlock)
+      if (charactersArray[1].isOnBlock)
       {
         charactersArray[1].isOnBlock = false;
-        charactersArray[1].onGround = false;
         charactersArray[1].playerVelocity.y = JUMP;
       }
       break;
@@ -236,10 +254,9 @@ void handelCharacterEvents(sf::Event &event)
     case sf::Keyboard::Up:
     {
 
-      if (charactersArray[2].onGround || charactersArray[2].isOnBlock)
+      if (charactersArray[2].isOnBlock)
       {
         charactersArray[2].isOnBlock = false;
-        charactersArray[2].onGround = false;
         charactersArray[2].playerVelocity.y = JUMP;
       }
       break;
@@ -285,10 +302,9 @@ void handelCharacterEvents(sf::Event &event)
     case sf::Keyboard::Numpad8:
     {
 
-      if (charactersArray[3].onGround || charactersArray[3].isOnBlock)
+      if (charactersArray[3].isOnBlock)
       {
         charactersArray[3].isOnBlock = false;
-        charactersArray[3].onGround = false;
         charactersArray[3].playerVelocity.y = JUMP;
       }
       break;
@@ -376,6 +392,7 @@ void checkBlockCollision(Character &player)
 
   sf::Vector2f playerPosition = player.area.getPosition();
   auto playerBounds = player.area.getGlobalBounds();
+  bool tmpIsOnBlock;
 
   for (int i = 0; i < map[current_map].num_of_blocks; i++)
   {
@@ -387,7 +404,7 @@ void checkBlockCollision(Character &player)
       if (playerPosition.y < blockBounds.top)
       {
         player.area.setPosition(sf::Vector2f(playerPosition.x, blockBounds.top - playerBounds.height));
-        player.isOnBlock = true;
+        tmpIsOnBlock = true;
         break;
       }
       // Collision from Right
@@ -409,11 +426,17 @@ void checkBlockCollision(Character &player)
         player.area.setPosition(sf::Vector2f(playerPosition.x, blockBounds.top + blockBounds.height + 3));
       }
     }
+    else if (blockBounds.top - playerBounds.height == player.area.getPosition().y)
+    {
+      tmpIsOnBlock = true;
+      break;
+    }
     else
     {
-      player.isOnBlock = false;
+      tmpIsOnBlock = false;
     }
   }
+  player.isOnBlock = tmpIsOnBlock;
 }
 
 void checkPlayerHitCollision(Character &player)
@@ -436,7 +459,6 @@ void checkPlayerHitCollision(Character &player)
         charactersArray[i].playerVelocity.x = player.isFacingLeft ? -20 : 20;
         charactersArray[i].playerVelocity.y = JUMP / 4;
         charactersArray[i].isFlying = true;
-        charactersArray[i].onGround = false;
         charactersArray[i].isDamaged.yes = true;
         charactersArray[i].isDamaged.damageQuantity = 3;
       }
@@ -487,7 +509,7 @@ void charactersUpdate(sf::RenderWindow &window)
     if (charactersArray[i].frames >= charactersArray[i].texturesLimt - 1)
       charactersArray[i].frames = 0;
 
-    if (charactersArray[i].isOnBlock || charactersArray[i].onGround)
+    if (charactersArray[i].isOnBlock)
     {
       charactersArray[i].playerVelocity.y = 0;
     }
