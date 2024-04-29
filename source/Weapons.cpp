@@ -75,7 +75,8 @@ void fire(int weaponIndex, int playerIndex)
 
         bulletSpawnPosition.x += charactersArray[playerIndex].isFacingLeft ? -1 * charactersArray[playerIndex].area.getGlobalBounds().width
                                                                            : charactersArray[playerIndex].area.getGlobalBounds().width;
-        createBullet(bulletSpawnPosition, charactersArray[playerIndex].isFacingLeft, weaponArray[weaponIndex].damage);
+        createBullet(bulletSpawnPosition, charactersArray[playerIndex].isFacingLeft,
+                     weaponArray[weaponIndex].damage, playerIndex);
     }
     else
     {

@@ -7,20 +7,48 @@ Bullet bulletsArray[MAX_BULLETS_NUMBER];
 int bulletsIndeies[MAX_BULLETS_NUMBER] = {};
 int lastBulletIndeiesElement = 0;
 
-sf::Texture bulletTexture;
+sf::Texture bulletTexture[4];
 
 void loadBulletsAssets()
 {
-    bulletTexture.loadFromFile("assets/images/bullet.png");
+
+    for (int i = 0; i < 4; i++)
+    {
+
+        bulletTexture[i].loadFromFile("assets/images/bullet.png");
+        // Get textures size
+        sf::Vector2u textureSize = bulletTexture[i].getSize();
+
+        // Create an image from the textures
+        sf::Image image = bulletTexture[i].copyToImage();
+
+        // Loop through each pixel
+        for (unsigned int y = 0; y < textureSize.y; ++y)
+        {
+            for (unsigned int x = 0; x < textureSize.x; ++x)
+            {
+                // Get current pixel color
+                sf::Color pixelColor = image.getPixel(x, y);
+
+                // Check if black (all color components are 0)
+                if (pixelColor.r == 255 && pixelColor.g == 244 && pixelColor.b == 0)
+                {
+                    // Change to red
+                    image.setPixel(x, y, charactersArray[i].color);
+                }
+            }
+        }
+        bulletTexture[i].update(image);
+    }
 }
-void createBullet(sf::Vector2f startPosition, bool facingLeft, int damage)
+void createBullet(sf::Vector2f startPosition, bool facingLeft, int damage, int palyerIndex)
 {
     for (int i = 0; i <= lastBulletIndeiesElement; i++)
     {
         if (bulletsIndeies[i] == 0)
         {
             bulletsIndeies[i] = 1;
-            bulletsArray[i].sprite.setTexture(bulletTexture);
+            bulletsArray[i].sprite.setTexture(bulletTexture[palyerIndex]);
             bulletsArray[i].sprite.setTextureRect(sf::IntRect(0, 0, 20, 20));
             bulletsArray[i].position = startPosition;
             bulletsArray[i].sprite.setPosition(startPosition);
