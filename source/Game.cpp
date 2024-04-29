@@ -31,7 +31,7 @@ void loadGameAssets()
     loadSoundAssets();
     loadColorsAssets();
     loadMenuAssets();
-    loadGamePlayAssets() :
+    loadGamePlayAssets();
 }
 
 // Update Switch

@@ -14,7 +14,6 @@ void loadWeaponsAssets()
 {
     for (int i = 0; i < MAX_WEAPONS_NUMBER; i++)
     {
-        weaponArray[i].area.setPosition(sf::Vector2f(100 * i, 200));
         if (!tex[i].loadFromFile("assets/images/weapons/weapon" + std::to_string(i) + ".png"))
         {
             std::cout << "ERROR: Could not load" << std::endl;
@@ -38,8 +37,8 @@ void checkPlayerWeaponCollision(int weaponIndex)
         if (playerBounds.intersects(weaponBounds))
         {
             weaponArray[weaponIndex].isWeaponOnBlock = false;
-            weaponArray[weaponIndex].isWeaponHeld.isHeld = true;
-            weaponArray[weaponIndex].isWeaponHeld.playerIndex = i;
+            weaponArray[weaponIndex].isHeld = true;
+            weaponArray[weaponIndex].ownerIndex = i;
             charactersArray[i].isHavingGun = true;
         }
     }
@@ -50,10 +49,10 @@ void spawnWeapons()
 
     if (current_map == 0)
     {
-        weaponArray[0].area.setPosition(sf::Vector2f(100, 100));
-        weaponArray[1].area.setPosition(sf::Vector2f(200, 100));
-        weaponArray[2].area.setPosition(sf::Vector2f(300, 100));
-        weaponArray[3].area.setPosition(sf::Vector2f(400, 100));
+        weaponArray[0].area.setPosition(sf::Vector2f(300, 100));
+        weaponArray[1].area.setPosition(sf::Vector2f(600, 100));
+        weaponArray[2].area.setPosition(sf::Vector2f(200, 100));
+        weaponArray[3].area.setPosition(sf::Vector2f(1000, 100));
     }
     else if (current_map == 1)
     {
@@ -77,63 +76,85 @@ void fire(int weaponIndex, int playerIndex)
         bulletSpawnPosition.x += charactersArray[playerIndex].isFacingLeft ? -1 * charactersArray[playerIndex].area.getGlobalBounds().width
                                                                            : charactersArray[playerIndex].area.getGlobalBounds().width;
         createBullet(bulletSpawnPosition, charactersArray[playerIndex].isFacingLeft, weaponArray[weaponIndex].damage);
-        std::cout << "Bullet #" << lastBulletIndeiesElement << std::endl;
     }
     else
     {
         timeBetweenAttacks--;
     }
 }
-void updateWeapons()
+
+void handleWeaponBlockCollision(Weapon *weapon)
 {
-    for (int i = 0; i < MAX_WEAPONS_NUMBER; i++)
+    auto weaponBounds = weapon->area.getGlobalBounds();
+    for (int i = 0; i < map[current_map].num_of_blocks; i++)
     {
+        auto blockBounds = map[current_map].blocks[i].block_area.getGlobalBounds();
 
-        // drop weapon if player is dead
-        if (weaponArray[i].isWeaponHeld.isHeld && charactersArray[weaponArray[i].isWeaponHeld.playerIndex].isDead)
-        {
-            Character *player = &charactersArray[weaponArray[i].isWeaponHeld.playerIndex];
-            player->area.setPosition(sf::Vector2f(player->area.getPosition().x, 0));
-            player->isHavingGun = false;
-            weaponArray[i].isWeaponHeld.isHeld = false;
-            weaponArray[i].isWeaponOnBlock = false;
-            continue;
-        }
-        weaponArray[i].area.move(weaponArray[i].weaponVelocity);
-        weaponArray[i].sprite.setPosition(weaponArray[i].area.getPosition());
-
-        if (!weaponArray[i].isWeaponHeld.isHeld)
-            checkPlayerWeaponCollision(i);
-        if (weaponArray[i].isWeaponHeld.isHeld)
+        if (blockBounds.intersects(weaponBounds))
         {
 
-            weaponArray[i].area.setPosition(sf::Vector2f(
-                charactersArray[weaponArray[i].isWeaponHeld.playerIndex].area.getPosition().x + 20,
-                charactersArray[weaponArray[i].isWeaponHeld.playerIndex].area.getPosition().y));
-            if (charactersArray[weaponArray[i].isWeaponHeld.playerIndex].isFiring)
-            {
-                fire(i, weaponArray[i].isWeaponHeld.playerIndex);
-            }
-            if (charactersArray[weaponArray[i].isWeaponHeld.playerIndex].isFacingLeft)
-                weaponArray[i].sprite.setScale(sf::Vector2f(-1.0, 1.0));
-            else
-                weaponArray[i].sprite.setScale(sf::Vector2f(1.0, 1.0));
-        }
-        else if (!weaponArray[i].isWeaponOnBlock && weaponArray[i].area.getPosition().y > SCREENHEIGHT)
-        {
-            weaponArray[i].isWeaponOnBlock = true;
-            weaponArray[i].area.setPosition(sf::Vector2f(weaponArray[i].area.getPosition().x,
-                                                         SCREENHEIGHT - weaponArray[i].area.getGlobalBounds().height));
-            weaponArray[i].weaponVelocity.y = 0;
-        }
-        else if (!weaponArray[i].isWeaponOnBlock)
-        {
-            weaponArray[i].weaponVelocity.y += GRAVITY.y / 2;
+            auto newPosition = sf::Vector2f(weapon->area.getPosition().x,
+                                            blockBounds.top - weapon->area.getGlobalBounds().height);
+            weapon->isWeaponOnBlock = true;
+            weapon->area.setPosition(newPosition);
+            weapon->weaponVelocity.y = 0;
         }
     }
 }
 
-bool firstDraw = true;
+void updateWeapons()
+{
+    for (int i = 0; i < MAX_WEAPONS_NUMBER; i++)
+    {
+        auto currentWeapon = &weaponArray[i];
+
+        handleWeaponBlockCollision(currentWeapon);
+
+        if (currentWeapon->isHeld)
+        {
+
+            Character *gunOwner = &charactersArray[currentWeapon->ownerIndex];
+
+            if (gunOwner->isDead)
+            {
+
+                gunOwner->area.setPosition(sf::Vector2f(gunOwner->area.getPosition().x, 0));
+                gunOwner->isHavingGun = false;
+                currentWeapon->isHeld = false;
+                currentWeapon->isWeaponOnBlock = false;
+                continue;
+            }
+
+            auto newPosition = sf::Vector2f(gunOwner->area.getPosition().x + 20,
+                                            gunOwner->area.getPosition().y + 10);
+
+            currentWeapon->area.setPosition(newPosition);
+
+            if (gunOwner->isFiring)
+                fire(i, currentWeapon->ownerIndex);
+
+            if (gunOwner->isFacingLeft)
+                currentWeapon->sprite.setScale(sf::Vector2f(-1.0, 1.0));
+
+            else
+                currentWeapon->sprite.setScale(sf::Vector2f(1.0, 1.0));
+        }
+
+        else
+        {
+
+            checkPlayerWeaponCollision(i);
+            currentWeapon->area.move(currentWeapon->weaponVelocity);
+            currentWeapon->sprite.setPosition(currentWeapon->area.getPosition());
+        }
+
+        if (!currentWeapon->isWeaponOnBlock)
+        {
+            currentWeapon->weaponVelocity.y += GRAVITY.y / 2;
+        }
+        currentWeapon->sprite.setPosition(currentWeapon->area.getPosition());
+    }
+}
 
 void drawWeapons(sf::RenderWindow &window)
 {

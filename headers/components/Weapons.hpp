@@ -4,27 +4,25 @@
 
 #define WEPONES_1_TEXTURE "assets/images/weapons/weapon1.png"
 
-struct WeaponState
-{
-    bool isHeld;
-    int playerIndex;
-};
 struct Weapon
 {
-    sf::Vector2f weaponVelocity;
+    sf::Vector2f weaponVelocity = sf::Vector2f(0, 0);
     sf::RectangleShape area;
     sf::Vector2f position;
     sf::Sprite sprite;
 
-    WeaponState isWeaponHeld = {};
-
+    bool isHeld = false;
+    int ownerIndex = -1;
     bool isWeaponOnBlock = false;
+
+    int speed;
     int damage;
 };
 
 void loadWeaponsAssets();
 void updateWeapons();
 void spawnWeapons();
+void handleWeaponBlockCollision(Weapon *weapon);
 void drawWeapons(sf::RenderWindow &window);
 
 #endif
