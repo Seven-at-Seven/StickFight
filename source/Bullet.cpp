@@ -45,6 +45,8 @@ void handleBulletPlayerCollision(int bulletIndex)
     auto bulletBounds = bulletsArray[bulletIndex].sprite.getGlobalBounds();
     for (int i = 0; i < MAX_PLAYERS_NUMBER; i++)
     {
+        if (charactersArray[i].isDead)
+            continue;
         auto playerBounds = charactersArray[i].area.getGlobalBounds();
 
         if (bulletBounds.intersects(playerBounds) && bulletsIndeies[bulletIndex] != 0)

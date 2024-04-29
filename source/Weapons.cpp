@@ -22,18 +22,17 @@ void loadWeaponsAssets()
         weaponArray[i].sprite.setTexture(tex[i]);
         weaponArray[i].sprite.setTextureRect(sf::IntRect(4, 0, 64, 33));
         weaponArray[i].area.setSize(sf::Vector2f(64, 33));
-        weaponArray[i].damage = 8;
+        weaponArray[i].damage = 20;
     }
 }
 
 void checkPlayerWeaponCollision(int weaponIndex)
 {
+
     auto weaponBounds = weaponArray[weaponIndex].sprite.getGlobalBounds();
     for (int i = 0; i < number_of_players; i++)
     {
-        if (weaponArray[weaponIndex].isWeaponHeld.isHeld)
-            break;
-        if (charactersArray[i].isHavingGun)
+        if (charactersArray[i].isHavingGun || charactersArray[i].isDead)
             continue;
         auto playerBounds = charactersArray[i].sprite.getGlobalBounds();
         if (playerBounds.intersects(weaponBounds))
@@ -68,9 +67,21 @@ void updateWeapons()
     for (int i = 0; i < MAX_WEAPONS_NUMBER; i++)
     {
 
+        // drop weapon if player is dead
+        if (weaponArray[i].isWeaponHeld.isHeld && charactersArray[weaponArray[i].isWeaponHeld.playerIndex].isDead)
+        {
+            Character *player = &charactersArray[weaponArray[i].isWeaponHeld.playerIndex];
+            player->area.setPosition(sf::Vector2f(player->area.getPosition().x, 0));
+            player->isHavingGun = false;
+            weaponArray[i].isWeaponHeld.isHeld = false;
+            weaponArray[i].isWeaponOnBlock = false;
+            continue;
+        }
         weaponArray[i].area.move(weaponArray[i].weaponVelocity);
         weaponArray[i].sprite.setPosition(weaponArray[i].area.getPosition());
-        checkPlayerWeaponCollision(i);
+
+        if (!weaponArray[i].isWeaponHeld.isHeld)
+            checkPlayerWeaponCollision(i);
         if (weaponArray[i].isWeaponHeld.isHeld)
         {
 
