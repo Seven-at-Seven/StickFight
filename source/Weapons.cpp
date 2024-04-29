@@ -34,6 +34,7 @@ void loadWeaponsAssets()
         weaponArray[i].sprite.setTexture(tex[i]);
         weaponArray[i].sprite.setTextureRect(sf::IntRect(4, 0, 64, 33));
         weaponArray[i].area.setSize(sf::Vector2f(64, 33));
+        weaponArray[i].damage = 8;
     }
 }
 
@@ -62,14 +63,12 @@ void fire(int weaponIndex, int playerIndex)
     {
         timeBetweenAttacks = 10;
         auto bulletSpawnPosition = sf::Vector2f(weaponArray[weaponIndex].area.getGlobalBounds().left,
-                                                weaponArray[weaponIndex].area.getGlobalBounds().top);
+                                                weaponArray[weaponIndex].area.getGlobalBounds().top + 5);
 
-        if (charactersArray[playerIndex].isFacingLeft)
-        {
-            bulletSpawnPosition.x -= charactersArray[playerIndex].area.getGlobalBounds().width;
-        }
-        createBullet(bulletSpawnPosition, !charactersArray[playerIndex].isFacingLeft, weaponArray[weaponIndex].damage);
-        std::cout << "bullet number # " << lastBulletIndeiesElement << std::endl;
+        bulletSpawnPosition.x += charactersArray[playerIndex].isFacingLeft ? -1 * charactersArray[playerIndex].area.getGlobalBounds().width
+                                                                           : charactersArray[playerIndex].area.getGlobalBounds().width;
+        createBullet(bulletSpawnPosition, charactersArray[playerIndex].isFacingLeft, weaponArray[weaponIndex].damage);
+        std::cout << "Bullet #" << lastBulletIndeiesElement << std::endl;
     }
     else
     {

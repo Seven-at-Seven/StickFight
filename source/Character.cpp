@@ -512,8 +512,7 @@ void charactersUpdate(sf::RenderWindow &window)
     // Handle hit
     if (charactersArray[i].isDamaged.yes && healthBarArray[i].currentHP > 0)
     {
-      healthBarArray[i].currentHP = healthBarArray[i].currentHP -
-                                    charactersArray[i].isDamaged.damageQuantity;
+      healthBarArray[i].currentHP -= charactersArray[i].isDamaged.damageQuantity;
       charactersArray[i].isDamaged.yes = false;
     }
   }

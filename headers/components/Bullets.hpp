@@ -11,11 +11,13 @@ struct Bullet
     sf::Vector2f position;
     sf::CircleShape area;
     sf::Sprite sprite;
-    bool directionIsRight;
+    bool facingLeft;
     int damage;
 };
 
-void createBullet(sf::Vector2f startPosition, bool directionIsRight, int damage);
+void createBullet(sf::Vector2f startPosition, bool facingLeft, int damage);
+void destroyBullet(int bulletIndex);
+void handleBulletPlayerCollision(int bulletIndex);
 void loadBulletsAssets();
 void updateBullets();
 void drawBullets(sf::RenderWindow &window);
