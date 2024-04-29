@@ -22,13 +22,13 @@ void optionsUpdate(sf::RenderWindow &window, Menu &opMenu)
                 case 0:
                     last_screen = current_screen;
                     opMenu.selectedItem = 0;
-                    current_screen = 0;
-                    break;
-                case 1:
                     current_screen = 4;
                     break;
-                case 2:
+                case 1:
                     current_screen = 6;
+                    break;
+                case 2:
+                    current_screen = 0;
                     break;
                 default:
                     break;
@@ -52,7 +52,7 @@ void optionsDraw(sf::RenderWindow &window, Menu &opMenu)
 }
 Menu initlizeOptionsMenu()
 {
-    char *options[OPTIONS_ITEMS_NUMBER] = {"Main Menu", "Sound", "Colors"};
+    char *options[OPTIONS_ITEMS_NUMBER] = {"Sound", "Colors", "Back"};
     Menu menu = initlizeMenu(OPTIONS_ITEMS_NUMBER, options);
     return menu;
 }

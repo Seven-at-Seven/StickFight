@@ -23,7 +23,7 @@ void playSettingsUpdate(sf::RenderWindow &window, Menu &psMenu)
                 {
                 case 0:
                     last_screen = current_screen;
-                    current_screen = 0;
+                    current_screen = 2;
                     break;
                 case 1:
                     last_screen = current_screen;
@@ -31,7 +31,7 @@ void playSettingsUpdate(sf::RenderWindow &window, Menu &psMenu)
                     break;
                 case 2:
                     last_screen = current_screen;
-                    current_screen = 2;
+                    current_screen = 0;
                     break;
 
                 default:
@@ -50,12 +50,12 @@ void playSettingsUpdate(sf::RenderWindow &window, Menu &psMenu)
 
 void playSettingsDraw(sf::RenderWindow &window, Menu &psMenu)
 {
-    drawMenu(psMenu, window, "Play Settings Menu");
+    drawMenu(psMenu, window, "Settings Menu");
 }
 
 Menu initlizePlaySettingsMenu()
 {
-    char *settings[PLAY_SETTINGS_ITEMS_NUMBER] = {"Main Menu", "Number Of Players", "Start Game"};
+    char *settings[PLAY_SETTINGS_ITEMS_NUMBER] = {"Go!", "Number Of Players", "Back"};
     Menu menu = initlizeMenu(PLAY_SETTINGS_ITEMS_NUMBER, settings);
     return menu;
 }
