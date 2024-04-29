@@ -421,6 +421,8 @@ void checkPlayerHitCollision(Character &player)
   auto playerBounds = player.sprite.getGlobalBounds();
   for (int i = 0; i < number_of_players; i++)
   {
+    if (charactersArray[i].isDead)
+      continue;
     auto otherPlayerBounds = charactersArray[i].sprite.getGlobalBounds();
 
     // if same player then skip
@@ -447,6 +449,8 @@ void charactersUpdate(sf::RenderWindow &window)
 
   for (int i = 0; i < number_of_players; i++)
   {
+    if (charactersArray[i].isDead)
+      continue;
     move(charactersArray[i]);
     // Collision Checks
     checkScreenCollision(charactersArray[i]);
@@ -457,10 +461,6 @@ void charactersUpdate(sf::RenderWindow &window)
       charactersArray[i].sprite.setPosition(charactersArray[i].area.getPosition() + sf::Vector2f(-18, 0));
     else
       charactersArray[i].sprite.setPosition(charactersArray[i].area.getPosition() + sf::Vector2f(-10, 0));
-
-    if (charactersArray[i].isFiring)
-    {
-    }
 
     if (charactersArray[i].isHavingGun)
     {
@@ -521,6 +521,8 @@ void charactersDraw(sf::RenderWindow &window)
 {
   for (int i = 0; i < number_of_players; i++)
   {
+    if (charactersArray[i].isDead)
+      continue;
     charactersArray[i].sprite.setTextureRect(sf::IntRect(64 * charactersArray[i].frames, 0,
                                                          charactersArray[i].sprite.getGlobalBounds().width,
                                                          charactersArray[i].sprite.getLocalBounds().height));

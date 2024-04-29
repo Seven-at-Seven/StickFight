@@ -32,6 +32,8 @@ void drawHealthBar(sf::RenderWindow &window)
             deathMessage.setFillColor(charactersArray[i].color);
             deathMessage.setPosition(healthBarArray[i].healthRectangle.getPosition());
             window.draw(deathMessage);
+            charactersArray[i].isDead = true;
+            charactersArray[i].isHavingGun = false;
         }
         window.draw(healthBarArray[i].healthRectangle);
     }

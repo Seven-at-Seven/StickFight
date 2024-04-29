@@ -27,6 +27,7 @@ struct Character
   short texturesLimt = 6;
   short frames = 0;
   bool onGround = false;
+  bool isDead = false;
   bool isMoving = false;
   bool isPunshing = false;
   bool isFiring = false;
