@@ -11,11 +11,13 @@ struct WeaponState
 };
 struct Weapon
 {
-    sf::Vector2f position;
-    sf::RectangleShape area;
-    sf::Sprite sprite;
-    WeaponState isWeaponHeld = {};
     sf::Vector2f weaponVelocity;
+    sf::RectangleShape area;
+    sf::Vector2f position;
+    sf::Sprite sprite;
+
+    WeaponState isWeaponHeld = {};
+
     bool isWeaponOnBlock = false;
     int damage;
 };

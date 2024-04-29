@@ -27,7 +27,7 @@ void gamePlayUpdate(sf::RenderWindow &window)
             if (event.key.code == sf::Keyboard::Space)
             {
 
-                if (current_map == 5)
+                if (current_map == 4)
                     current_map = 0;
 
                 else
@@ -59,9 +59,9 @@ void gamePlayDraw(sf::RenderWindow &window)
     case 4:
         drawMap(window, map[4], 4, 0, current_map);
         break;
-    case 5:
-        drawMap(window, map[5], 4, 0, current_map);
-        break;
+    // case 5:
+    //     drawMap(window, map[5], 4, 0, current_map);
+    //     break;
     default:
         break;
     }

@@ -67,6 +67,12 @@ void loadCharacterAssets()
 
 void spawnCharacters(int mapIndex)
 {
+  for (int i = 0; i < MAX_PLAYERS_NUMBER; i++)
+  {
+    charactersArray[i].isDead = false;
+    healthBarArray[i].currentHP = 100;
+  }
+
   if (mapIndex == 0)
   {
     charactersArray[0].area.setPosition(sf::Vector2f(220, 100));
@@ -84,16 +90,16 @@ void spawnCharacters(int mapIndex)
   else if (mapIndex == 2)
   {
     charactersArray[0].area.setPosition(sf::Vector2f(100, 100));
-    charactersArray[1].area.setPosition(sf::Vector2f(200, 100));
-    charactersArray[2].area.setPosition(sf::Vector2f(300, 100));
-    charactersArray[3].area.setPosition(sf::Vector2f(400, 100));
+    charactersArray[1].area.setPosition(sf::Vector2f(340, 100));
+    charactersArray[2].area.setPosition(sf::Vector2f(540, 100));
+    charactersArray[3].area.setPosition(sf::Vector2f(740, 100));
   }
   else
   {
-    charactersArray[0].area.setPosition(sf::Vector2f(100, 100));
-    charactersArray[1].area.setPosition(sf::Vector2f(900, 100));
-    charactersArray[2].area.setPosition(sf::Vector2f(500, 100));
-    charactersArray[3].area.setPosition(sf::Vector2f(700, 100));
+    charactersArray[0].area.setPosition(sf::Vector2f(130, 100));
+    charactersArray[1].area.setPosition(sf::Vector2f(930, 100));
+    charactersArray[2].area.setPosition(sf::Vector2f(530, 100));
+    charactersArray[3].area.setPosition(sf::Vector2f(730, 100));
   }
 }
 void checkScreenCollision(Character &player)
@@ -113,7 +119,7 @@ void checkScreenCollision(Character &player)
   }
   else if (player.area.getPosition().y + player.area.getSize().y >= SCREENHEIGHT)
   {
-    player.area.setPosition(player.area.getPosition().x, SCREENHEIGHT - player.area.getSize().y);
+    player.isDead = true;
   }
 }
 
@@ -544,7 +550,9 @@ void charactersUpdate(sf::RenderWindow &window)
     // Handle hit
     if (charactersArray[i].isDamaged.yes && healthBarArray[i].currentHP > 0)
     {
+      std::cout << "interscet with player" << i << std::endl;
       healthBarArray[i].currentHP -= charactersArray[i].isDamaged.damageQuantity;
+      std::cout << "player" << i << "'s Health = " << healthBarArray[i].currentHP << std::endl;
       charactersArray[i].isDamaged.yes = false;
     }
   }

@@ -44,6 +44,45 @@ void checkPlayerWeaponCollision(int weaponIndex)
         }
     }
 }
+
+void spawnWeapons(int mapIndex)
+{
+    for (int i = 0; i < MAX_PLAYERS_NUMBER; i++)
+    {
+        charactersArray[i].isDead = false;
+        healthBarArray[i].currentHP = 100;
+    }
+
+    if (mapIndex == 0)
+    {
+        charactersArray[0].area.setPosition(sf::Vector2f(220, 100));
+        charactersArray[1].area.setPosition(sf::Vector2f(900, 100));
+        charactersArray[2].area.setPosition(sf::Vector2f(500, 100));
+        charactersArray[3].area.setPosition(sf::Vector2f(700, 100));
+    }
+    else if (mapIndex == 1)
+    {
+        charactersArray[0].area.setPosition(sf::Vector2f(300, 100));
+        charactersArray[1].area.setPosition(sf::Vector2f(900, 100));
+        charactersArray[2].area.setPosition(sf::Vector2f(500, 100));
+        charactersArray[3].area.setPosition(sf::Vector2f(700, 100));
+    }
+    else if (mapIndex == 2)
+    {
+        charactersArray[0].area.setPosition(sf::Vector2f(100, 100));
+        charactersArray[1].area.setPosition(sf::Vector2f(340, 100));
+        charactersArray[2].area.setPosition(sf::Vector2f(540, 100));
+        charactersArray[3].area.setPosition(sf::Vector2f(740, 100));
+    }
+    else
+    {
+        charactersArray[0].area.setPosition(sf::Vector2f(130, 100));
+        charactersArray[1].area.setPosition(sf::Vector2f(930, 100));
+        charactersArray[2].area.setPosition(sf::Vector2f(530, 100));
+        charactersArray[3].area.setPosition(sf::Vector2f(730, 100));
+    }
+}
+
 void fire(int weaponIndex, int playerIndex)
 {
     if (timeBetweenAttacks == 0)

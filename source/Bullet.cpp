@@ -51,7 +51,6 @@ void handleBulletPlayerCollision(int bulletIndex)
 
         if (bulletBounds.intersects(playerBounds) && bulletsIndeies[bulletIndex] != 0)
         {
-            std::cout << "interscet with player" << i << std::endl;
             charactersArray[i].isDamaged.yes = true;
             charactersArray[i].isDamaged.damageQuantity = bulletsArray[i].damage;
             destroyBullet(bulletIndex);
