@@ -79,8 +79,8 @@ void handleBulletPlayerCollision(int bulletIndex)
 
         if (bulletBounds.intersects(playerBounds) && bulletsIndeies[bulletIndex] != 0)
         {
-            charactersArray[i].isDamaged.yes = true;
-            charactersArray[i].isDamaged.damageQuantity = bulletsArray[i].damage;
+            charactersArray[i].isDamaged = true;
+            charactersArray[i].damageQuantity = bulletsArray[i].damage;
             destroyBullet(bulletIndex);
             break;
         }

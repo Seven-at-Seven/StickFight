@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "Configurations.hpp"
 
-#define JUMP -22
+#define JUMP -20
 
 // Textures
 #define IDLE_TEXTURE "assets/StickmanPack/Idle/thickIdleSheet.png"
@@ -13,8 +13,6 @@
 
 struct Damage
 {
-  bool yes;
-  int damageQuantity;
 };
 
 struct Character
@@ -35,7 +33,8 @@ struct Character
   bool isFacingLeft = false;
   bool isHavingGun = false;
   bool isFlying = false;
-  Damage isDamaged = {};
+  bool isDamaged;
+  int damageQuantity;
   sf::Vector2f playerVelocity = {};
 };
 
