@@ -9,7 +9,7 @@ sf::Text deathMessage;
 
 void loadHealthBarAssets()
 {
-    deathMessageFont.loadFromFile("assets/Surum.ttf");
+    deathMessageFont.loadFromFile("assets/VCR_OSD_MONO.ttf");
     for (int i = 0; i < MAX_PLAYERS_NUMBER; i++)
     {
         healthBarArray[i].currentHP = 100;

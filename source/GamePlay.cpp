@@ -11,7 +11,6 @@ int round_over_timer = 30;
 
 void loadGamePlayAssets()
 {
-
     loadCharacterAssets();
     loadMapAssets();
     loadHealthBarAssets();
@@ -39,7 +38,6 @@ void gamePlayUpdate(sf::RenderWindow &window)
             round_over_timer = 30;
             if (current_map == 3)
             {
-
                 restartGamePlay();
                 current_screen = 0;
                 current_map = 0;

@@ -15,7 +15,6 @@ void mainUpdate(Menu &menu, int &current_screen, sf::RenderWindow &window)
             break;
         case sf::Event::KeyReleased:
         {
-
             // If first load don't check for KeyRelease Enter
             if (firstLoad)
             {
@@ -60,6 +59,5 @@ Menu initlizeMainMenu()
 
 void mainDraw(Menu &menu, sf::RenderWindow &window)
 {
-
-    drawMenu(menu, window, "Main Menu");
+    drawMenu(menu, window, "Stick Fight 9000");
 }
