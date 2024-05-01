@@ -29,7 +29,7 @@ void gamePlayUpdate(sf::RenderWindow &window)
     alive_counter = number_of_players;
     for (int i = 0; i < number_of_players; i++)
     {
-        if (!charactersArray[i].isDead)
+        if (charactersArray[i].isDead)
             alive_counter--;
     }
     if (alive_counter == 1)
