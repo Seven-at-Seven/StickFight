@@ -10,7 +10,7 @@ void NamesDraw(sf::RenderWindow &window)
     sf::Texture bg;
     if (!bg.loadFromFile("assets/images/mainMenuBackground.png"))
     {
-        std::cout << "Error loading font: assets/images/mainMenuBackground.jpg" << '\n';
+        std::cout << "Error loading font: assets/images/mainMenuBackground.png" << '\n';
     }
 
     sf::Sprite bg_sprite;
