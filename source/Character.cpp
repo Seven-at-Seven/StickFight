@@ -35,7 +35,6 @@ void loadCharacterAssets()
     charactersArray[i].sprite.setTextureRect(sf::IntRect(0, 0, 64, 64));
     charactersArray[i].area.setSize(sf::Vector2f(40, 64));
     charactersArray[i].color = palyersColors[i];
-    charactersArray[i].area.setFillColor(sf::Color::Red);
     for (int j = 0; j < 4; j++)
     {
 
@@ -76,10 +75,10 @@ void spawnCharacters()
 
   if (current_map == 0)
   {
-    charactersArray[0].area.setPosition(sf::Vector2f(220, 100));
-    charactersArray[1].area.setPosition(sf::Vector2f(900, 100));
-    charactersArray[2].area.setPosition(sf::Vector2f(500, 100));
-    charactersArray[3].area.setPosition(sf::Vector2f(700, 100));
+    charactersArray[0].area.setPosition(sf::Vector2f(40, 100));
+    charactersArray[1].area.setPosition(sf::Vector2f(40 + 350, 100));
+    charactersArray[2].area.setPosition(sf::Vector2f(40 + 700, 100));
+    charactersArray[3].area.setPosition(sf::Vector2f(40 + 1050, 100));
   }
   else if (current_map == 1)
   {

@@ -4,17 +4,21 @@
 #include <SFML/Graphics.hpp>
 
 #define MAX_STONES 60
-#define STONE_SIZE 30
+#define STONE_SIZE 18
+#define STONE_TEXTURE "assets/images/stone.png"
+#define STONE_TOP_TEXTURE "assets/images/stoneTop.png"
 
 struct Block
 {
-    sf::Vector2f position, stone_size;
-    int stone_num, rows;
-    sf::Sprite blockSprites[MAX_STONES];
+    int columns, rows;
+
+    sf::Vector2f position;
+    sf::Sprite stones[MAX_STONES];
     sf::RectangleShape block_area;
 };
 
 void drawBlock(sf::RenderWindow &winodw, Block &block);
-Block initialize_block(sf::Vector2f position, int numStones, int rows);
+void loadBlockAssests();
+Block initialize_block(sf::Vector2f position, int columns, int rows);
 
 #endif

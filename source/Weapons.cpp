@@ -149,7 +149,7 @@ void updateWeapons()
 
         if (!currentWeapon->isWeaponOnBlock)
         {
-            currentWeapon->weaponVelocity.y += GRAVITY.y / 2;
+            currentWeapon->weaponVelocity.y += GRAVITY.y / 7;
         }
         currentWeapon->sprite.setPosition(currentWeapon->area.getPosition());
     }

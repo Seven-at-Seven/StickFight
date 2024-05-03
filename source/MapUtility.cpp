@@ -3,11 +3,11 @@
 #include "Configurations.hpp"
 #include "components/Character.hpp"
 #include "components/Weapons.hpp"
+#include "components/Block.hpp"
 #include "Globals.hpp"
 #include <string>
 
 Map map[4];
-sf::Texture blocksTexture;
 bool spawnNewMap[4] = {};
 
 int abs(int x)
@@ -17,11 +17,8 @@ int abs(int x)
 }
 void loadMapAssets()
 {
-    if (!blocksTexture.loadFromFile(BLOCKS_TEXTURE_PATH))
-    {
-        std::cout << "Error loading map assets" << std::endl;
-    }
 
+    loadBlockAssests();
     for (int i = 0; i < 4; i++)
     {
         map[i].background.loadFromFile("assets/images/background" + std::to_string(i) + ".png");
@@ -40,14 +37,15 @@ void loadMapBlocks()
 
     // map[0]has 3 blocks
 
-    map[0].num_of_blocks = 3; // The block position is based on the law of projectiles....but some positions only for a good shape
-    map[0].blocks[0] = initialize_block(sf::Vector2f(SCREENWIDTH / 2 - (17 * STONE_SIZE) / 2, SCREENHEIGHT / 2 + 70), 34, 2);
-    map[0].blocks[1] = initialize_block(sf::Vector2f((SCREENWIDTH / 2 - (17 * STONE_SIZE) / 2 - (4 * STONE_SIZE)) - MAX_JUMP_X_AXIS / 2 + 10,
-                                                     SCREENHEIGHT / 2 + 70 - (MAX_JUMP_Y_AXIS - 10)),
-                                        4, 1);
-    map[0].blocks[2] = initialize_block(sf::Vector2f((SCREENWIDTH / 2 + (17 * STONE_SIZE) / 2) + MAX_JUMP_X_AXIS / 2 - 10,
-                                                     SCREENHEIGHT / 2 + 70 - (MAX_JUMP_Y_AXIS - 10)),
-                                        4, 1);
+    map[0].num_of_blocks = 5;
+    auto map0Position0 = sf::Vector2f(0, 300);
+    auto map0Position1 = sf::Vector2f(350, 300);
+    auto map0Position2 = sf::Vector2f(700, 300);
+    auto map0Position3 = sf::Vector2f(1050, 300);
+    map[0].blocks[0] = initialize_block(map0Position0, 10, 3);
+    map[0].blocks[1] = initialize_block(map0Position1, 10, 3);
+    map[0].blocks[2] = initialize_block(map0Position2, 10, 3);
+    map[0].blocks[3] = initialize_block(map0Position3, 10, 3);
 
     map[1].num_of_blocks = 5;
     for (int i = 0; i < map[1].num_of_blocks; i++)
@@ -84,7 +82,9 @@ void drawMap(sf::RenderWindow &window)
         spawnCharacters();
         spawnWeapons();
     }
+    // background
     window.draw(map[current_map].background_sprite);
+    // stones
     for (int i = 0; i < map[current_map].num_of_blocks; i++)
     {
         drawBlock(window, map[current_map].blocks[i]);

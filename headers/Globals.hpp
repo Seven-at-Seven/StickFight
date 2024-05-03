@@ -17,7 +17,7 @@ extern Bullet bulletsArray[MAX_BULLETS_NUMBER];
 extern int bulletsIndeies[MAX_BULLETS_NUMBER];
 extern int lastBulletIndeiesElement;
 
-extern sf::Texture blocksTexture;
+extern sf::Texture stoneTexture;
 extern sf::Color palyersColors[];
 extern sf::Event event;
 

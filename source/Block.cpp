@@ -2,63 +2,51 @@
 #include "Globals.hpp"
 #include <iostream>
 
-void drawBlock(sf::RenderWindow &winodw, Block &block)
+sf::Texture stoneTexture;
+sf::Texture stoneTopTexture;
+void loadBlockAssests()
 {
-    int texture_row_index, texture_col_index;
-    int tmp_texture_row_index, tmp_texture_col_index;
-    if (current_map == 0)
+    if (!stoneTexture.loadFromFile(STONE_TEXTURE))
     {
-        texture_row_index = 2;
-        texture_col_index = 3;
-        tmp_texture_col_index = texture_col_index;
-        tmp_texture_row_index = texture_row_index;
+        std::cout << "Error loading map assets" << std::endl;
     }
-    else if (current_map == 1)
+    if (!stoneTopTexture.loadFromFile(STONE_TOP_TEXTURE))
     {
-        texture_row_index = 4;
-        texture_col_index = 3;
-        tmp_texture_col_index = texture_col_index;
-        tmp_texture_row_index = texture_row_index;
+        std::cout << "Error loading map assets" << std::endl;
     }
     else
-    {
-        texture_row_index = 4;
-        texture_col_index = 0;
-        tmp_texture_col_index = texture_col_index;
-        tmp_texture_row_index = texture_row_index;
-    }
+        std::cout << "Loading map assets" << std::endl;
+}
 
+void drawBlock(sf::RenderWindow &winodw, Block &block)
+{
     for (int i = 0; i < block.rows; i++)
     {
-        for (int j = 0; j < block.stone_num / block.rows; j++)
+        for (int j = 0; j < block.columns; j++)
         {
+            sf::Vector2f currentStonePosition = sf::Vector2f(block.position.x + j * STONE_SIZE,
+                                                             block.position.y + i * STONE_SIZE);
+            block.stones[i].setPosition(currentStonePosition);
+            block.stones[i].setTextureRect(sf::IntRect(0, 0, 18, 18));
+            if (i == 0)
+                block.stones[i].setTexture(stoneTopTexture);
 
-            block.blockSprites[i].setTexture(blocksTexture);
-            block.blockSprites[i].setPosition(block.position.x + j * STONE_SIZE,
-                                              block.position.y + i * STONE_SIZE);
-            // Choosing the block from the image
-            block.blockSprites[i].setTextureRect(sf::IntRect(tmp_texture_row_index * 18,
-                                                             tmp_texture_col_index * 18, 16, 16));
-            tmp_texture_row_index++;
-            if (tmp_texture_row_index % 2 == 0 && tmp_texture_row_index != texture_row_index)
-                tmp_texture_row_index = texture_row_index;
-            block.blockSprites[i].setScale(sf::Vector2f(2.0f, 2.0f));
-            winodw.draw(block.blockSprites[i]);
+            else
+                block.stones[i].setTexture(stoneTexture);
+
+            winodw.draw(block.stones[i]);
         }
-        tmp_texture_col_index++;
-        if (tmp_texture_col_index % 3 == 0 && tmp_texture_col_index != texture_col_index)
-            tmp_texture_col_index = texture_col_index;
     }
 }
-Block initialize_block(sf::Vector2f position, int numStones, int rows)
+Block initialize_block(sf::Vector2f position, int columns, int rows)
 {
 
     Block block;
 
     block.position = position;
-    block.stone_num = numStones;
+    block.columns = columns;
     block.rows = rows;
-    block.block_area.setSize(sf::Vector2f((STONE_SIZE * (numStones / rows)), STONE_SIZE * rows));
+    block.block_area.setSize(sf::Vector2f((STONE_SIZE * columns), STONE_SIZE * rows));
     block.block_area.setPosition(sf::Vector2f(position.x, position.y));
     block.block_area.setFillColor(sf::Color::Green);
     return block;
