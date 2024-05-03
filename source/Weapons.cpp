@@ -69,7 +69,7 @@ void fire(int weaponIndex, int playerIndex)
 {
     if (timeBetweenAttacks == 0)
     {
-        timeBetweenAttacks = 10;
+        timeBetweenAttacks = 5;
         auto bulletSpawnPosition = sf::Vector2f(weaponArray[weaponIndex].area.getGlobalBounds().left,
                                                 weaponArray[weaponIndex].area.getGlobalBounds().top + 5);
 

@@ -9,7 +9,7 @@ sf::Sprite mainMenuBackgroundSprite;
 
 void loadMenuAssets()
 {
-    mainMenuBackgroundTexture.loadFromFile("assets/images/mainMenuBackground.jpg");
+    mainMenuBackgroundTexture.loadFromFile("assets/images/mainMenuBackground.png");
 }
 Menu initlizeMenu(int numebrOfItems, char **items)
 {

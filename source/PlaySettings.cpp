@@ -23,7 +23,7 @@ void playSettingsUpdate(sf::RenderWindow &window, Menu &psMenu)
                 {
                 case 0:
                     last_screen = current_screen;
-                    current_screen = 2;
+                    current_screen = 9;
                     break;
                 case 1:
                     last_screen = current_screen;

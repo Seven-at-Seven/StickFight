@@ -11,12 +11,14 @@
 #include "screens/Colors.hpp"                     // Screen 6
 #include "components/Weapons.hpp"
 #include "components/Bullets.hpp"
+#include "Names.hpp"
 
 // Global states
 int current_screen = 0;
 int last_screen = 0;
 int number_of_players = 2;
 sf::Event event;
+std::string names[4] = {"","", "", ""};
 
 // Menus
 
@@ -60,6 +62,9 @@ void updateGame(sf::RenderWindow &window)
     case 6:
         colorsUpdate(window, ColorsMenu);
         break;
+    case 9:
+        NamesUpdate(window,names);
+        break;
 
     default:
         break;
@@ -91,6 +96,9 @@ void drawGame(sf::RenderWindow &window)
         break;
     case 6:
         colorsDraw(window, ColorsMenu);
+        break;
+    case 9:
+        NamesDraw(window);
         break;
 
     default:
