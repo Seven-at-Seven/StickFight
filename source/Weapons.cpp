@@ -79,9 +79,7 @@ void fire(int weaponIndex, int playerIndex)
                      weaponArray[weaponIndex].damage, playerIndex);
     }
     else
-    {
         timeBetweenAttacks--;
-    }
 }
 
 void handleWeaponBlockCollision(Weapon *weapon)

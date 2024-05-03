@@ -9,7 +9,11 @@ sf::Sprite mainMenuBackgroundSprite;
 
 void loadMenuAssets()
 {
-    mainMenuBackgroundTexture.loadFromFile("assets/images/mainMenuBackground.jpg");
+    mainMenuBackgroundTexture.loadFromFile("assets/images/mainMenuBackground.png");
+
+    mainMenuBackgroundSprite.setTextureRect(sf::IntRect(0, 0, 500, 500));
+    mainMenuBackgroundSprite.setTexture(mainMenuBackgroundTexture);
+    mainMenuBackgroundSprite.setPosition(sf::Vector2f(700, 100));
 }
 Menu initlizeMenu(int numebrOfItems, char **items)
 {
@@ -30,8 +34,8 @@ Menu initlizeMenu(int numebrOfItems, char **items)
         menu.text[i].setColor(sf::Color::White);
         menu.text[i].setString(items[i]);
         menu.text[i].setCharacterSize(42);
-        menu.text[i].setOrigin(sf::Vector2f(menu.text[i].getGlobalBounds().width / 2, menu.text[i].getGlobalBounds().height / 2));
-        menu.text[i].setPosition(sf::Vector2f(menu.width / 2, menu.height / (numebrOfItems + 1) * (i + 1)));
+        // menu.text[i].setOrigin(sf::Vector2f(menu.text[i].getGlobalBounds().width / 2, menu.text[i].getGlobalBounds().height / 2));
+        menu.text[i].setPosition(sf::Vector2f(50, menu.height / (numebrOfItems + 1) * (i + 1)));
     }
 
     return menu;
@@ -77,8 +81,6 @@ void updateMenu(Menu &menu, sf::Event &event)
 void drawMenu(Menu &menu, sf::RenderWindow &window, char *title)
 {
     // Menu Background
-    mainMenuBackgroundSprite.setTextureRect(sf::IntRect(-SCREENWIDTH / 2, -SCREENHEIGHT / 2, SCREENWIDTH, SCREENHEIGHT));
-    mainMenuBackgroundSprite.setTexture(mainMenuBackgroundTexture);
     window.draw(mainMenuBackgroundSprite);
 
     for (int i = 0; i < menu.numberOfItems; i++)
@@ -86,14 +88,14 @@ void drawMenu(Menu &menu, sf::RenderWindow &window, char *title)
         if (i == menu.selectedItem)
             menu.text[i].setColor(sf::Color::Red);
         else
-            menu.text[i].setColor(sf::Color::Black);
+            menu.text[i].setColor(sf::Color::White);
         window.draw(menu.text[i]);
     }
 
     // Menu title
     menuTitle.setString(title);
     menuTitle.setFont(menu.font);
-    menuTitle.setPosition(sf::Vector2f(20, 20));
-    menuTitle.setFillColor(sf::Color::Blue);
+    menuTitle.setPosition(sf::Vector2f(SCREENWIDTH - 10 - menuTitle.getGlobalBounds().width, 20));
+    menuTitle.setFillColor(sf::Color::Black);
     window.draw(menuTitle);
 };
