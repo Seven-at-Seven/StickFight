@@ -86,7 +86,7 @@ void drawMenu(Menu &menu, sf::RenderWindow &window, char *title)
     for (int i = 0; i < menu.numberOfItems; i++)
     {
         if (i == menu.selectedItem)
-            menu.text[i].setColor(sf::Color::Red);
+            menu.text[i].setColor(sf::Color(255, 204, 0));
         else
             menu.text[i].setColor(sf::Color::White);
         window.draw(menu.text[i]);

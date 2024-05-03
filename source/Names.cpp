@@ -14,8 +14,10 @@ void NamesDraw(sf::RenderWindow &window)
     }
 
     sf::Sprite bg_sprite;
-    bg_sprite.setTextureRect(sf::IntRect(-SCREENWIDTH / 2, -SCREENHEIGHT / 2, SCREENWIDTH, SCREENHEIGHT));
+
+    bg_sprite.setTextureRect(sf::IntRect(0, 0, 500, 500));
     bg_sprite.setTexture(bg);
+    bg_sprite.setPosition(sf::Vector2f(700, 100));
     sf::Font font;
     sf::Text t;
     if (!font.loadFromFile("assets/VCR_OSD_MONO.ttf")) // change font from here
@@ -26,7 +28,7 @@ void NamesDraw(sf::RenderWindow &window)
     t.setString("Enter Players' names: ");
     t.setCharacterSize(65);
     t.setPosition(10, 10);
-    t.setFillColor(sf::Color::Black);
+    t.setFillColor(sf::Color(255, 204, 0));
     for (int i = 0, multiple = 70; i < number_of_players; i++, multiple += 55)
     {
         names_text[i].setFont(font);
