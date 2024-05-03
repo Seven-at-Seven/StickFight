@@ -31,7 +31,7 @@ void gamePlayUpdate(sf::RenderWindow &window)
         if (charactersArray[i].isDead)
             alive_counter--;
     }
-    if (alive_counter == 1)
+    if (alive_counter == 1000)
     {
         if (round_over_timer == 0)
         {
