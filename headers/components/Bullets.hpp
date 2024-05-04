@@ -15,10 +15,13 @@ struct Bullet
     int damage;
 };
 
+void loadBulletsAssets();
+
 void createBullet(sf::Vector2f startPosition, bool facingLeft, int damage, int palyerIndex);
 void destroyBullet(int bulletIndex);
+
 void handleBulletPlayerCollision(int bulletIndex);
-void loadBulletsAssets();
+
 void updateBullets();
 void drawBullets(sf::RenderWindow &window);
 

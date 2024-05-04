@@ -20,9 +20,10 @@ struct Weapon
 };
 
 void loadWeaponsAssets();
-void updateWeapons();
 void spawnWeapons();
-void handleWeaponBlockCollision(Weapon *weapon);
-void drawWeapons(sf::RenderWindow &window);
 
+void handleWeaponBlockCollision(Weapon *weapon);
+
+void updateWeapons();
+void drawWeapons(sf::RenderWindow &window);
 #endif

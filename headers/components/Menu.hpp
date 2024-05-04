@@ -13,11 +13,13 @@ struct Menu
     sf::Text text[MAX_NUMBER_OF_ITEMS];
 };
 
-void moveSelectionUp(Menu &menu);
-void moveSelectionDown(Menu &menu);
-void drawMenu(Menu &menu, sf::RenderWindow &window, char *title);
-void updateMenu(Menu &menu, sf::Event &event);
 void loadMenuAssets();
 Menu initlizeMenu(int numebrOfItems, char **items);
+
+void moveSelectionUp(Menu &menu);
+void moveSelectionDown(Menu &menu);
+
+void drawMenu(Menu &menu, sf::RenderWindow &window, char *title);
+void updateMenu(Menu &menu, sf::Event &event);
 
 #endif

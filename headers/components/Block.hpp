@@ -17,8 +17,9 @@ struct Block
     sf::RectangleShape block_area;
 };
 
-void drawBlock(sf::RenderWindow &winodw, Block &block);
 void loadBlockAssests();
 Block initialize_block(sf::Vector2f position, int columns, int rows);
+
+void drawBlock(sf::RenderWindow &winodw, Block &block);
 
 #endif
