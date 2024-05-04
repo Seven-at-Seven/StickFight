@@ -46,7 +46,10 @@
     "stdexcept": "cpp",
     "streambuf": "cpp",
     "typeinfo": "cpp",
-    "format": "cpp"
+    "format": "cpp",
+    "list": "cpp",
+    "xstring": "cpp",
+    "xiosbase": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }

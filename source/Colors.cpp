@@ -35,7 +35,7 @@ void colorsDraw(sf::RenderWindow &window, Menu &colorsMenu)
         {
 
             colorPalettes[i].setOutlineThickness(4.f);
-            colorPalettes[i].setOutlineColor(sf::Color::Black);
+            colorPalettes[i].setOutlineColor(sf::Color::White);
         }
         else
             colorPalettes[i].setOutlineThickness(0.f);

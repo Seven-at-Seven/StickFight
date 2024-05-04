@@ -7,6 +7,7 @@
 #include "components/HealthBar.hpp"
 #include "components/Weapons.hpp"
 #include "components/Bullets.hpp"
+#include <string>
 
 // Global Variables
 extern Character charactersArray[MAX_PLAYERS_NUMBER];
@@ -28,4 +29,5 @@ extern int current_map;
 
 extern Map map[4];
 
+extern int state;
 #endif // S_GLOBALS_H

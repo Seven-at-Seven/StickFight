@@ -17,6 +17,7 @@ struct Damage
 
 struct Character
 {
+  std::string name;
   sf::Sprite sprite;
   int selectedIndex;
   sf::Color color;
