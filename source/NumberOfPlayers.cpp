@@ -56,7 +56,7 @@ void numberOfPlayersDraw(sf::RenderWindow &window)
     numText.setFont(numOfPMenu.font);
     numText.setString(std::to_string(number_of_players));
     numText.setPosition(SCREENWIDTH / 2 - numText.getLocalBounds().width / 2, SCREENHEIGHT / 2 - numText.getLocalBounds().height / 2);
-    numText.setColor(sf::Color::Black);
+    numText.setColor(sf::Color::White);
     window.draw(numText);
 
     // Right and Left Text
@@ -64,14 +64,14 @@ void numberOfPlayersDraw(sf::RenderWindow &window)
     rightText.setFont(numOfPMenu.font);
     rightText.setString(" ->");
     rightText.setPosition(SCREENWIDTH / 2 + numText.getLocalBounds().width / 2 + 10, SCREENHEIGHT / 2 - numText.getLocalBounds().height / 2);
-    rightText.setColor(sf::Color::Black);
+    rightText.setColor(sf::Color::White);
     window.draw(rightText);
 
     sf::Text leftText;
     leftText.setFont(numOfPMenu.font);
     leftText.setString("<- ");
     leftText.setPosition(SCREENWIDTH / 2 - numText.getLocalBounds().width / 2 - 10 - leftText.getLocalBounds().width, SCREENHEIGHT / 2 - numText.getLocalBounds().height / 2);
-    leftText.setColor(sf::Color::Black);
+    leftText.setColor(sf::Color::White);
     window.draw(leftText);
 }
 

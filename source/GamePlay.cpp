@@ -9,6 +9,12 @@ int current_map = 0;
 int alive_counter = number_of_players;
 int round_over_timer = 30;
 
+void restartGamePlay()
+{
+    spawnCharacters();
+    spawnWeapons();
+}
+
 void loadGamePlayAssets()
 {
     loadCharacterAssets();
@@ -16,11 +22,7 @@ void loadGamePlayAssets()
     loadHealthBarAssets();
     loadWeaponsAssets();
     loadBulletsAssets();
-}
-void restartGamePlay()
-{
-    spawnCharacters();
-    spawnWeapons();
+    restartGamePlay();
 }
 
 void gamePlayUpdate(sf::RenderWindow &window)
@@ -31,19 +33,23 @@ void gamePlayUpdate(sf::RenderWindow &window)
         if (charactersArray[i].isDead)
             alive_counter--;
     }
-    if (alive_counter == 1000)
+    if (alive_counter <= 1)
     {
         if (round_over_timer == 0)
         {
             round_over_timer = 30;
             if (current_map == 3)
             {
-                restartGamePlay();
                 current_screen = 0;
                 current_map = 0;
+                restartGamePlay();
             }
             else
+            {
+
                 current_map++;
+                restartGamePlay();
+            }
         }
         else
             round_over_timer--;

@@ -70,7 +70,9 @@ void spawnCharacters()
   for (int i = 0; i < MAX_PLAYERS_NUMBER; i++)
   {
     charactersArray[i].isDead = false;
+    charactersArray[i].isHavingGun = false;
     healthBarArray[i].currentHP = 100;
+    charactersArray[i].playerVelocity = {};
   }
 
   if (current_map == 0)
@@ -97,9 +99,9 @@ void spawnCharacters()
   else
   {
     charactersArray[0].area.setPosition(sf::Vector2f(130, 100));
-    charactersArray[1].area.setPosition(sf::Vector2f(930, 100));
-    charactersArray[2].area.setPosition(sf::Vector2f(530, 100));
-    charactersArray[3].area.setPosition(sf::Vector2f(730, 100));
+    charactersArray[1].area.setPosition(sf::Vector2f(SCREENWIDTH - 130, 100));
+    charactersArray[2].area.setPosition(sf::Vector2f(230, 100));
+    charactersArray[3].area.setPosition(sf::Vector2f(SCREENWIDTH - 230, 100));
   }
 }
 void checkScreenCollision(Character &player)

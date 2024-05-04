@@ -47,21 +47,39 @@ void checkPlayerWeaponCollision(int weaponIndex)
 void spawnWeapons()
 {
 
+    for (int i = 0; i < 4; i++)
+    {
+        weaponArray[i].isHeld = false;
+        weaponArray[i].isWeaponOnBlock = false;
+    }
     if (current_map == 0)
+    {
+        weaponArray[0].area.setPosition(sf::Vector2f(100, 100));
+        weaponArray[1].area.setPosition(sf::Vector2f(100 + 1 * 350, 100));
+        weaponArray[2].area.setPosition(sf::Vector2f(100 + 2 * 350, 100));
+        weaponArray[3].area.setPosition(sf::Vector2f(100 + 3 * 350, 100));
+    }
+    else if (current_map == 1)
+    {
+
+        weaponArray[0].area.setPosition(sf::Vector2f(300, 100));
+        weaponArray[1].area.setPosition(sf::Vector2f(600, 100));
+        weaponArray[2].area.setPosition(sf::Vector2f(200, 100));
+        weaponArray[3].area.setPosition(sf::Vector2f(1000, 100));
+    }
+    else if (current_map == 2)
     {
         weaponArray[0].area.setPosition(sf::Vector2f(300, 100));
         weaponArray[1].area.setPosition(sf::Vector2f(600, 100));
         weaponArray[2].area.setPosition(sf::Vector2f(200, 100));
         weaponArray[3].area.setPosition(sf::Vector2f(1000, 100));
     }
-    else if (current_map == 1)
-    {
-    }
-    else if (current_map == 2)
-    {
-    }
     else
     {
+        weaponArray[0].area.setPosition(sf::Vector2f(300, 100));
+        weaponArray[1].area.setPosition(sf::Vector2f(600, 100));
+        weaponArray[2].area.setPosition(sf::Vector2f(200, 100));
+        weaponArray[3].area.setPosition(sf::Vector2f(1000, 100));
     }
 }
 

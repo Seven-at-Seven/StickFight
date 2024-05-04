@@ -14,8 +14,6 @@ void loadBlockAssests()
     {
         std::cout << "Error loading map assets" << std::endl;
     }
-    else
-        std::cout << "Loading map assets" << std::endl;
 }
 
 void drawBlock(sf::RenderWindow &winodw, Block &block)
