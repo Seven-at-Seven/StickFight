@@ -34,8 +34,8 @@ Menu initlizeMenu(int numebrOfItems, char **items)
         menu.text[i].setColor(sf::Color::White);
         menu.text[i].setString(items[i]);
         menu.text[i].setCharacterSize(42);
-        // menu.text[i].setOrigin(sf::Vector2f(menu.text[i].getGlobalBounds().width / 2, menu.text[i].getGlobalBounds().height / 2));
-        menu.text[i].setPosition(sf::Vector2f(50, menu.height / (numebrOfItems + 1) * (i + 1)));
+        menu.text[i].setOrigin(sf::Vector2f(menu.text[i].getGlobalBounds().width / 2, menu.text[i].getGlobalBounds().height / 2));
+        menu.text[i].setPosition(sf::Vector2f(SCREENWIDTH / 2, menu.height / (numebrOfItems + 2) * (i + 1) + 100));
     }
 
     return menu;

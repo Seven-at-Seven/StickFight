@@ -4,6 +4,7 @@
 #include "MapUtility.hpp"
 #include "components/HealthBar.hpp"
 #include "components/Weapons.hpp"
+#include <iostream>
 
 int current_map = 0;
 int alive_counter = number_of_players;
@@ -12,7 +13,7 @@ int round_over_timer = 30;
 void restartGamePlay()
 {
     spawnCharacters();
-    spawnWeapons();
+    restartWeapons();
 }
 
 void loadGamePlayAssets()
@@ -70,6 +71,11 @@ void gamePlayUpdate(sf::RenderWindow &window)
                 current_screen = last_screen;
                 last_screen = 0;
             }
+        }
+        if (event.type == sf::Event::MouseButtonPressed)
+        {
+            std::cout << "x is :" << event.mouseButton.x << std::endl;
+            std::cout << "y is :" << event.mouseButton.y << std::endl;
         }
     }
     updateCharacters();

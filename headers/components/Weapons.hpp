@@ -12,6 +12,7 @@ struct Weapon
     sf::Sprite sprite;
 
     bool isHeld = false;
+    bool isSpawned = false;
     int ownerIndex = -1;
     bool isWeaponOnBlock = false;
 
@@ -21,6 +22,7 @@ struct Weapon
 
 void loadWeaponsAssets();
 void spawnWeapons();
+void restartWeapons();
 
 void handleWeaponBlockCollision(Weapon *weapon);
 

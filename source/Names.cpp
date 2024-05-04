@@ -75,7 +75,7 @@ void NamesUpdate(sf::RenderWindow &window)
         }
         if (event.type == sf::Event::KeyReleased)
         {
-            if (event.key.code == sf::Keyboard::Return)
+            if (event.key.code == sf::Keyboard::Enter)
             {
                 state++;
                 if (state >= number_of_players)

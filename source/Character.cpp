@@ -77,6 +77,7 @@ void spawnCharacters()
 
   if (current_map == 0)
   {
+
     charactersArray[0].area.setPosition(sf::Vector2f(40, 100));
     charactersArray[1].area.setPosition(sf::Vector2f(40 + 350, 100));
     charactersArray[2].area.setPosition(sf::Vector2f(40 + 700, 100));
@@ -92,9 +93,9 @@ void spawnCharacters()
   else if (current_map == 2)
   {
     charactersArray[0].area.setPosition(sf::Vector2f(100, 100));
-    charactersArray[1].area.setPosition(sf::Vector2f(340, 100));
-    charactersArray[2].area.setPosition(sf::Vector2f(540, 100));
-    charactersArray[3].area.setPosition(sf::Vector2f(740, 100));
+    charactersArray[1].area.setPosition(sf::Vector2f(SCREENWIDTH - 130, 100));
+    charactersArray[2].area.setPosition(sf::Vector2f(230, 100));
+    charactersArray[3].area.setPosition(sf::Vector2f(SCREENWIDTH - 230, 100));
   }
   else
   {
@@ -191,7 +192,7 @@ void checkPlayerHitCollision(Character &player)
       if (player.isPunshing && !player.isFlying && !player.isHavingGun)
       {
 
-        charactersArray[i].playerVelocity.x = player.isFacingLeft ? -20 : 20;
+        charactersArray[i].playerVelocity.x = player.isFacingLeft ? -10 : 10;
         charactersArray[i].playerVelocity.y = JUMP / 4;
         charactersArray[i].isFlying = true;
         charactersArray[i].isDamaged = true;

@@ -2,6 +2,7 @@
 #define CHARACTER_H
 #include <SFML/Graphics.hpp>
 #include "Configurations.hpp"
+#include <string.h>
 
 #define JUMP -20
 
@@ -10,10 +11,6 @@
 #define PUNCH_TEXTURE "assets/StickmanPack/Punch/thickPunchSheet.png"
 #define MOVEING_TEXTURE "assets/StickmanPack/Run/thickRunSheet.png"
 #define HAVING_GUN_TEXTURE "assets/StickmanPack/Punch/HavingAGun.png"
-
-struct Damage
-{
-};
 
 struct Character
 {

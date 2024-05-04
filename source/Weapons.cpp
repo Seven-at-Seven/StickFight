@@ -3,12 +3,16 @@
 #include "Globals.hpp"
 #include "string.h"
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 Weapon weaponArray[MAX_WEAPONS_NUMBER];
 
 sf::Texture tex[MAX_WEAPONS_NUMBER];
 
 int timeBetweenAttacks[MAX_WEAPONS_NUMBER] = {3, 6, 15, 20};
+int awaitedWeapon = 0;
+int weaponTimer = 20;
 
 void loadWeaponsAssets()
 {
@@ -54,43 +58,42 @@ void checkPlayerWeaponCollision(int weaponIndex)
     }
 }
 
+void restartWeapons()
+{
+
+    awaitedWeapon = 0;
+    weaponTimer = 20;
+    for (int i = 0; i < 4; i++)
+    {
+        weaponArray[i].area.setPosition(sf::Vector2f(500, -200));
+        weaponArray[i].sprite.setPosition(weaponArray[i].area.getPosition());
+        weaponArray[i].isHeld = false;
+        weaponArray[i].isWeaponOnBlock = false;
+        weaponArray[i].isSpawned = false;
+        weaponArray[i].weaponVelocity.y = 0;
+    }
+}
 void spawnWeapons()
 {
 
-    for (int i = 0; i < 4; i++)
+    if (awaitedWeapon > 3)
+        return;
+    if (weaponTimer == 0)
     {
-        weaponArray[i].isHeld = false;
-        weaponArray[i].isWeaponOnBlock = false;
-    }
-    if (current_map == 0)
-    {
-        weaponArray[0].area.setPosition(sf::Vector2f(100, 100));
-        weaponArray[1].area.setPosition(sf::Vector2f(100 + 1 * 350, 100));
-        weaponArray[2].area.setPosition(sf::Vector2f(100 + 2 * 350, 100));
-        weaponArray[3].area.setPosition(sf::Vector2f(100 + 3 * 350, 100));
-    }
-    else if (current_map == 1)
-    {
+        weaponTimer = 150;
+        srand(time(nullptr));
 
-        weaponArray[0].area.setPosition(sf::Vector2f(300, 100));
-        weaponArray[1].area.setPosition(sf::Vector2f(600, 100));
-        weaponArray[2].area.setPosition(sf::Vector2f(200, 100));
-        weaponArray[3].area.setPosition(sf::Vector2f(1000, 100));
-    }
-    else if (current_map == 2)
-    {
-        weaponArray[0].area.setPosition(sf::Vector2f(300, 100));
-        weaponArray[1].area.setPosition(sf::Vector2f(600, 100));
-        weaponArray[2].area.setPosition(sf::Vector2f(200, 100));
-        weaponArray[3].area.setPosition(sf::Vector2f(1000, 100));
+        int weaponXPosition = std::rand() % (int)SCREENWIDTH;
+        weaponArray[awaitedWeapon].area.setPosition(sf::Vector2f(weaponXPosition, 0));
+        weaponArray[awaitedWeapon].sprite.setPosition(sf::Vector2f(weaponXPosition, 0));
+
+        weaponArray[awaitedWeapon].isSpawned = true;
+
+        std::cout << "Spwan weapon at :" << weaponXPosition << std::endl;
+        awaitedWeapon++;
     }
     else
-    {
-        weaponArray[0].area.setPosition(sf::Vector2f(300, 100));
-        weaponArray[1].area.setPosition(sf::Vector2f(600, 100));
-        weaponArray[2].area.setPosition(sf::Vector2f(200, 100));
-        weaponArray[3].area.setPosition(sf::Vector2f(1000, 100));
-    }
+        weaponTimer--;
 }
 
 void fire(int weaponIndex, int playerIndex)
@@ -131,6 +134,7 @@ void handleWeaponBlockCollision(Weapon *weapon)
 
 void updateWeapons()
 {
+    spawnWeapons();
     for (int i = 0; i < MAX_WEAPONS_NUMBER; i++)
     {
         auto currentWeapon = &weaponArray[i];
@@ -175,7 +179,8 @@ void updateWeapons()
             currentWeapon->sprite.setPosition(currentWeapon->area.getPosition());
         }
 
-        if (!currentWeapon->isWeaponOnBlock)
+        if (!currentWeapon->isWeaponOnBlock && currentWeapon->isSpawned &&
+            !currentWeapon->isHeld)
         {
             currentWeapon->weaponVelocity.y += GRAVITY.y / 7;
         }
