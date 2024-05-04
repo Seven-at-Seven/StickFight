@@ -9,11 +9,11 @@ sf::Sprite mainMenuBackgroundSprite;
 
 void loadMenuAssets()
 {
-    mainMenuBackgroundTexture.loadFromFile("assets/images/mainMenuBackground.png");
+    mainMenuBackgroundTexture.loadFromFile("assets/images/mainMenuBackground1.png");
 
-    mainMenuBackgroundSprite.setTextureRect(sf::IntRect(0, 0, 500, 500));
+    // mainMenuBackgroundSprite.setTextureRect(sf::IntRect(0, 0, 500, 480));
     mainMenuBackgroundSprite.setTexture(mainMenuBackgroundTexture);
-    mainMenuBackgroundSprite.setPosition(sf::Vector2f(700, 100));
+    // mainMenuBackgroundSprite.setPosition(sf::Vector2f(700, 100));
 }
 Menu initlizeMenu(int numebrOfItems, char **items)
 {

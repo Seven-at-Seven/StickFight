@@ -18,7 +18,6 @@ int current_screen = 0;
 int last_screen = 0;
 int number_of_players = 2;
 sf::Event event;
-std::string names[4] = {"","", "", ""};
 
 // Menus
 
@@ -63,7 +62,7 @@ void updateGame(sf::RenderWindow &window)
         colorsUpdate(window, ColorsMenu);
         break;
     case 9:
-        NamesUpdate(window,names);
+        NamesUpdate(window);
         break;
 
     default:

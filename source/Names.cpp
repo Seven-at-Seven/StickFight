@@ -1,9 +1,6 @@
 #include "Names.hpp"
 #include "components/Character.hpp"
 
-void draw_name_screen(sf::RenderWindow &window)
-{
-}
 void NamesDraw(sf::RenderWindow &window)
 {
     sf::Text names_text[4];
@@ -17,7 +14,7 @@ void NamesDraw(sf::RenderWindow &window)
 
     bg_sprite.setTextureRect(sf::IntRect(0, 0, 500, 500));
     bg_sprite.setTexture(bg);
-    bg_sprite.setPosition(sf::Vector2f(700, 100));
+    bg_sprite.setPosition(sf::Vector2f(700, 200));
     sf::Font font;
     sf::Text t;
     if (!font.loadFromFile("assets/VCR_OSD_MONO.ttf")) // change font from here
@@ -29,7 +26,7 @@ void NamesDraw(sf::RenderWindow &window)
     t.setCharacterSize(65);
     t.setPosition(10, 10);
     t.setFillColor(sf::Color(255, 204, 0));
-    for (int i = 0, multiple = 70; i < number_of_players; i++, multiple += 55)
+    for (int i = 0, multiple = 100; i < number_of_players; i++, multiple += 55)
     {
         names_text[i].setFont(font);
         names_text[i].setCharacterSize(55);
@@ -46,7 +43,7 @@ void NamesDraw(sf::RenderWindow &window)
     }
 }
 int state = 0;
-void NamesUpdate(sf::RenderWindow &window, std::string names[])
+void NamesUpdate(sf::RenderWindow &window)
 {
     while (window.pollEvent(event))
     {
@@ -57,24 +54,24 @@ void NamesUpdate(sf::RenderWindow &window, std::string names[])
             switch (state)
             {
             case 0:
-                names[0] += static_cast<char>(event.text.unicode);
+                charactersArray[0].name += static_cast<char>(event.text.unicode);
                 break;
             case 1:
-                names[1] += static_cast<char>(event.text.unicode);
+                charactersArray[1].name += static_cast<char>(event.text.unicode);
                 break;
             case 2:
-                names[2] += static_cast<char>(event.text.unicode);
+                charactersArray[2].name += static_cast<char>(event.text.unicode);
                 break;
             case 3:
-                names[3] += static_cast<char>(event.text.unicode);
+                charactersArray[3].name += static_cast<char>(event.text.unicode);
                 break;
             default:
                 break;
             }
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Backspace) && names[state].size() > 0)
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Backspace) && charactersArray[state].name.size() > 0)
         {
-            names[state].pop_back();
+            charactersArray[state].name.pop_back();
         }
         if (event.type == sf::Event::KeyReleased)
         {
@@ -93,9 +90,5 @@ void NamesUpdate(sf::RenderWindow &window, std::string names[])
                 return;
             }
         }
-    }
-    for (int i = 0; i < number_of_players; i++)
-    {
-        charactersArray[i].name = names[i];
     }
 }

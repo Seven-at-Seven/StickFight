@@ -6,7 +6,6 @@
 #include "Globals.hpp"
 #include <iostream>
 
-void draw_name_screen(sf::RenderWindow &window);
 void NamesDraw(sf::RenderWindow &window);
-void NamesUpdate(sf::RenderWindow &window,std::string names[]);
+void NamesUpdate(sf::RenderWindow &window);
 #endif
