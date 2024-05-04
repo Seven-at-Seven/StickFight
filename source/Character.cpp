@@ -106,14 +106,6 @@ void spawnCharacters()
 }
 void checkScreenCollision(Character &player)
 {
-  if (player.area.getPosition().x <= 0)
-  {
-    player.area.setPosition(0, player.area.getPosition().y);
-  }
-  else if (player.area.getPosition().x + player.area.getSize().x > SCREENWIDTH)
-  {
-    player.area.setPosition(SCREENWIDTH - player.area.getSize().x, player.area.getPosition().y);
-  }
 
   if (player.area.getPosition().y <= 0)
   {
