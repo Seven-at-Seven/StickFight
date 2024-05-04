@@ -8,7 +8,7 @@ Weapon weaponArray[MAX_WEAPONS_NUMBER];
 
 sf::Texture tex[MAX_WEAPONS_NUMBER];
 
-int timeBetweenAttacks = 0;
+int timeBetweenAttacks[MAX_WEAPONS_NUMBER] = {3, 6, 15, 20};
 
 void loadWeaponsAssets()
 {
@@ -21,8 +21,18 @@ void loadWeaponsAssets()
         weaponArray[i].sprite.setTexture(tex[i]);
         weaponArray[i].sprite.setTextureRect(sf::IntRect(4, 0, 64, 33));
         weaponArray[i].area.setSize(sf::Vector2f(64, 33));
-        weaponArray[i].damage = 20;
     }
+    weaponArray[0].damage = 3;
+    weaponArray[0].speed = 2;
+
+    weaponArray[1].speed = 6;
+    weaponArray[1].damage = 6;
+
+    weaponArray[2].speed = 15;
+    weaponArray[2].damage = 20;
+
+    weaponArray[3].speed = 20;
+    weaponArray[3].damage = 34;
 }
 
 void checkPlayerWeaponCollision(int weaponIndex)
@@ -85,9 +95,9 @@ void spawnWeapons()
 
 void fire(int weaponIndex, int playerIndex)
 {
-    if (timeBetweenAttacks == 0)
+    if (timeBetweenAttacks[weaponIndex] == 0)
     {
-        timeBetweenAttacks = 10;
+        timeBetweenAttacks[weaponIndex] = weaponArray[weaponIndex].speed;
         auto bulletSpawnPosition = sf::Vector2f(weaponArray[weaponIndex].area.getGlobalBounds().left,
                                                 weaponArray[weaponIndex].area.getGlobalBounds().top + 5);
 
@@ -97,7 +107,7 @@ void fire(int weaponIndex, int playerIndex)
                      weaponArray[weaponIndex].damage, playerIndex);
     }
     else
-        timeBetweenAttacks--;
+        timeBetweenAttacks[weaponIndex]--;
 }
 
 void handleWeaponBlockCollision(Weapon *weapon)
