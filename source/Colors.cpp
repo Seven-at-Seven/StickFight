@@ -1,6 +1,7 @@
 #include "screens/Colors.hpp"
 #include "Configurations.hpp"
 #include "components/Character.hpp"
+#include "components/Bullets.hpp"
 #include "Globals.hpp"
 #include "components/HealthBar.hpp"
 
@@ -96,6 +97,7 @@ void colorsUpdate(sf::RenderWindow &window, Menu &colorsMenu)
                     avaliable_index = 0;
                 loadCharacterAssets();
                 loadHealthBarAssets();
+                loadBulletsAssets();
             }
             else if (event.key.code == sf::Keyboard::Enter && colorsMenu.selectedItem == 0)
             {
