@@ -27,7 +27,7 @@ void drawHealthBar(sf::RenderWindow &window)
         playerName.setFont(deathMessageFont);
         playerName.setString(charactersArray[i].name);
         playerName.setFillColor(charactersArray[i].color);
-        playerName.setPosition(sf::Vector2f(healthBarArray[i].healthRectangle.getPosition().x - charactersArray[i].name.size() * 18
+        playerName.setPosition(sf::Vector2f(healthBarArray[i].healthRectangle.getPosition().x - charactersArray[i].name.size() * 20
         , healthBarArray[i].healthRectangle.getPosition().y - 8));
         window.draw(playerName);
         if (healthBarArray[i].currentHP <= 0 || charactersArray[i].isDead)

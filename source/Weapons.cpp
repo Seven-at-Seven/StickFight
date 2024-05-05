@@ -81,9 +81,17 @@ void spawnWeapons()
     if (weaponTimer == 0)
     {
         weaponTimer = 150;
-        srand(time(nullptr));
-
         int weaponXPosition = std::rand() % (int)SCREENWIDTH;
+        if (current_map == 1)
+        {
+            if (weaponXPosition < 280)
+            weaponXPosition = 280;
+            if (weaponXPosition > 909)
+            {
+                weaponXPosition = 909;
+            }
+        }
+        
         weaponArray[awaitedWeapon].area.setPosition(sf::Vector2f(weaponXPosition, 0));
         weaponArray[awaitedWeapon].sprite.setPosition(sf::Vector2f(weaponXPosition, 0));
 

@@ -4,7 +4,7 @@
 
 #include "components/Block.hpp"
 
-#define MAX_BLOCKS 6
+#define MAX_BLOCKS 9
 #define MAX_JUMP_Y_AXIS 84
 #define MAX_JUMP_X_AXIS 78
 

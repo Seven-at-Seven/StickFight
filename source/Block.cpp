@@ -26,7 +26,8 @@ void drawBlock(sf::RenderWindow &winodw, Block &block)
                                                              block.position.y + i * STONE_SIZE);
             block.stones[i].setPosition(currentStonePosition);
             block.stones[i].setTextureRect(sf::IntRect(0, 0, 18, 18));
-            if (i == 0)
+            if (current_map == 3 || current_map == 2) continue;
+            else if (i == 0)
                 block.stones[i].setTexture(stoneTopTexture);
 
             else

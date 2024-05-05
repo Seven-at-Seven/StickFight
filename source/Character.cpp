@@ -77,11 +77,14 @@ void spawnCharacters()
 
   if (current_map == 0)
   {
-
-    charactersArray[0].area.setPosition(sf::Vector2f(40, 100));
-    charactersArray[1].area.setPosition(sf::Vector2f(40 + 350, 100));
-    charactersArray[2].area.setPosition(sf::Vector2f(40 + 700, 100));
-    charactersArray[3].area.setPosition(sf::Vector2f(40 + 1050, 100));
+    int characterXposition0 = std::rand() % (int)1150 + 110;
+    int characterXposition1 = std::rand() % (int)1150 + 110;
+    int characterXposition2 = std::rand() % (int)1150 + 110;
+    int characterXposition3 = std::rand() % (int)1150 + 110;
+    charactersArray[0].area.setPosition(sf::Vector2f(characterXposition0, 30));
+    charactersArray[1].area.setPosition(sf::Vector2f(characterXposition1, 30));
+    charactersArray[2].area.setPosition(sf::Vector2f(characterXposition2, 30));
+    charactersArray[3].area.setPosition(sf::Vector2f(characterXposition3, 30));
   }
   else if (current_map == 1)
   {
@@ -99,10 +102,14 @@ void spawnCharacters()
   }
   else
   {
-    charactersArray[0].area.setPosition(sf::Vector2f(130, 100));
-    charactersArray[1].area.setPosition(sf::Vector2f(SCREENWIDTH - 130, 100));
-    charactersArray[2].area.setPosition(sf::Vector2f(230, 100));
-    charactersArray[3].area.setPosition(sf::Vector2f(SCREENWIDTH - 230, 100));
+    int characterXposition0 = std::rand() % (int) SCREENWIDTH;
+    int characterXposition1 = std::rand() % (int) SCREENWIDTH;
+    int characterXposition2 = std::rand() % (int) SCREENWIDTH;
+    int characterXposition3 = std::rand() % (int) SCREENWIDTH;
+    charactersArray[0].area.setPosition(sf::Vector2f(characterXposition0, 30));
+    charactersArray[1].area.setPosition(sf::Vector2f(characterXposition1, 30));
+    charactersArray[2].area.setPosition(sf::Vector2f(characterXposition2, 30));
+    charactersArray[3].area.setPosition(sf::Vector2f(characterXposition3, 30));
   }
 }
 void checkScreenCollision(Character &player)
@@ -222,11 +229,6 @@ void updateCharacters()
     else
       charactersArray[i].sprite.setPosition(charactersArray[i].area.getPosition() + sf::Vector2f(-10, 0));
 
-    // if (charactersArray[i].isHavingGun)
-    // {
-    //   charactersArray[i].texturesLimt = 0;
-    //   charactersArray[i].selectedIndex = 3;
-    // }
     if (charactersArray[i].isPunshing)
     {
       charactersArray[i].texturesLimt = 10;

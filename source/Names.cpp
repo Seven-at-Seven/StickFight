@@ -16,16 +16,16 @@ void NamesDraw(sf::RenderWindow &window)
     bg_sprite.setTexture(bg);
     bg_sprite.setPosition(sf::Vector2f(700, 200));
     sf::Font font;
-    sf::Text t;
+    sf::Text main_text;
     if (!font.loadFromFile("assets/VCR_OSD_MONO.ttf")) // change font from here
     {
         std::cout << "Error loading font: assets/VCR_OSD_MONO.ttf" << std::endl;
     }
-    t.setFont(font);
-    t.setString("Enter Players' names: ");
-    t.setCharacterSize(65);
-    t.setPosition(10, 10);
-    t.setFillColor(sf::Color(255, 204, 0));
+    main_text.setFont(font);
+    main_text.setString("Enter Players' names: ");
+    main_text.setCharacterSize(65);
+    main_text.setPosition(10, 10);
+    main_text.setFillColor(sf::Color(255, 204, 0));
     for (int i = 0, multiple = 100; i < number_of_players; i++, multiple += 55)
     {
         names_text[i].setFont(font);
@@ -36,7 +36,7 @@ void NamesDraw(sf::RenderWindow &window)
     }
 
     window.draw(bg_sprite);
-    window.draw(t);
+    window.draw(main_text);
     for (int i = 0; i < number_of_players; i++)
     {
         window.draw(names_text[i]);
@@ -77,15 +77,19 @@ void NamesUpdate(sf::RenderWindow &window)
         {
             if (event.key.code == sf::Keyboard::Enter)
             {
+                charactersArray[state].name.pop_back();
+                if(!charactersArray[state].name.empty()) 
                 state++;
                 if (state >= number_of_players)
                 {
                     current_screen = 2;
+                    state = 0;
                     return;
                 }
             }
             if (event.key.code == sf::Keyboard::Escape)
             {
+                charactersArray[state].name.pop_back();
                 current_screen = 1;
                 return;
             }
