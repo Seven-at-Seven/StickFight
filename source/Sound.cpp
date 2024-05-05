@@ -4,6 +4,7 @@
 #include <iostream>
 
 int current_sound_texture = 3;
+int soundVolume;
 sf::Texture soundSliderTextures[7];
 sf::Sprite soundSliderSprite;
 
@@ -83,6 +84,7 @@ void soundUpdate(sf::RenderWindow &window, Menu &SoundMenu)
             }
         }
     }
+    soundVolume = 16 * current_sound_texture;
 }
 
 void soundDraw(sf::RenderWindow &window, Menu &SoundMenu)

@@ -1,6 +1,7 @@
 #ifndef WEPONES_H
 #define WEPONES_H
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 #define WEPONES_1_TEXTURE "assets/images/weapons/weapon1.png"
 
@@ -10,6 +11,7 @@ struct Weapon
     sf::RectangleShape area;
     sf::Vector2f position;
     sf::Sprite sprite;
+    sf::Sound effect;
 
     bool isHeld = false;
     bool isSpawned = false;

@@ -9,6 +9,7 @@
 Weapon weaponArray[MAX_WEAPONS_NUMBER];
 
 sf::Texture tex[MAX_WEAPONS_NUMBER];
+sf::SoundBuffer sBuffer[MAX_WEAPONS_NUMBER];
 
 int timeBetweenAttacks[MAX_WEAPONS_NUMBER] = {3, 6, 15, 20};
 int awaitedWeapon = 0;
@@ -22,6 +23,12 @@ void loadWeaponsAssets()
         {
             std::cout << "ERROR: Could not load" << std::endl;
         }
+        if (!sBuffer[i].loadFromFile("assets/sounds/sound" + std::to_string(i) + ".wav"))
+            std::cout << "ERROR: Could not load" << std::endl;
+
+        weaponArray[i].effect.setBuffer(sBuffer[i]);
+        weaponArray[i].effect.setVolume(12);
+
         weaponArray[i].sprite.setTexture(tex[i]);
         weaponArray[i].sprite.setTextureRect(sf::IntRect(4, 0, 64, 33));
         weaponArray[i].area.setSize(sf::Vector2f(64, 33));
@@ -85,13 +92,13 @@ void spawnWeapons()
         if (current_map == 1)
         {
             if (weaponXPosition < 280)
-            weaponXPosition = 280;
+                weaponXPosition = 280;
             if (weaponXPosition > 909)
             {
                 weaponXPosition = 909;
             }
         }
-        
+
         weaponArray[awaitedWeapon].area.setPosition(sf::Vector2f(weaponXPosition, 0));
         weaponArray[awaitedWeapon].sprite.setPosition(sf::Vector2f(weaponXPosition, 0));
 
@@ -108,6 +115,8 @@ void fire(int weaponIndex, int playerIndex)
 {
     if (timeBetweenAttacks[weaponIndex] == 0)
     {
+        weaponArray[weaponIndex].effect.setPlayingOffset(sf::seconds(0.2f));
+        weaponArray[weaponIndex].effect.play();
         timeBetweenAttacks[weaponIndex] = weaponArray[weaponIndex].speed;
         auto bulletSpawnPosition = sf::Vector2f(weaponArray[weaponIndex].area.getGlobalBounds().left,
                                                 weaponArray[weaponIndex].area.getGlobalBounds().top + 5);
@@ -177,6 +186,8 @@ void updateWeapons()
 
             else
                 currentWeapon->sprite.setScale(sf::Vector2f(1.0, 1.0));
+            if (!gunOwner->isFiring)
+                currentWeapon->effect.stop();
         }
 
         else

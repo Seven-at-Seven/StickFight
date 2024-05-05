@@ -27,6 +27,8 @@ extern int current_screen;
 extern int last_screen;
 extern int current_map;
 
+extern int soundVolume;
+
 extern Map map[4];
 
 extern int state;
