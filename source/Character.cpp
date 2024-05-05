@@ -77,10 +77,10 @@ void spawnCharacters()
 
   if (current_map == 0)
   {
-    int characterXposition0 = std::rand() % (int)1150 + 110;
-    int characterXposition1 = std::rand() % (int)1150 + 110;
-    int characterXposition2 = std::rand() % (int)1150 + 110;
-    int characterXposition3 = std::rand() % (int)1150 + 110;
+    int characterXposition0 = std::rand() % (int)1040 + 110;
+    int characterXposition1 = std::rand() % (int)1040 + 110;
+    int characterXposition2 = std::rand() % (int)1040 + 110;
+    int characterXposition3 = std::rand() % (int)1040 + 110;
     charactersArray[0].area.setPosition(sf::Vector2f(characterXposition0, 30));
     charactersArray[1].area.setPosition(sf::Vector2f(characterXposition1, 30));
     charactersArray[2].area.setPosition(sf::Vector2f(characterXposition2, 30));
@@ -102,10 +102,10 @@ void spawnCharacters()
   }
   else
   {
-    int characterXposition0 = std::rand() % (int) SCREENWIDTH;
-    int characterXposition1 = std::rand() % (int) SCREENWIDTH;
-    int characterXposition2 = std::rand() % (int) SCREENWIDTH;
-    int characterXposition3 = std::rand() % (int) SCREENWIDTH;
+    int characterXposition0 = std::rand() % (int)SCREENWIDTH;
+    int characterXposition1 = std::rand() % (int)SCREENWIDTH;
+    int characterXposition2 = std::rand() % (int)SCREENWIDTH;
+    int characterXposition3 = std::rand() % (int)SCREENWIDTH;
     charactersArray[0].area.setPosition(sf::Vector2f(characterXposition0, 30));
     charactersArray[1].area.setPosition(sf::Vector2f(characterXposition1, 30));
     charactersArray[2].area.setPosition(sf::Vector2f(characterXposition2, 30));
