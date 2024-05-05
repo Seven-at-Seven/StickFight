@@ -8,10 +8,9 @@
 #include "screens/Options.hpp"                    // Screen 3
 #include "screens/Sound.hpp"                      // Screen 4
 #include "screens/subscreens/NumberOfPlayers.hpp" // Screen 5
-#include "screens/Colors.hpp"                     // Screen 6
+#include "screens/Register.hpp"                   // Screen 9
 #include "components/Weapons.hpp"
 #include "components/Bullets.hpp"
-#include "Names.hpp"
 
 // Global states
 int current_screen = 0;
@@ -25,15 +24,14 @@ Menu mainMenu = initlizeMainMenu();
 Menu opMenu = initlizeOptionsMenu();
 Menu psMenu = initlizePlaySettingsMenu();
 Menu SoundMenu = initlizeSoundMenu();
-Menu ColorsMenu = initlizeColorsMenu();
 
 void loadGameAssets()
 {
     srand(time(nullptr));
     loadSoundAssets();
-    loadColorsAssets();
     loadMenuAssets();
     loadGamePlayAssets();
+    loadRegisterAssets();
 }
 
 // Update Switch
@@ -59,11 +57,8 @@ void updateGame(sf::RenderWindow &window)
     case 5:
         numberOfPlayersUpdate(window);
         break;
-    case 6:
-        colorsUpdate(window, ColorsMenu);
-        break;
     case 9:
-        NamesUpdate(window);
+        registerUpdate(window);
         break;
 
     default:
@@ -94,11 +89,8 @@ void drawGame(sf::RenderWindow &window)
     case 5:
         numberOfPlayersDraw(window);
         break;
-    case 6:
-        colorsDraw(window, ColorsMenu);
-        break;
     case 9:
-        NamesDraw(window);
+        registerDraw(window);
         break;
 
     default:

@@ -1,6 +1,7 @@
 #include "screens/subscreens/NumberOfPlayers.hpp"
 #include "Globals.hpp"
 #include "Configurations.hpp"
+#include "screens/Register.hpp"
 
 #define NUMBER_OF_PLAYERS_ITEMS_NUMBER 2
 
@@ -34,12 +35,20 @@ void numberOfPlayersUpdate(sf::RenderWindow &window)
             if (event.key.code == sf::Keyboard::Right && numOfPMenu.selectedItem == 0)
             {
                 if (number_of_players < 4)
+                {
+
                     number_of_players++;
+                    loadRegisterAssets();
+                }
             }
             if (event.key.code == sf::Keyboard::Left && numOfPMenu.selectedItem == 0)
             {
                 if (number_of_players > 2)
+                {
+                    loadRegisterAssets();
+
                     number_of_players--;
+                }
             }
 
             updateMenu(numOfPMenu, event);

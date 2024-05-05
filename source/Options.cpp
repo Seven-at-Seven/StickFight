@@ -1,7 +1,7 @@
 #include "screens/Options.hpp"
 #include "Globals.hpp"
 
-#define OPTIONS_ITEMS_NUMBER 3
+#define OPTIONS_ITEMS_NUMBER 2
 
 void optionsUpdate(sf::RenderWindow &window, Menu &opMenu)
 {
@@ -25,9 +25,6 @@ void optionsUpdate(sf::RenderWindow &window, Menu &opMenu)
                     current_screen = 4;
                     break;
                 case 1:
-                    current_screen = 6;
-                    break;
-                case 2:
                     current_screen = 0;
                     break;
                 default:
@@ -52,7 +49,7 @@ void optionsDraw(sf::RenderWindow &window, Menu &opMenu)
 }
 Menu initlizeOptionsMenu()
 {
-    char *options[OPTIONS_ITEMS_NUMBER] = {"Sound", "Colors", "Back"};
+    char *options[OPTIONS_ITEMS_NUMBER] = {"Sound", "Back"};
     Menu menu = initlizeMenu(OPTIONS_ITEMS_NUMBER, options);
     return menu;
 }
