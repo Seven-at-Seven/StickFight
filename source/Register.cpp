@@ -55,7 +55,7 @@ void registerDraw(sf::RenderWindow &window)
     bg_sprite.setTexture(bg);
     bg_sprite.setPosition(sf::Vector2f(700, 200));
     main_text.setFont(font);
-    main_text.setString("Enter Players' names: ");
+    main_text.setString("Enter Players' colors and names:");
     main_text.setCharacterSize(65);
     main_text.setPosition(10, 10);
     main_text.setFillColor(sf::Color(255, 204, 0));
@@ -107,6 +107,11 @@ void updateColors()
         if (event.key.code == sf::Keyboard::Space)
         {
             changingColor = false;
+        }
+        if (event.key.code == sf::Keyboard::Escape)
+        {
+            current_screen = 1;
+            return;
         }
         else if (event.key.code == sf::Keyboard::Enter)
         {
