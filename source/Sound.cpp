@@ -4,7 +4,7 @@
 #include <iostream>
 
 int current_sound_texture = 3;
-int soundVolume;
+int soundVolume = 16;
 sf::Texture soundSliderTextures[7];
 sf::Sprite soundSliderSprite;
 

@@ -27,7 +27,7 @@ void loadWeaponsAssets()
             std::cout << "ERROR: Could not load" << std::endl;
 
         weaponArray[i].effect.setBuffer(sBuffer[i]);
-        weaponArray[i].effect.setVolume(12);
+        weaponArray[i].effect.setVolume(soundVolume);
 
         weaponArray[i].sprite.setTexture(tex[i]);
         weaponArray[i].sprite.setTextureRect(sf::IntRect(4, 0, 64, 33));
