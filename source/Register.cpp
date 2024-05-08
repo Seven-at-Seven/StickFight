@@ -144,7 +144,7 @@ void updateNames()
 {
     if (event.type == sf::Event::TextEntered)
     {
-        charactersArray[current_row].name += static_cast<char>(event.text.unicode);
+        charactersArray[current_row].name += (char)(event.text.unicode);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Backspace) && charactersArray[current_row].name.size() > 0)
     {
