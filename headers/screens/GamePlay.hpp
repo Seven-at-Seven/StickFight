@@ -1,9 +1,10 @@
 #ifndef GAMEPLAY_H
 #define GAMEPLAY_H
-
-#include "components/Character.hpp"
+#include <SFML/Graphics.hpp>
 
 void loadGamePlayAssets();
+void startNewRound();
+
 void gamePlayUpdate(sf::RenderWindow &window);
 void gamePlayDraw(sf::RenderWindow &window);
 

@@ -16,9 +16,12 @@ struct Character
 {
   std::string name;
   sf::Sprite sprite;
-  int selectedIndex;
   sf::Color color;
   sf::RectangleShape area;
+
+  int selectedIndex;
+
+  int winningCount;
 
   short texturesLimt = 6;
   short frames = 0;

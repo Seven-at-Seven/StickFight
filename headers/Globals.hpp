@@ -29,6 +29,8 @@ extern int current_map;
 
 extern int soundVolume;
 
+extern bool gameOver;
+
 extern Map map[4];
 
 extern int state;

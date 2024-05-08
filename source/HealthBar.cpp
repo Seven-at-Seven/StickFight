@@ -25,10 +25,9 @@ void drawHealthBar(sf::RenderWindow &window)
     {
         healthBarArray[i].healthRectangle.setSize(sf::Vector2f(3 * healthBarArray[i].currentHP, 20));
         playerName.setFont(deathMessageFont);
-        playerName.setString(charactersArray[i].name);
+        playerName.setString(std::to_string(charactersArray[i].winningCount) + " " + charactersArray[i].name);
         playerName.setFillColor(charactersArray[i].color);
-        playerName.setPosition(sf::Vector2f(healthBarArray[i].healthRectangle.getPosition().x - charactersArray[i].name.size() * 20
-        , healthBarArray[i].healthRectangle.getPosition().y - 8));
+        playerName.setPosition(sf::Vector2f(healthBarArray[i].healthRectangle.getPosition().x - charactersArray[i].name.size() * 30, healthBarArray[i].healthRectangle.getPosition().y - 8));
         window.draw(playerName);
         if (healthBarArray[i].currentHP <= 0 || charactersArray[i].isDead)
         {
@@ -36,8 +35,7 @@ void drawHealthBar(sf::RenderWindow &window)
             deathMessage.setFont(deathMessageFont);
             deathMessage.setString("DEAD");
             deathMessage.setFillColor(charactersArray[i].color);
-            deathMessage.setPosition(sf::Vector2f(healthBarArray[i].healthRectangle.getPosition().x
-        , healthBarArray[i].healthRectangle.getPosition().y - 8));
+            deathMessage.setPosition(sf::Vector2f(healthBarArray[i].healthRectangle.getPosition().x, healthBarArray[i].healthRectangle.getPosition().y - 8));
             window.draw(deathMessage);
             charactersArray[i].isDead = true;
             charactersArray[i].isHavingGun = false;

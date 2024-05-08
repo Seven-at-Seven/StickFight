@@ -4,13 +4,18 @@
 #include "MapUtility.hpp"
 #include "components/HealthBar.hpp"
 #include "components/Weapons.hpp"
+#include "screens/GameOver.hpp"
 #include <iostream>
 
 int current_map = 0;
 int alive_counter = number_of_players;
 int round_over_timer = 30;
+int winnerIndex = -1;
+bool gameOver = false;
 
-void restartGamePlay()
+// spawn characters/weapons in the new map,
+// and refill the health bar for all damaged/dead characters
+void startNewRound()
 {
     spawnCharacters();
     restartWeapons();
@@ -18,69 +23,81 @@ void restartGamePlay()
 
 void loadGamePlayAssets()
 {
+    // initialize
+    startNewRound();
+    // load assets
     loadCharacterAssets();
     loadMapAssets();
     loadHealthBarAssets();
     loadWeaponsAssets();
     loadBulletsAssets();
-    restartGamePlay();
 }
 
 void gamePlayUpdate(sf::RenderWindow &window)
 {
-    alive_counter = number_of_players;
-    for (int i = 0; i < number_of_players; i++)
+    if (!gameOver)
     {
-        if (charactersArray[i].isDead)
-            alive_counter--;
-    }
-    if (alive_counter <= 1)
-    {
-        if (round_over_timer == 0)
+
+        alive_counter = number_of_players;
+        for (int i = 0; i < number_of_players; i++)
         {
-            round_over_timer = 30;
-            if (current_map == 3)
+            if (charactersArray[i].isDead)
+                alive_counter--;
+            else
+                winnerIndex = i;
+        }
+        if (alive_counter <= 1)
+        {
+            if (round_over_timer == 0)
             {
-                current_screen = 0;
-                current_map = 0;
-                restartGamePlay();
+                charactersArray[winnerIndex].winningCount++;
+                round_over_timer = 30;
+                if (current_map == 3)
+                {
+                    gameOver = true;
+                    // current_screen = 0;
+                    // current_map = 0;
+                    // restartGamePlay();
+                }
+                else
+                {
+
+                    current_map++;
+                    startNewRound();
+                }
             }
             else
-            {
+                round_over_timer--;
+        }
 
-                current_map++;
-                restartGamePlay();
+        while (window.pollEvent(event))
+        {
+
+            if (event.type == sf::Event::Closed)
+                window.close();
+
+            handelCharacterEvents(event);
+            if (event.type == sf::Event::KeyReleased)
+            {
+                if (event.key.code == sf::Keyboard::Escape)
+                {
+
+                    current_screen = last_screen;
+                    last_screen = 0;
+                }
+            }
+            if (event.type == sf::Event::MouseButtonPressed)
+            {
+                std::cout << "x is :" << event.mouseButton.x << std::endl;
+                std::cout << "y is :" << event.mouseButton.y << std::endl;
             }
         }
-        else
-            round_over_timer--;
+        updateCharacters();
+        updateWeapons();
+        updateBullets();
     }
-
-    while (window.pollEvent(event))
-    {
-
-        if (event.type == sf::Event::Closed)
-            window.close();
-
-        handelCharacterEvents(event);
-        if (event.type == sf::Event::KeyReleased)
-        {
-            if (event.key.code == sf::Keyboard::Escape)
-            {
-
-                current_screen = last_screen;
-                last_screen = 0;
-            }
-        }
-        if (event.type == sf::Event::MouseButtonPressed)
-        {
-            std::cout << "x is :" << event.mouseButton.x << std::endl;
-            std::cout << "y is :" << event.mouseButton.y << std::endl;
-        }
-    }
-    updateCharacters();
-    updateWeapons();
-    updateBullets();
+    else
+        updateGameOverScreen(window, winnerIndex);
 }
 
 void gamePlayDraw(sf::RenderWindow &window)
@@ -91,4 +108,6 @@ void gamePlayDraw(sf::RenderWindow &window)
     drawHealthBar(window);
     drawWeapons(window);
     drawBullets(window);
+    if (gameOver)
+        drawGameOverScreen(window);
 }
