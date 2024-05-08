@@ -1,6 +1,7 @@
 #ifndef MENU_H
 #define MENU_H
 #include <SFML/Graphics.hpp>
+#include <string.h>
 
 #define MAX_NUMBER_OF_ITEMS 6
 
@@ -14,12 +15,12 @@ struct Menu
 };
 
 void loadMenuAssets();
-Menu initlizeMenu(int numebrOfItems, char **items);
+Menu initlizeMenu(int numebrOfItems, std::string items[]);
 
 void moveSelectionUp(Menu &menu);
 void moveSelectionDown(Menu &menu);
 
-void drawMenu(Menu &menu, sf::RenderWindow &window, char *title);
+void drawMenu(Menu &menu, sf::RenderWindow &window, std::string title);
 void updateMenu(Menu &menu, sf::Event &event);
 
 #endif

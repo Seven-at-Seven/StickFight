@@ -49,7 +49,7 @@ void optionsDraw(sf::RenderWindow &window, Menu &opMenu)
 }
 Menu initlizeOptionsMenu()
 {
-    char *options[OPTIONS_ITEMS_NUMBER] = {"Sound", "Back"};
+    std::string options[OPTIONS_ITEMS_NUMBER] = {"Sound", "Back"};
     Menu menu = initlizeMenu(OPTIONS_ITEMS_NUMBER, options);
     return menu;
 }

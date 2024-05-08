@@ -94,7 +94,7 @@ void soundDraw(sf::RenderWindow &window, Menu &SoundMenu)
 }
 Menu initlizeSoundMenu()
 {
-    char *items[3] = {"Go Back", "", ""};
+    std::string items[3] = {"Go Back", "", ""};
     Menu SoundMenu = initlizeMenu(3, items);
     return SoundMenu;
 }

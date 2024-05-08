@@ -25,7 +25,7 @@ void drawHealthBar(sf::RenderWindow &window)
     {
         healthBarArray[i].healthRectangle.setSize(sf::Vector2f(3 * healthBarArray[i].currentHP, 20));
         playerName.setFont(deathMessageFont);
-        playerName.setString(std::to_string(charactersArray[i].winningCount) + " " + charactersArray[i].name);
+        playerName.setString(std::to_string(charactersArray[i].score) + " " + charactersArray[i].name);
         playerName.setFillColor(charactersArray[i].color);
         playerName.setPosition(sf::Vector2f(healthBarArray[i].healthRectangle.getPosition().x - charactersArray[i].name.size() * 30, healthBarArray[i].healthRectangle.getPosition().y - 8));
         window.draw(playerName);

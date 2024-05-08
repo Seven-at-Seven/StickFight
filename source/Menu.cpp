@@ -15,7 +15,7 @@ void loadMenuAssets()
     mainMenuBackgroundSprite.setTexture(mainMenuBackgroundTexture);
     // mainMenuBackgroundSprite.setPosition(sf::Vector2f(700, 100));
 }
-Menu initlizeMenu(int numebrOfItems, char **items)
+Menu initlizeMenu(int numebrOfItems, std::string items[])
 {
 
     Menu menu;
@@ -31,7 +31,7 @@ Menu initlizeMenu(int numebrOfItems, char **items)
     for (size_t i = 0; i < numebrOfItems; i++)
     {
         menu.text[i].setFont(menu.font);
-        menu.text[i].setColor(sf::Color::White);
+        menu.text[i].setFillColor(sf::Color::White);
         menu.text[i].setString(items[i]);
         menu.text[i].setCharacterSize(42);
         menu.text[i].setOrigin(sf::Vector2f(menu.text[i].getGlobalBounds().width / 2, menu.text[i].getGlobalBounds().height / 2));
@@ -78,7 +78,7 @@ void updateMenu(Menu &menu, sf::Event &event)
         last_screen = 0;
     }
 }
-void drawMenu(Menu &menu, sf::RenderWindow &window, char *title)
+void drawMenu(Menu &menu, sf::RenderWindow &window, std::string title)
 {
     // Menu Background
     window.draw(mainMenuBackgroundSprite);
@@ -86,9 +86,9 @@ void drawMenu(Menu &menu, sf::RenderWindow &window, char *title)
     for (int i = 0; i < menu.numberOfItems; i++)
     {
         if (i == menu.selectedItem)
-            menu.text[i].setColor(sf::Color(255, 204, 0));
+            menu.text[i].setFillColor(sf::Color(255, 204, 0));
         else
-            menu.text[i].setColor(sf::Color::White);
+            menu.text[i].setFillColor(sf::Color::White);
         window.draw(menu.text[i]);
     }
 

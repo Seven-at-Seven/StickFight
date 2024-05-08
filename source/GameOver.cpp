@@ -46,7 +46,7 @@ void loadGameOverAssets(int winnerIndex)
         GameOverMessages[1].setOrigin(sf::Vector2f(GameOverMessageBounds.width / 2, GameOverMessageBounds.height / 2));
         GameOverMessages[1].setPosition(sf::Vector2f(SCREENWIDTH / 2, SCREENHEIGHT / 2));
 
-        GameOverMessages[2].setString("Score is " + std::to_string(charactersArray[winnerIndex].winningCount));
+        GameOverMessages[2].setString("Score is " + std::to_string(charactersArray[winnerIndex].score));
         GameOverMessageBounds = GameOverMessages[2].getGlobalBounds();
         GameOverMessages[2].setOrigin(sf::Vector2f(GameOverMessageBounds.width / 2, GameOverMessageBounds.height / 2));
         GameOverMessages[2].setPosition(sf::Vector2f(SCREENWIDTH / 2, SCREENHEIGHT / 2 + 60));
@@ -102,8 +102,8 @@ void updateGameOverScreen(sf::RenderWindow &window, int winnerIndex)
                 startNewRound();
                 for (int i = 0; i < MAX_PLAYERS_NUMBER; i++)
                 {
-                    charactersArray[i].winningCount = 0;
-                    charactersArray[i].winningCount = 0;
+                    charactersArray[i].score = 0;
+                    charactersArray[i].score = 0;
                     if (!leftChoiceIsSelected)
                         charactersArray[i].name = "";
                 }

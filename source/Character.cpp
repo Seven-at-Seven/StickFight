@@ -134,7 +134,7 @@ void checkBlockCollision(Character &player)
 
   sf::Vector2f playerPosition = player.area.getPosition();
   auto playerBounds = player.area.getGlobalBounds();
-  bool tmpIsOnBlock;
+  bool tmpIsOnBlock = false;
 
   for (int i = 0; i < map[current_map].num_of_blocks; i++)
   {
@@ -173,10 +173,6 @@ void checkBlockCollision(Character &player)
     {
       tmpIsOnBlock = true;
       break;
-    }
-    else
-    {
-      tmpIsOnBlock = false;
     }
   }
   player.isOnBlock = tmpIsOnBlock;

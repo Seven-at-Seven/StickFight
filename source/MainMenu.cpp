@@ -51,7 +51,7 @@ void mainUpdate(Menu &menu, int &current_screen, sf::RenderWindow &window)
 
 Menu initlizeMainMenu()
 {
-    char *items[MAIN_MENU_ITEMS_NUMBER] = {"Play", "Options", "Exit"};
+    std::string items[MAIN_MENU_ITEMS_NUMBER] = {"Play", "Options", "Exit"};
     Menu menu = initlizeMenu(MAIN_MENU_ITEMS_NUMBER, items);
 
     return menu;

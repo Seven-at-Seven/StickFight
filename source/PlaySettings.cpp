@@ -55,7 +55,7 @@ void playSettingsDraw(sf::RenderWindow &window, Menu &psMenu)
 
 Menu initlizePlaySettingsMenu()
 {
-    char *settings[PLAY_SETTINGS_ITEMS_NUMBER] = {"Go!", "Number Of Players", "Back"};
+    std::string settings[PLAY_SETTINGS_ITEMS_NUMBER] = {"Go!", "Number Of Players", "Back"};
     Menu menu = initlizeMenu(PLAY_SETTINGS_ITEMS_NUMBER, settings);
     return menu;
 }

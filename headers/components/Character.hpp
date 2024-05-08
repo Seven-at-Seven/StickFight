@@ -21,7 +21,7 @@ struct Character
 
   int selectedIndex;
 
-  int winningCount;
+  int score;
 
   short texturesLimt = 6;
   short frames = 0;

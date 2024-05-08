@@ -10,7 +10,8 @@
 int current_map = 0;
 int alive_counter = number_of_players;
 int round_over_timer = 30;
-int winnerIndex = -1;
+int roundWinnerIndex = 0;
+int gameWinnerIndex = 0;
 bool gameOver = false;
 
 // spawn characters/weapons in the new map,
@@ -32,6 +33,36 @@ void loadGamePlayAssets()
     loadWeaponsAssets();
     loadBulletsAssets();
 }
+void handleRoundOver()
+{
+
+    if (round_over_timer == 0)
+    {
+        charactersArray[roundWinnerIndex].score++;
+        round_over_timer = 30;
+
+        // handle last round over
+        if (current_map == 3)
+        {
+            // find the winner
+            for (int i = 0; i < number_of_players; i++)
+            {
+                int gameWinnerScore = charactersArray[gameWinnerIndex].score;
+                gameWinnerIndex = charactersArray[i].score > gameWinnerScore ? i : gameWinnerIndex;
+            }
+            // Stop the updateGamePlay loop and show GameOver screen
+            gameOver = true;
+        }
+        // handle normal round over
+        else
+        {
+            current_map++;
+            startNewRound();
+        }
+    }
+    else
+        round_over_timer--;
+}
 
 void gamePlayUpdate(sf::RenderWindow &window)
 {
@@ -44,31 +75,11 @@ void gamePlayUpdate(sf::RenderWindow &window)
             if (charactersArray[i].isDead)
                 alive_counter--;
             else
-                winnerIndex = i;
+                roundWinnerIndex = i;
         }
-        if (alive_counter <= 1)
-        {
-            if (round_over_timer == 0)
-            {
-                charactersArray[winnerIndex].winningCount++;
-                round_over_timer = 30;
-                if (current_map == 3)
-                {
-                    gameOver = true;
-                    // current_screen = 0;
-                    // current_map = 0;
-                    // restartGamePlay();
-                }
-                else
-                {
 
-                    current_map++;
-                    startNewRound();
-                }
-            }
-            else
-                round_over_timer--;
-        }
+        if (alive_counter <= 1)
+            handleRoundOver();
 
         while (window.pollEvent(event))
         {
@@ -76,7 +87,6 @@ void gamePlayUpdate(sf::RenderWindow &window)
             if (event.type == sf::Event::Closed)
                 window.close();
 
-            handelCharacterEvents(event);
             if (event.type == sf::Event::KeyReleased)
             {
                 if (event.key.code == sf::Keyboard::Escape)
@@ -86,18 +96,21 @@ void gamePlayUpdate(sf::RenderWindow &window)
                     last_screen = 0;
                 }
             }
-            if (event.type == sf::Event::MouseButtonPressed)
-            {
-                std::cout << "x is :" << event.mouseButton.x << std::endl;
-                std::cout << "y is :" << event.mouseButton.y << std::endl;
-            }
+
+            handelCharacterEvents(event);
+
+            // if (event.type == sf::Event::MouseButtonPressed)
+            // {
+            //     std::cout << "x is :" << event.mouseButton.x << std::endl;
+            //     std::cout << "y is :" << event.mouseButton.y << std::endl;
+            // }
         }
         updateCharacters();
         updateWeapons();
         updateBullets();
     }
     else
-        updateGameOverScreen(window, winnerIndex);
+        updateGameOverScreen(window, gameWinnerIndex);
 }
 
 void gamePlayDraw(sf::RenderWindow &window)
