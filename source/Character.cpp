@@ -78,6 +78,16 @@ void updateCharacters()
     if (checkPlayerHitCollision(charactersArray[i]))
       handlePlayerHitted(charactersArray[i], i);
 
+    if (charactersArray[i].isDamaged)
+    {
+
+      charactersArray[i].isDamaged = false;
+      if (healthBarArray[i].currentHP > 0)
+      {
+        healthBarArray[i].currentHP -= charactersArray[i].damageQuantity;
+      }
+    }
+
     checkScreenCollision(charactersArray[i]);
 
     checkBlockCollision(charactersArray[i]);

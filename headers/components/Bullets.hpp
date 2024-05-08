@@ -13,6 +13,7 @@ struct Bullet
     sf::Sprite sprite;
     bool facingLeft;
     int damage;
+    int shooterIndex;
 };
 
 void loadBulletsAssets();

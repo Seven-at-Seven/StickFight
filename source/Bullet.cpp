@@ -54,6 +54,7 @@ void createBullet(sf::Vector2f startPosition, bool facingLeft, int damage, int p
             bulletsArray[i].sprite.setPosition(startPosition);
             bulletsArray[i].facingLeft = facingLeft;
             bulletsArray[i].damage = damage;
+            bulletsArray[i].shooterIndex = palyerIndex;
             if (i == lastBulletIndeiesElement && lastBulletIndeiesElement + 1 < MAX_BULLETS_NUMBER)
                 lastBulletIndeiesElement++;
             break;
@@ -71,9 +72,9 @@ void destroyBullet(int bulletIndex)
 void handleBulletPlayerCollision(int bulletIndex)
 {
     auto bulletBounds = bulletsArray[bulletIndex].sprite.getGlobalBounds();
-    for (int i = 0; i < MAX_PLAYERS_NUMBER; i++)
+    for (int i = 0; i < number_of_players; i++)
     {
-        if (charactersArray[i].isDead)
+        if (charactersArray[i].isDead || i == bulletsArray[bulletIndex].shooterIndex)
             continue;
         auto playerBounds = charactersArray[i].area.getGlobalBounds();
 
