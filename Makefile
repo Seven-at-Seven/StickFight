@@ -13,7 +13,7 @@ OBJECTS := $(patsubst $(SRCDIR)/%.cpp,$(BUILDDIR)/%.o,$(SOURCES))
 MAIN := main.cpp
 
 
-TARGET := my_game
+TARGET := Stick_Fight_9000
 RM := rm -f
 
 ifeq ($(OS),Windows_NT)
