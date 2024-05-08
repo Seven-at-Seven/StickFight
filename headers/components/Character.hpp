@@ -28,6 +28,9 @@ struct Character
   bool onGround = false;
   bool isDead = false;
   bool isMoving = false;
+  bool isMovingLeft = false;
+  bool isMovingRight = false;
+  bool shallJump = false;
   bool isPunshing = false;
   bool isFiring = false;
   bool isOnBlock = false;
@@ -41,8 +44,12 @@ struct Character
 
 void checkScreenCollision(Character &player);
 void checkBlockCollision(Character &player);
+bool checkPlayerHitCollision(Character &player);
+void handlePlayerHitted(Character &player, int playerIndex);
 
 void handelCharacterEvents(sf::Event &event);
+
+void updatePlayerAnimation(Character &player);
 
 void updateCharacters();
 void drawCharacters(sf::RenderWindow &window);
