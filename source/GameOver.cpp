@@ -104,10 +104,11 @@ void updateGameOverScreen(sf::RenderWindow &window, int winnerIndex)
                 {
                     charactersArray[i].winningCount = 0;
                     charactersArray[i].winningCount = 0;
+                    if (!leftChoiceIsSelected)
+                        charactersArray[i].name = "";
                 }
                 if (!leftChoiceIsSelected)
                 {
-
                     current_screen = 0;
                 }
             }
