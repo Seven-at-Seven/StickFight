@@ -4,6 +4,8 @@
 #include "components/Character.hpp"
 #include "Globals.hpp"
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
 sf::RectangleShape darkBar;
 
@@ -14,6 +16,9 @@ sf::Text GameOverButtons[MAX_GAMEOVER_BUTTONS];
 
 bool firstGameOverLoop = true;
 bool leftChoiceIsSelected = true;
+
+std::ofstream writeScore;
+std::ifstream readScore;
 
 void loadGameOverAssets(int winnerIndex)
 {
@@ -78,6 +83,12 @@ void updateGameOverScreen(sf::RenderWindow &window, int winnerIndex)
 
     if (firstGameOverLoop)
     {
+        readScore.open("score.txt");
+        writeScore.open("score.txt", std::ios::app);
+        std::string lines;
+
+        writeScore << charactersArray[winnerIndex].name << " is the winner with score: " << charactersArray[winnerIndex].score << "\n";
+        writeScore.close();
         firstGameOverLoop = false;
         loadGameOverAssets(winnerIndex);
     }

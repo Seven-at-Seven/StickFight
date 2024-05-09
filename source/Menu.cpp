@@ -50,6 +50,7 @@ void moveSelectionUp(Menu &menu)
         menu.selectedItem--;
     }
 };
+
 void moveSelectionDown(Menu &menu)
 {
 
@@ -60,6 +61,7 @@ void moveSelectionDown(Menu &menu)
         menu.selectedItem++;
     }
 };
+
 void updateMenu(Menu &menu, sf::Event &event)
 {
 
@@ -78,6 +80,7 @@ void updateMenu(Menu &menu, sf::Event &event)
         last_screen = 0;
     }
 }
+
 void drawMenu(Menu &menu, sf::RenderWindow &window, std::string title)
 {
     // Menu Background

@@ -87,6 +87,7 @@ void handleBulletPlayerCollision(int bulletIndex)
         }
     }
 }
+
 void updateBullets()
 {
 
