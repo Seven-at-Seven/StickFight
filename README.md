@@ -1,4 +1,4 @@
-# SFML-Snake-Game
+# SFML-Snake-Game 
 
 ## Main Menu Control
 
